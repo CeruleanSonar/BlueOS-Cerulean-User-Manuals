@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1"
+        />
+        <style>
+            body.dragging * {
+                cursor: grabbing !important;
+            }
+            * {
+                box-sizing: border-box;
+            }
+            *:focus,
+            *:hover {
+                outline: none;
+            }
+            .gitbook-splashscreen {
+                position: fixed;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                display: flex;
+                width: 100%;
+                height: 100%;
+            }
+            .slate-spacer {
+                height: 0;
+                color: transparent;
+                outline: none;
+                position: absolute;
+            }
+            @keyframes LoadingIndicator {
+                from {
+                    transform: rotate(0deg);
+                }
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+            [data-loading-indicator='true'] {
+                animation: LoadingIndicator 0.6s linear infinite;
+            }
+        </style>
+        <title>Appendix – Coordinate Systems - DVL-75 User Manual</title>
+<link rel="preload" as="font" type="font/woff2" href="https://app.gitbook.com/public/fonts/Inter/Inter-Bold.woff2?v=3.19" crossorigin="anonymous">
+<link rel="preload" as="font" type="font/woff2" href="https://app.gitbook.com/public/fonts/Inter/Inter-BoldItalic.woff2?v=3.19" crossorigin="anonymous">
+<link rel="preload" as="font" type="font/woff2" href="https://app.gitbook.com/public/fonts/Inter/Inter-ExtraBold.woff2?v=3.19" crossorigin="anonymous">
+<link rel="preload" as="font" type="font/woff2" href="https://app.gitbook.com/public/fonts/Inter/Inter-ExtraBoldItalic.woff2?v=3.19" crossorigin="anonymous">
+<link rel="preload" as="font" type="font/woff2" href="https://app.gitbook.com/public/fonts/Inter/Inter-Medium.woff2?v=3.19" crossorigin="anonymous">
+<link rel="preload" as="font" type="font/woff2" href="https://app.gitbook.com/public/fonts/Inter/Inter-MediumItalic.woff2?v=3.19" crossorigin="anonymous">
+<link rel="preload" as="font" type="font/woff2" href="https://app.gitbook.com/public/fonts/Inter/Inter-Regular.woff2?v=3.19" crossorigin="anonymous">
+<link rel="preload" as="font" type="font/woff2" href="https://app.gitbook.com/public/fonts/Inter/Inter-Italic.woff2?v=3.19" crossorigin="anonymous">
+        <style id="__font-Inter-gitbook-content-font">
+            @font-face {
+            font-family: 'gitbook-content-font';
+            font-style:  normal;
+            font-weight: 700;
+            font-display: swap;
+            src: local("Inter Bold"), local("Inter-Bold"), url("https://app.gitbook.com/public/fonts/Inter/Inter-Bold.woff2?v=3.19") format("woff2"),
+                    url("https://app.gitbook.com/public/fonts/Inter/Inter-Bold.woff?v=3.19") format("woff");
+        }
+@font-face {
+            font-family: 'gitbook-content-font';
+            font-style:  italic;
+            font-weight: 700;
+            font-display: swap;
+            src: local("Inter BoldItalic"), local("Inter-BoldItalic"), url("https://app.gitbook.com/public/fonts/Inter/Inter-BoldItalic.woff2?v=3.19") format("woff2"),
+                    url("https://app.gitbook.com/public/fonts/Inter/Inter-BoldItalic.woff?v=3.19") format("woff");
+        }
+@font-face {
+            font-family: 'gitbook-content-font';
+            font-style:  normal;
+            font-weight: 800;
+            font-display: swap;
+            src: local("Inter ExtraBold"), local("Inter-ExtraBold"), url("https://app.gitbook.com/public/fonts/Inter/Inter-ExtraBold.woff2?v=3.19") format("woff2"),
+                    url("https://app.gitbook.com/public/fonts/Inter/Inter-ExtraBold.woff?v=3.19") format("woff");
+        }
+@font-face {
+            font-family: 'gitbook-content-font';
+            font-style:  italic;
+            font-weight: 800;
+            font-display: swap;
+            src: local("Inter ExtraBoldItalic"), local("Inter-ExtraBoldItalic"), url("https://app.gitbook.com/public/fonts/Inter/Inter-ExtraBoldItalic.woff2?v=3.19") format("woff2"),
+                    url("https://app.gitbook.com/public/fonts/Inter/Inter-ExtraBoldItalic.woff?v=3.19") format("woff");
+        }
+@font-face {
+            font-family: 'gitbook-content-font';
+            font-style:  normal;
+            font-weight: 500;
+            font-display: swap;
+            src: local("Inter Medium"), local("Inter-Medium"), url("https://app.gitbook.com/public/fonts/Inter/Inter-Medium.woff2?v=3.19") format("woff2"),
+                    url("https://app.gitbook.com/public/fonts/Inter/Inter-Medium.woff?v=3.19") format("woff");
+        }
+@font-face {
+            font-family: 'gitbook-content-font';
+            font-style:  italic;
+            font-weight: 500;
+            font-display: swap;
+            src: local("Inter MediumItalic"), local("Inter-MediumItalic"), url("https://app.gitbook.com/public/fonts/Inter/Inter-MediumItalic.woff2?v=3.19") format("woff2"),
+                    url("https://app.gitbook.com/public/fonts/Inter/Inter-MediumItalic.woff?v=3.19") format("woff");
+        }
+@font-face {
+            font-family: 'gitbook-content-font';
+            font-style:  normal;
+            font-weight: 400;
+            font-display: swap;
+            src: local("Inter Regular"), local("Inter-Regular"), url("https://app.gitbook.com/public/fonts/Inter/Inter-Regular.woff2?v=3.19") format("woff2"),
+                    url("https://app.gitbook.com/public/fonts/Inter/Inter-Regular.woff?v=3.19") format("woff");
+        }
+@font-face {
+            font-family: 'gitbook-content-font';
+            font-style:  italic;
+            font-weight: 400;
+            font-display: swap;
+            src: local("Inter Italic"), local("Inter-Italic"), url("https://app.gitbook.com/public/fonts/Inter/Inter-Italic.woff2?v=3.19") format("woff2"),
+                    url("https://app.gitbook.com/public/fonts/Inter/Inter-Italic.woff?v=3.19") format("woff");
+        }
+        </style>
+<meta name="description" content="" id="__meta-description" />
+<meta name="og:description" content="" id="__meta-og:description" />
+<meta name="og:image" content="https://app.gitbook.com/share/space/thumbnail/IUx8F0dEX9C01W3iSbva/page/NRKPgJXMblbLromBeXO1.png?color=&logo=&theme=" id="__meta-og:image" />
+<meta name="twitter:card" content="summary_large_image" id="__meta-twitter:card" />
+<meta name="og:title" content="Appendix – Coordinate Systems" id="__meta-og:title" />
+<meta name="twitter:site" content="DVL-75 User Manual" id="__meta-twitter:site" />
+<meta name="robots" content="index" id="__meta-robots" />
+<link rel="icon" href="https://app.gitbook.com/public/images/icon-512.png"  id="__link-icon" />
+
+                
+                <script type="module" defer src="https://app.gitbook.com/public/app/public-VIHRYJQK.min.js?v=10.9.236-841586b2b7629d7ddb3c0baceca20a16cb339edf-3986028514"></script>
+                <style id="react-native-stylesheet">[stylesheet-group="0"]{}
+body{margin:0;}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0;}
+html{-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:rgba(0,0,0,0);}
+input::-webkit-search-cancel-button,input::-webkit-search-decoration,input::-webkit-search-results-button,input::-webkit-search-results-decoration{display:none;}
+[stylesheet-group="1"]{}
+.css-11aywtz{-moz-appearance:textfield;-webkit-appearance:none;background-color:rgba(0,0,0,0.00);border-bottom-left-radius:0px;border-bottom-right-radius:0px;border-top-left-radius:0px;border-top-right-radius:0px;border:0 solid black;box-sizing:border-box;font:14px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;margin:0px;padding:0px;resize:none;}
+.css-175oi2r{align-items:stretch;background-color:rgba(0,0,0,0.00);border:0 solid black;box-sizing:border-box;display:flex;flex-basis:auto;flex-direction:column;flex-shrink:0;list-style:none;margin:0px;min-height:0px;min-width:0px;padding:0px;position:relative;text-decoration:none;z-index:0;}
+.css-1qaijid{background-color:rgba(0,0,0,0.00);border:0 solid black;box-sizing:border-box;color:inherit;display:inline;font:inherit;list-style:none;margin:0px;padding:0px;text-align:inherit;text-decoration:none;white-space:inherit;word-wrap:break-word;}
+.css-1rynq56{background-color:rgba(0,0,0,0.00);border:0 solid black;box-sizing:border-box;color:rgba(0,0,0,1.00);display:inline;font:14px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;list-style:none;margin:0px;padding:0px;text-align:inherit;text-decoration:none;white-space:pre-wrap;word-wrap:break-word;}
+.css-9pa8cd{bottom:0px;height:100%;left:0px;opacity:0;position:absolute;right:0px;top:0px;width:100%;z-index:-1;}
+[stylesheet-group="2"]{}
+.r-1064s9p{margin:4px;}
+.r-11mg6pl{border-bottom-color:rgba(255,255,255,1.00);border-left-color:rgba(255,255,255,1.00);border-right-color:rgba(255,255,255,1.00);border-top-color:rgba(255,255,255,1.00);}
+.r-13awgt0{flex:1;}
+.r-13fxbef{border-bottom-color:rgba(211,61,61,1.00);border-left-color:rgba(211,61,61,1.00);border-right-color:rgba(211,61,61,1.00);border-top-color:rgba(211,61,61,1.00);}
+.r-1471scf{display:inline;}
+.r-156hn8l{border-bottom-color:rgba(211,220,228,1.00);border-left-color:rgba(211,220,228,1.00);border-right-color:rgba(211,220,228,1.00);border-top-color:rgba(211,220,228,1.00);}
+.r-17gur6a{border-bottom-left-radius:0px;border-bottom-right-radius:0px;border-top-left-radius:0px;border-top-right-radius:0px;}
+.r-18c69zk{border-bottom-left-radius:100px;border-bottom-right-radius:100px;border-top-left-radius:100px;border-top-right-radius:100px;}
+.r-190qawg{border-bottom-color:rgba(227,232,237,1.00);border-left-color:rgba(227,232,237,1.00);border-right-color:rgba(227,232,237,1.00);border-top-color:rgba(227,232,237,1.00);}
+.r-19dn8jc{border-bottom-color:rgba(104,60,17,1.00);border-left-color:rgba(104,60,17,1.00);border-right-color:rgba(104,60,17,1.00);border-top-color:rgba(104,60,17,1.00);}
+.r-19nkufj{border-bottom-color:rgba(40,49,67,1.00);border-left-color:rgba(40,49,67,1.00);border-right-color:rgba(40,49,67,1.00);border-top-color:rgba(40,49,67,1.00);}
+.r-1awa8pu{border-bottom-color:rgba(101,119,134,1.00);border-left-color:rgba(101,119,134,1.00);border-right-color:rgba(101,119,134,1.00);border-top-color:rgba(101,119,134,1.00);}
+.r-1c57tb8{border-bottom-left-radius:34px;border-bottom-right-radius:34px;border-top-left-radius:34px;border-top-right-radius:34px;}
+.r-1d4xg89{border-bottom-color:rgba(170,184,194,1.00);border-left-color:rgba(170,184,194,1.00);border-right-color:rgba(170,184,194,1.00);border-top-color:rgba(170,184,194,1.00);}
+.r-1dqxon3{overflow-x:auto;overflow-y:auto;}
+.r-1edjr5w{padding:80px;}
+.r-1f0042m{border-bottom-left-radius:5px;border-bottom-right-radius:5px;border-top-left-radius:5px;border-top-right-radius:5px;}
+.r-1fdo3w0{margin:16px;}
+.r-1fuqb1j{border-bottom-left-radius:24px;border-bottom-right-radius:24px;border-top-left-radius:24px;border-top-right-radius:24px;}
+.r-1j16mh1{border-bottom-left-radius:100%;border-bottom-right-radius:100%;border-top-left-radius:100%;border-top-right-radius:100%;}
+.r-1jkafct{border-bottom-left-radius:2px;border-bottom-right-radius:2px;border-top-left-radius:2px;border-top-right-radius:2px;}
+.r-1jyn79y{border-bottom-color:rgba(0,150,136,1.00);border-left-color:rgba(0,150,136,1.00);border-right-color:rgba(0,150,136,1.00);border-top-color:rgba(0,150,136,1.00);}
+.r-1p0fg95{border-bottom-color:rgba(245,247,249,1.00);border-left-color:rgba(245,247,249,1.00);border-right-color:rgba(245,247,249,1.00);border-top-color:rgba(245,247,249,1.00);}
+.r-1phboty{border-bottom-style:solid;border-left-style:solid;border-right-style:solid;border-top-style:solid;}
+.r-1rwzld0{border-bottom-color:rgba(11,79,47,1.00);border-left-color:rgba(11,79,47,1.00);border-right-color:rgba(11,79,47,1.00);border-top-color:rgba(11,79,47,1.00);}
+.r-1tgwseu{border-bottom-color:rgba(52,109,219,1.00);border-left-color:rgba(52,109,219,1.00);border-right-color:rgba(52,109,219,1.00);border-top-color:rgba(52,109,219,1.00);}
+.r-1tw7wh{border-bottom-left-radius:50px;border-bottom-right-radius:50px;border-top-left-radius:50px;border-top-right-radius:50px;}
+.r-1udh08x{overflow-x:hidden;overflow-y:hidden;}
+.r-1w1o3af{border-bottom-color:rgba(251,232,240,1.00);border-left-color:rgba(251,232,240,1.00);border-right-color:rgba(251,232,240,1.00);border-top-color:rgba(251,232,240,1.00);}
+.r-1wgstfn{border-bottom-style:none;border-left-style:none;border-right-style:none;border-top-style:none;}
+.r-1xc7w19{border-bottom-color:rgba(0,0,0,1.00);border-left-color:rgba(0,0,0,1.00);border-right-color:rgba(0,0,0,1.00);border-top-color:rgba(0,0,0,1.00);}
+.r-1xfd6ze{border-bottom-left-radius:8px;border-bottom-right-radius:8px;border-top-left-radius:8px;border-top-right-radius:8px;}
+.r-1xutcf9{padding:40px;}
+.r-1yadl64{border-bottom-width:0px;border-left-width:0px;border-right-width:0px;border-top-width:0px;}
+.r-42olwf{border-bottom-color:rgba(0,0,0,0.00);border-left-color:rgba(0,0,0,0.00);border-right-color:rgba(0,0,0,0.00);border-top-color:rgba(0,0,0,0.00);}
+.r-4a18lf{border-bottom-color:rgba(255,0,0,1.00);border-left-color:rgba(255,0,0,1.00);border-right-color:rgba(255,0,0,1.00);border-top-color:rgba(255,0,0,1.00);}
+.r-4qtqp9{display:inline-block;}
+.r-60ke3l{border-bottom-color:rgba(0,128,0,1.00);border-left-color:rgba(0,128,0,1.00);border-right-color:rgba(0,128,0,1.00);border-top-color:rgba(0,128,0,1.00);}
+.r-6578ry{margin:40px;}
+.r-6koalj{display:flex;}
+.r-6ncur5{border-bottom-left-radius:18px;border-bottom-right-radius:18px;border-top-left-radius:18px;border-top-right-radius:18px;}
+.r-6t2glc{border-bottom-left-radius:40px;border-bottom-right-radius:40px;border-top-left-radius:40px;border-top-right-radius:40px;}
+.r-9x6qib{border-bottom-color:rgba(204,214,221,1.00);border-left-color:rgba(204,214,221,1.00);border-right-color:rgba(204,214,221,1.00);border-top-color:rgba(204,214,221,1.00);}
+.r-ancj0c{border-bottom-color:rgba(218,212,255,1.00);border-left-color:rgba(218,212,255,1.00);border-right-color:rgba(218,212,255,1.00);border-top-color:rgba(218,212,255,1.00);}
+.r-by8dw1{margin:24px;}
+.r-cdmcib{border-bottom-left-radius:3px;border-bottom-right-radius:3px;border-top-left-radius:3px;border-top-right-radius:3px;}
+.r-cpet4d{border-bottom-left-radius:999px;border-bottom-right-radius:999px;border-top-left-radius:999px;border-top-right-radius:999px;}
+.r-crgep1{margin:0px;}
+.r-d045u9{border-bottom-width:2px;border-left-width:2px;border-right-width:2px;border-top-width:2px;}
+.r-d23pfw{padding:24px;}
+.r-dta0w2{flex:2;}
+.r-edyy15{padding:8px;}
+.r-eg6o18{border-bottom-style:dashed;border-left-style:dashed;border-right-style:dashed;border-top-style:dashed;}
+.r-egco7n{border-bottom-color:rgba(253,195,137,1.00);border-left-color:rgba(253,195,137,1.00);border-right-color:rgba(253,195,137,1.00);border-top-color:rgba(253,195,137,1.00);}
+.r-fx7oqy{border-bottom-color:rgba(0,0,255,1.00);border-left-color:rgba(0,0,255,1.00);border-right-color:rgba(0,0,255,1.00);border-top-color:rgba(0,0,255,1.00);}
+.r-gat16f{border-bottom-color:rgba(194,217,255,1.00);border-left-color:rgba(194,217,255,1.00);border-right-color:rgba(194,217,255,1.00);border-top-color:rgba(194,217,255,1.00);}
+.r-gav1f{border-bottom-color:rgba(24,28,31,1.00);border-left-color:rgba(24,28,31,1.00);border-right-color:rgba(24,28,31,1.00);border-top-color:rgba(24,28,31,1.00);}
+.r-hvic4v{display:none;}
+.r-hwh8t1{margin:8px;}
+.r-jqra5g{border-bottom-color:rgba(55,65,81,1.00);border-left-color:rgba(55,65,81,1.00);border-right-color:rgba(55,65,81,1.00);border-top-color:rgba(55,65,81,1.00);}
+.r-jxo161{border-bottom-color:rgba(255,204,203,1.00);border-left-color:rgba(255,204,203,1.00);border-right-color:rgba(255,204,203,1.00);border-top-color:rgba(255,204,203,1.00);}
+.r-kdyh1x{border-bottom-left-radius:6px;border-bottom-right-radius:6px;border-top-left-radius:6px;border-top-right-radius:6px;}
+.r-krxsd3{display:-webkit-box;}
+.r-m2nopt{border-bottom-color:rgba(43,46,57,1.00);border-left-color:rgba(43,46,57,1.00);border-right-color:rgba(43,46,57,1.00);border-top-color:rgba(43,46,57,1.00);}
+.r-m7id7e{flex:unset;}
+.r-m9k8lk{border-bottom-color:rgba(223,255,240,1.00);border-left-color:rgba(223,255,240,1.00);border-right-color:rgba(223,255,240,1.00);border-top-color:rgba(223,255,240,1.00);}
+.r-nsbfu8{padding:16px;}
+.r-p4pd8u{border-bottom-color:rgba(36,42,49,1.00);border-left-color:rgba(36,42,49,1.00);border-right-color:rgba(36,42,49,1.00);border-top-color:rgba(36,42,49,1.00);}
+.r-qwd59z{border-bottom-left-radius:1px;border-bottom-right-radius:1px;border-top-left-radius:1px;border-top-right-radius:1px;}
+.r-rs99b7{border-bottom-width:1px;border-left-width:1px;border-right-width:1px;border-top-width:1px;}
+.r-t60dpp{padding:0px;}
+.r-texgdz{margin:80px;}
+.r-tuq35u{padding:4px;}
+.r-tyhe3k{border-bottom-left-radius:64px;border-bottom-right-radius:64px;border-top-left-radius:64px;border-top-right-radius:64px;}
+.r-xoduu5{display:inline-flex;}
+.r-xyw6el{padding:12px;}
+.r-ywje51{margin:auto;}
+.r-z2wwpe{border-bottom-left-radius:4px;border-bottom-right-radius:4px;border-top-left-radius:4px;border-top-right-radius:4px;}
+.r-zhp00w{padding:2px;}
+[stylesheet-group="2.1"]{}
+.r-10x3wzx{padding-bottom:40px;padding-top:40px;}
+.r-11yq8vr{margin-left:40px;margin-right:40px;}
+.r-1e081e0{padding-left:12px;padding-right:12px;}
+.r-1guathk{padding-left:24px;padding-right:24px;}
+.r-1h4fu65{padding-bottom:24px;padding-top:24px;}
+.r-1hy1u7s{margin-left:24px;margin-right:24px;}
+.r-1isdzm1{padding-left:80px;padding-right:80px;}
+.r-1jgb5lz{margin-left:auto;margin-right:auto;}
+.r-1p02zvt{padding-left:48px;padding-right:48px;}
+.r-1p4rafz{padding-left:2px;padding-right:2px;}
+.r-1p6iasa{margin-bottom:4px;margin-top:4px;}
+.r-1pn2ns4{padding-left:8px;padding-right:8px;}
+.r-1r5su4o{margin-bottom:16px;margin-top:16px;}
+.r-1unineu{margin-bottom:40px;margin-top:40px;}
+.r-1vvnge1{padding-bottom:2px;padding-top:2px;}
+.r-1w3m5we{padding-bottom:80px;padding-top:80px;}
+.r-1xtiow5{padding-bottom:9px;padding-top:9px;}
+.r-1ybube5{margin-left:8px;margin-right:8px;}
+.r-1ydw1k6{margin-left:16px;margin-right:16px;}
+.r-1yzf0co{padding-bottom:16px;padding-top:16px;}
+.r-4amgru{margin-left:4px;margin-right:4px;}
+.r-5njf8e{padding-bottom:8px;padding-top:8px;}
+.r-5wp0in{padding-left:40px;padding-right:40px;}
+.r-c8eef1{margin-bottom:8px;margin-top:8px;}
+.r-g4w12b{padding-left:94px;padding-right:94px;}
+.r-g8va3u{margin-left:80px;margin-right:80px;}
+.r-lz04qo{margin-left:-4px;margin-right:-4px;}
+.r-mgi0kt{margin-left:-24px;margin-right:-24px;}
+.r-mk0yit{padding-left:0px;padding-right:0px;}
+.r-mvpalk{margin-left:0px;margin-right:0px;}
+.r-oyd9sg{padding-bottom:4px;padding-top:4px;}
+.r-pw2am6{margin-bottom:24px;margin-top:24px;}
+.r-r0h9e2{margin-bottom:0px;margin-top:0px;}
+.r-r26ds4{margin-bottom:80px;margin-top:80px;}
+.r-rjfia{padding-bottom:0px;padding-top:0px;}
+.r-s1qlax{padding-left:4px;padding-right:4px;}
+.r-ymttw5{padding-left:16px;padding-right:16px;}
+[stylesheet-group="2.2"]{}
+.r-100vyta{margin-top:7px;}
+.r-1029d6i{top:-24px;}
+.r-105ug2t{pointer-events:auto!important;}
+.r-109y4c4{height:1px;}
+.r-10drpc{color:rgba(0,73,215,1.00);}
+.r-10kz8ia{color:rgba(228,79,137,1.00);}
+.r-10ptun7{height:16px;}
+.r-10pyoum{color:rgba(5,5,5,1.00);}
+.r-10sqg0u{margin-bottom:1px;}
+.r-10x49cs{font-size:10px;}
+.r-10xqauy{padding-top:env(safe-area-inset-top);}
+.r-111w7nw{box-shadow:0px 1px 2px rgba(0,0,0,0.69);}
+.r-113qch9{cursor:auto;}
+.r-116b19x{padding-left:40px;}
+.r-119vxgs{border-top-style:dashed;}
+.r-119zq30{border-left-width:4px;}
+.r-11c0sde{margin-top:24px;}
+.r-11f42r{height:314px;}
+.r-11g3r6m{padding-right:24px;}
+.r-11j9u27{visibility:hidden;}
+.r-11mo1y0{margin-bottom:7px;}
+.r-11mpjr4{background-color:rgba(223,223,223,1.00);}
+.r-11udlyb{background-color:rgba(0,150,136,1.00);}
+.r-11vxtcu{background-color:rgba(211,220,228,1.00);}
+.r-11wlrp9{border-top-color:rgba(52,109,219,1.00);}
+.r-11wrixw{margin-left:0px;}
+.r-11yh6sk{overflow-x:hidden;}
+.r-11ys0m{-webkit-break-before:auto;break-before:auto;}
+.r-123mryc{color:rgba(185,94,4,1.00);}
+.r-127358a{animation-name:r-9p3sdl;}
+.r-127gp16{max-width:150px;}
+.r-12dqhl9{height:calc(100vh - 80px);}
+.r-12mrs02{object-fit:contain;}
+.r-12v2sbk{background-color:rgba(36,42,49,0.50);}
+.r-12vffkv>*{pointer-events:auto;}
+.r-12vffkv{pointer-events:none!important;}
+.r-12ym1je{width:18px;}
+.r-12zb1j4{margin-right:7px;}
+.r-135wba7{line-height:24px;}
+.r-13hce6t{margin-left:4px;}
+.r-13i40vn{box-shadow:0px 12px 13px rgba(0,0,0,0.02);}
+.r-13l2t4g{border-right-width:1px;}
+.r-13ll0g2{color:rgba(10,48,105,1.00);}
+.r-13lvk87{margin-left:110px;}
+.r-13qz1uu{width:100%;}
+.r-13tjlyg{transition-duration:0.1s;}
+.r-13yce4e{border-top-width:0px;}
+.r-142tt33{-webkit-text-decoration-line:line-through;text-decoration-line:line-through;}
+.r-144uupt{left:2px;}
+.r-146iojx{max-width:300px;}
+.r-1472mwg{height:24px;}
+.r-14bkmb3{bottom:-3px;}
+.r-14eup4l{top:3px;}
+.r-14gqq1x{margin-top:4px;}
+.r-14lw9ot{background-color:rgba(255,255,255,1.00);}
+.r-14sbq61{background-color:rgba(33,150,243,1.00);}
+.r-14taxks{width:196px;}
+.r-14utu6a{line-height:8px;}
+.r-14vq63g{background-color:rgba(3,58,22,1.00);}
+.r-14yzgew{line-height:18px;}
+.r-150rngu{-webkit-overflow-scrolling:touch;}
+.r-157h22z{background-color:rgba(45,50,58,1.00);}
+.r-15czi30{background-image:linear-gradient(90deg, #e44f89, #c62c68);}
+.r-15d4u6f{background-color:rgba(145,176,240,1.00);}
+.r-15g7tld{margin-bottom:80px;}
+.r-15m1z73{margin-left:40px;}
+.r-15n4387{outline-color:#2662d7;}
+.r-15o5oer{bottom:auto;}
+.r-15ysp7h{min-height:32px;}
+.r-15zivkp{margin-bottom:4px;}
+.r-16dba41{font-weight:400;}
+.r-16l9doz{height:auto;}
+.r-16r7sh{right:-16px;}
+.r-16vg0q1{max-width:225px;}
+.r-16y2uox{flex-grow:1;}
+.r-173mn98{align-self:flex-end;}
+.r-1777fci{justify-content:center;}
+.r-17bb2tj{animation-duration:0.75s;}
+.r-17giqoz{box-shadow:0px 0px 7px rgba(0,0,0,0.52);}
+.r-17grq5a{margin-right:-8px;}
+.r-17leim2{background-repeat:repeat;}
+.r-17rnw9f{line-height:30px;}
+.r-17s6mgv{justify-content:flex-end;}
+.r-17tb59b{opacity:0.7;}
+.r-17tloay{opacity:0.6;}
+.r-17wrw06{color:rgba(180,26,26,1.00);}
+.r-184en5c{z-index:1;}
+.r-18ayb63{border-right-color:rgba(227,232,237,1.00);}
+.r-18kxxzh{flex-grow:0;}
+.r-18nhz7w{top:-3px;}
+.r-18p6if4{border-right-width:2px;}
+.r-18u37iz{flex-direction:row;}
+.r-18y5qoh{color:rgba(165,214,255,1.00);}
+.r-190thrv{color:rgba(145,75,5,1.00);}
+.r-19554kt{width:90px;}
+.r-19907ok{-moz-transition:opacity ease 200ms;-webkit-transition:opacity ease 200ms;transition:opacity ease 200ms;}
+.r-19akecc{color:rgba(175,245,180,1.00);}
+.r-19bdk51{border-right-color:rgba(211,61,61,1.00);}
+.r-19byhck{flex-basis:32%;}
+.r-19eyfmh{width:640px;}
+.r-19lq7b1{top:16px;}
+.r-19r33im{letter-spacing:1.2px;}
+.r-19tq15n{margin-top:80px;}
+.r-19wmn03{width:20px;}
+.r-19z077z{touch-action:none;}
+.r-1a3cspq{background-color:rgba(40,49,67,1.00);}
+.r-1abnn5w{animation-play-state:paused;}
+.r-1acpoxo{width:36px;}
+.r-1aerykh{border-top-color:rgba(211,220,228,1.00);}
+.r-1aockid{width:40px;}
+.r-1armvtb{font-size:8px;}
+.r-1awozwy{align-items:center;}
+.r-1axcl7z{border:1px solid #d3dce4;}
+.r-1ay1djp{animation-duration:1s;}
+.r-1azx6h{max-height:480px;}
+.r-1b00too{background-color:rgba(236,239,241,1.00);}
+.r-1b096ap{border-bottom-color:rgba(36,42,49,1.00);}
+.r-1b1g84l{bottom:-8px;}
+.r-1b3fm86{background-color:undefined;}
+.r-1b43r93{font-size:14px;}
+.r-1bcbbo8{color:rgba(17,99,41,1.00);}
+.r-1bnj018{color:rgba(92,105,117,1.00);}
+.r-1bwgafa{-webkit-text-decoration-color:rgba(136,153,168,1.00);text-decoration-color:rgba(136,153,168,1.00);}
+.r-1c681wc{color:rgba(77,222,152,1.00);}
+.r-1c6unfx{forced-color-adjust:none;}
+.r-1ceczpf{min-height:24px;}
+.r-1clhhh9{-moz-transition-property:all;-webkit-transition-property:all;transition-property:all;}
+.r-1cmwbt1{gap:8px;}
+.r-1cvj4g8{margin-top:1px;}
+.r-1d09ksm{align-items:baseline;}
+.r-1d2f490{left:0px;}
+.r-1d4mawv{margin-right:4px;}
+.r-1d5kdc7{flex-direction:column-reverse;}
+.r-1d7fvdj{justify-content:space-evenly;}
+.r-1d9grui{border-bottom-color:rgba(211,220,228,1.00);}
+.r-1ddef8g{-webkit-text-decoration-line:underline;text-decoration-line:underline;}
+.r-1dernwh{height:70%;}
+.r-1dlgt49{max-height:30px;}
+.r-1dmvmgl{background-color:rgba(36,42,49,1.00);}
+.r-1dn12g7{line-height:48px;}
+.r-1dpl46z{border-bottom-right-radius:4px;}
+.r-1dqbpge{cursor:text;}
+.r-1dumtqg{background-color:rgba(253,195,137,1.00);}
+.r-1e7him5{min-width:220px;}
+.r-1ea14ly{border-right-color:rgba(95,69,255,1.00);}
+.r-1efo1hp{border-bottom-color:rgba(43,46,57,1.00);}
+.r-1ei5mc7{cursor:inherit;}
+.r-1eic64l{color:rgba(198,44,104,1.00);}
+.r-1enofrn{font-size:12px;}
+.r-1etz4cy{color:rgba(194,217,255,1.00);}
+.r-1euycsn{flex-direction:row-reverse;}
+.r-1ewcgjf{box-shadow:0px 1px 3px rgba(0,0,0,0.5);}
+.r-1f23bpq{text-color:#ffffff;}
+.r-1f2v84d{color:rgba(204,207,212,1.00);}
+.r-1f529hi{line-height:14px;}
+.r-1fd96xs{padding-left:50px;}
+.r-1fe0xdi{left:0%;}
+.r-1ff274t{text-align:right;}
+.r-1fi01yr{background-color:rgba(55,65,81,1.00);}
+.r-1fiaf3z{opacity:0.05;}
+.r-1fo40xd{top:80px;}
+.r-1fq43b1{flex-basis:100%;}
+.r-1g7fiml{height:30px;}
+.r-1g80fh1{margin-right:80px;}
+.r-1ghhsy9{color:rgba(52,109,219,1.00);}
+.r-1gigy5k{border-bottom-color:rgba(45,50,58,1.00);}
+.r-1glc72y{border-bottom-color:rgba(245,247,249,1.00);}
+.r-1h0z5md{justify-content:flex-start;}
+.r-1h815vi{right:92%;}
+.r-1h8ys4a{padding-top:4px;}
+.r-1h9q8wt{color:rgba(69,69,69,1.00);}
+.r-1habvwh{align-items:flex-start;}
+.r-1hjwoze{height:18px;}
+.r-1hlnpa{height:3px;}
+.r-1hpgsb4{;}
+.r-1hqdnve{box-shadow:0px 0px 4px inset rgba(0,0,0, 0.08);}
+.r-1hrvmjx{border-top-color:rgba(55,65,81,1.00);}
+.r-1hsi953{min-height:180px;}
+.r-1hvjb8t{padding-right:4px;}
+.r-1hy97zq{padding-top:80px;}
+.r-1hycxz{width:350px;}
+.r-1i6wzkk{-moz-transition-property:opacity;-webkit-transition-property:opacity;transition-property:opacity;}
+.r-1i7sdiz{box-shadow:0px 4px 10px rgba(0,0,0,0.05);}
+.r-1i93rbr{right:0%;}
+.r-1ielgck{animation-duration:300ms;}
+.r-1ifxtd0{margin-bottom:16px;}
+.r-1ik5qf4{max-width:500px;}
+.r-1iln25a{word-wrap:normal;}
+.r-1ioqa4e{border-top-right-radius:7px;}
+.r-1ipicw7{width:300px;}
+.r-1j7aebl{width:880px;}
+.r-1janqcz{width:16px;}
+.r-1jg9483{width:8px;}
+.r-1jj8364{margin-left:auto;}
+.r-1jkjb{margin-left:8px;}
+.r-1jnzvcq{padding-bottom:80px;}
+.r-1jocfgc{width:290px;}
+.r-1jpmnxg{word-wrap:anywhere;}
+.r-1jrm8ja{background-color:rgba(185,94,4,1.00);}
+.r-1jsra8{box-shadow:inset 0px 0px 0px 1px #e3e8ed;}
+.r-1jxfwug{border-top-width:2px;}
+.r-1k1q3bj{max-height:300px;}
+.r-1k25im9{height:26px;}
+.r-1kb76zh{margin-right:8px;}
+.r-1kf75xu{color:rgba(12,105,61,1.00);}
+.r-1kfrs79{font-weight:600;}
+.r-1kihuf0{align-self:center;}
+.r-1kjq87h{width:376px;}
+.r-1knl56f{animation-name:r-1hunrpy;}
+.r-1kvn7zp{max-height:150px;}
+.r-1kx0pzc{background-image:radial-gradient(rgba(0, 0, 0, 0.1), #181c1f);}
+.r-1l0m7dr{background-image:radial-gradient(rgba(0, 0, 0, 0.1), #ffffff);}
+.r-1l7z4oj{padding-bottom:16px;}
+.r-1l94q7l{box-shadow:inset 0px 0px 1px rgb(0 0 0 / 30%);}
+.r-1ld3bg{top:-4px;}
+.r-1ldzwu0{animation-timing-function:linear;}
+.r-1ljd8xs{border-left-width:1px;}
+.r-1lky6n1{background-color:rgba(227,232,237,1.00);}
+.r-1lnfjr6{-webkit-background-clip:text;}
+.r-1lnt56z{color:rgba(211,220,228,1.00);}
+.r-1loqt21{cursor:pointer;}
+.r-1m04atk{padding-left:8px;}
+.r-1m4drjs{top:-6px;}
+.r-1maqer6{max-width:860px;}
+.r-1mdbw0j{padding-bottom:0px;}
+.r-1mdsxwj{color:rgba(237,159,81,1.00);}
+.r-1mgmw1x{background-image:linear-gradient(90deg, #5f45ff, #442fc8);}
+.r-1mhtwjo{left:-3px;}
+.r-1mkpi1y{max-width:max(50%, 300px);}
+.r-1mlwlqe{flex-basis:auto;}
+.r-1mnahxq{margin-top:0px;}
+.r-1moh23t{bottom:16px;}
+.r-1mrlafo{background-position:0;}
+.r-1ms9ukt{bottom:-5px;}
+.r-1mtwht8{color:rgba(210,168,255,1.00);}
+.r-1muvv40{animation-iteration-count:infinite;}
+.r-1n20pny{width:140px;}
+.r-1n6k3lk{color:rgba(36,42,49,1.00);}
+.r-1na1l7e{animation-play-state:running;}
+.r-1ndx55c{background-color:rgba(248,250,255,1.00);}
+.r-1nf4jbm{color:rgba(59,69,78,1.00);}
+.r-1niwhzg{background-color:rgba(0,0,0,0.00);}
+.r-1nj16ve{left:-10px;}
+.r-1nlw0im{bottom:8px;}
+.r-1nq9s1i{color:rgba(145,176,240,1.00);}
+.r-1ny4l3l{outline-style:none;}
+.r-1o9jcv2{max-width:660px;}
+.r-1ocf4r9{scroll-snap-type:y mandatory;}
+.r-1odw9d6{background-color:rgba(20,23,28,1.00);}
+.r-1oec5bt{opacity:0.2;}
+.r-1oep0n4{left:-12px;}
+.r-1ois7e2{color:rgba(55,65,81,1.00);}
+.r-1or9b2r{height:10px;}
+.r-1osy6ei{color:rgba(255,220,215,1.00);}
+.r-1oszu61{align-items:stretch;}
+.r-1otgn73{touch-action:manipulation;}
+.r-1ow6zhx{margin-left:16px;}
+.r-1oy60ga{transform:translateX(-12px);}
+.r-1p0dtai{bottom:0px;}
+.r-1p3vkdf{border-right-color:rgba(45,50,58,1.00);}
+.r-1p5i0ed{bottom:-24px;}
+.r-1p69tiw{border-top-color:rgba(43,46,57,1.00);}
+.r-1peese0{margin-bottom:24px;}
+.r-1pgixoa{border-right-left-radius:4px;}
+.r-1ph75f1{height:80px;}
+.r-1pi2tsx{height:100%;}
+.r-1pl7oy7{min-height:48px;}
+.r-1pos5eu{vertical-align:middle;}
+.r-1ptriwd{right:2px;}
+.r-1pyaxff{padding-right:8px;}
+.r-1q142lx{flex-shrink:0;}
+.r-1q3nxaj{z-index:300;}
+.r-1q6rxnj{padding-right:110px;}
+.r-1q77oe7{background-color:rgba(171,183,202,1.00);}
+.r-1q9jyb7{-webkit-filter:blur(16px) contrast(110%) hue-rotate(10deg) brightness(1.2) saturate(1.2);filter:blur(16px) contrast(110%) hue-rotate(10deg) brightness(1.2) saturate(1.2);}
+.r-1qc3rpd{transform:scaleY(-1);}
+.r-1qd0xha{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+.r-1qdbj55{animation-name:r-ndfo3d;}
+.r-1qefu2b{right:-3px;}
+.r-1qhn6m8{padding-left:16px;}
+.r-1quu1zo{;}
+.r-1r0uwd5{color:rgba(255,166,87,1.00);}
+.r-1r74h94{left:8px;}
+.r-1r8g8re{height:36px;}
+.r-1rasi3h{color:rgba(136,153,168,1.00);}
+.r-1rbj2e8{outline-color:#f5f7f9;}
+.r-1rdth4h{border-left-color:rgba(55,65,81,1.00);}
+.r-1rho1gz{box-shadow:0px 12px 13px rgba(0,0,0,0.12);}
+.r-1rkdych{max-width:1040px;}
+.r-1rla0r3{background-image:linear-gradient(90deg, #d33d3d, #b41a1a);}
+.r-1rnoaur{overflow-y:auto;}
+.r-1ro0kt6{flex-basis:0%;}
+.r-1ro7rbe{right:100%;}
+.r-1rttkqs{width:400px;}
+.r-1s3egr7{z-index:100;}
+.r-1s8p94s{max-width:832px;}
+.r-1sc18lr{padding-bottom:88px;}
+.r-1sncvnh{transform:translateZ(0px);}
+.r-1sxrcry{background-size:auto;}
+.r-1t2qqvi{flex-basis:50%;}
+.r-1t7uo4s{object-fit:cover;}
+.r-1t8m4kl{text-shadow:0px 0px 3px rgba(36,42,49,1.00);}
+.r-1tazni7{cursor:not-allowed;}
+.r-1tpn5c{background-color:rgba(194,217,255,1.00);}
+.r-1ts5s6y{aspect-ratio:1.7777777777777777;}
+.r-1ttybm1{border-top-color:rgba(45,50,58,1.00);}
+.r-1ty4vvm{left:40px;}
+.r-1tymxbh{box-shadow:5px 0px 7px rgba(36,42,49,0.60);}
+.r-1u8kdu{bottom:24px;}
+.r-1ua3vzd{background-color:rgba(223,255,240,1.00);}
+.r-1ub1aon{transform:translateY(100%);}
+.r-1udbk01{text-overflow:ellipsis;}
+.r-1ufdtu9{background-image:linear-gradient(270deg, #e3e8ed 10%, #f5f7f9, #e3e8ed 90%);}
+.r-1ufr4wv{z-index:9;}
+.r-1ug9s38{box-shadow:inset 0px 0px 0px 1px #374151;}
+.r-1ui5ee8{font-size:32px;}
+.r-1ul06mb{margin-left:32px;}
+.r-1ulgld5{color:rgba(255,123,114,1.00);}
+.r-1uql0sn{top:-1.2em;}
+.r-1ur4h4l{bottom:-16px;}
+.r-1ur9v65{padding-top:40px;}
+.r-1ut4w64{margin-bottom:-1px;}
+.r-1uwte3a{padding-bottom:40px;}
+.r-1uypc71{animation-timing-function:ease-in;}
+.r-1v4p587{border-bottom-color:rgba(24,28,31,1.00);}
+.r-1v6e3re{min-width:48px;}
+.r-1v7fmog{background-color:rgba(236,243,255,1.00);}
+.r-1v7sw2p{background-size:50% 80px;}
+.r-1vamr63{max-width:720px;}
+.r-1vckr1u{background-color:rgba(245,247,249,1.00);}
+.r-1vex5ub{color:rgba(68,47,200,1.00);}
+.r-1vo7ria{color:rgba(38,98,215,1.00);}
+.r-1vutw0s{background-color:rgba(103,6,12,1.00);}
+.r-1vz48go{background-image:radial-gradient(rgba(255, 255, 255, 0.1), #181c1f);}
+.r-1vzi8xi{vertical-align:middle;}
+.r-1w2pmg{height:0px;}
+.r-1w6e6rj{flex-wrap:wrap;}
+.r-1wb8bfx{text-decoration-thickness:2px;}
+.r-1wbh5a2{flex-shrink:1;}
+.r-1wezhl{margin-left:80px;}
+.r-1wfhzrg{height:120px;}
+.r-1wtj0ep{justify-content:space-between;}
+.r-1wv73ep{align-self:baseline;}
+.r-1ww30s9{max-width:30px;}
+.r-1wyvozj{left:50%;}
+.r-1wyyakw{z-index:-1;}
+.r-1wzrnnt{margin-top:16px;}
+.r-1x35g6{font-size:24px;}
+.r-1x93onp{width:110px;}
+.r-1xbve24{height:6px;}
+.r-1xcajam{position:fixed;}
+.r-1xnzce8{-moz-user-select:text;-webkit-user-select:text;user-select:text;}
+.r-1xoqk23{background-color:rgba(68,47,200,1.00);}
+.r-1xy5wl5{width:128px;}
+.r-1y14msn{border-bottom-color:rgba(55,65,81,1.00);}
+.r-1y9xkqr{left:8%;}
+.r-1yb8zos{background-color:rgba(162,169,185,1.00);}
+.r-1ybp48z{background-image:linear-gradient(90deg, #cc3131, #b41a1a);}
+.r-1ygmrgt{padding-top:24px;}
+.r-1ylffjs{-webkit-text-decoration-style:dotted;text-decoration-style:dotted;}
+.r-1yv4afn{border-top-color:rgba(227,232,237,1.00);}
+.r-1yvhtrz{width:32px;}
+.r-1yxedwg{top:8px;}
+.r-1yyzdbt{border-left-color:rgba(227,232,237,1.00);}
+.r-23aq58{border-right-color:rgba(204,49,49,1.00);}
+.r-257lmc{width:1180px;}
+.r-285fr0{min-width:16px;}
+.r-29dh1f{background-image:linear-gradient(90deg, #eceff1, #e3e8ed);}
+.r-2awvau{min-width:-webkit-max-content;min-width:-moz-max-content;min-width:max-content;}
+.r-2eszeu::-webkit-scrollbar{display:none}
+.r-2eszeu{scrollbar-width:none;}
+.r-2fm7cc{color:rgba(139,148,158,1.00);}
+.r-2fw26j{outline-offset:0px;}
+.r-2jelyo{background-color:rgba(24,28,31,1.00);}
+.r-2jxp4q{background-color:rgba(34,39,46,1.00);}
+.r-2kxcpj{inset:0px;}
+.r-2llsf{min-height:100%;}
+.r-2o02ov{margin-top:40px;}
+.r-2tavb8{background-color:rgba(0,0,0,0.60);}
+.r-2zpn8w{-webkit-break-inside:avoid;break-inside:avoid;}
+.r-30o5oe{-moz-appearance:none;-ms-appearance:none;-webkit-appearance:none;appearance:none;}
+.r-30qeir{bottom:-4px;}
+.r-36ujnk{font-style:italic;}
+.r-37tt59{line-height:32px;}
+.r-3da1kt{height:8px;}
+.r-3dgjpp{border-top-color:rgba(36,42,49,1.00);}
+.r-3hw5f6{color:rgba(149,56,0,1.00);}
+.r-3mc0re{right:8px;}
+.r-3o833n{background-color:rgba(251,232,240,1.00);}
+.r-3pxcvb{border-bottom-color:rgba(255,255,255,1.00);}
+.r-3s2u2q{white-space:nowrap;}
+.r-417010{z-index:0;}
+.r-432wen{width:3px;}
+.r-44c749{border-bottom-left-radius:7px;}
+.r-493a2x{width:680px;}
+.r-4d76ec{height:200px;}
+.r-4dj0k7{box-shadow:0px 1px 2px rgba(0,0,0,0.12);}
+.r-4gszlv{background-size:cover;}
+.r-4jz4xt{background-image:linear-gradient(90deg, #374151, #374151);}
+.r-4v7adb{height:5px;}
+.r-5cpxsl{stroke-width:3;}
+.r-5is6sd{max-width:460px;}
+.r-5kkj8d{border-top-width:1px;}
+.r-5ks0hp{right:3.5px;}
+.r-5kx3fr{page-break-inside:avoid;}
+.r-5oul0u{margin-bottom:8px;}
+.r-5soawk{width:10px;}
+.r-5xr8s6{outline-width:2px;}
+.r-60emj1{background-color:rgba(255,204,203,1.00);}
+.r-61z16t{margin-right:0px;}
+.r-633pao{pointer-events:none!important;}
+.r-6dt33c{opacity:1;}
+.r-6k4xqk{margin-top:-40px;}
+.r-6t5ypu{border-bottom-left-radius:4px;}
+.r-6taxm2:-ms-input-placeholder{color:var(--placeholderTextColor);opacity:1;}
+.r-6taxm2::-moz-placeholder{color:var(--placeholderTextColor);opacity:1;}
+.r-6taxm2::-webkit-input-placeholder{color:var(--placeholderTextColor);opacity:1;}
+.r-6taxm2::placeholder{color:var(--placeholderTextColor);opacity:1;}
+.r-6uxfom{margin-left:24px;}
+.r-6wscbn{max-width:252px;}
+.r-73dpzl{border-top-color:rgba(245,247,249,1.00);}
+.r-7a29px{width:64px;}
+.r-7b7h2f{left:100%;}
+.r-7cikom{font-size:inherit;}
+.r-7k9uk9{width:calc(100% - 110px);}
+.r-7l9xyp{background-color:rgba(255,255,255,0.20);}
+.r-7q8q6z{cursor:default;}
+.r-7xmw5f{width:-webkit-fit-content;width:-moz-fit-content;width:fit-content;}
+.r-81rbui{animation-name:r-1ak6360;}
+.r-855088{border-left-color:rgba(0,0,0,0.00);}
+.r-88pszg{margin-right:16px;}
+.r-8akbws{-webkit-box-orient:vertical;}
+.r-8d26hk{margin-bottom:40px;}
+.r-8hc5te{width:6px;}
+.r-8v5hsd{color:rgba(126,231,135,1.00);}
+.r-9030i9{box-shadow:0px 4px 10px rgba(0,0,0,0.99);}
+.r-9111t9{padding-right:410px;}
+.r-92ng3h{width:1px;}
+.r-934yyj{padding-left:34px;}
+.r-9358xi{background-color:rgba(35,131,226,0.14);}
+.r-95jzfe{padding-top:16px;}
+.r-97e31f{padding-bottom:env(safe-area-inset-bottom);}
+.r-97prym{flex-basis:16px;}
+.r-99m41f{color:rgba(110,119,129,1.00);}
+.r-9aemit{padding-right:0px;}
+.r-9ji8r7{transform:translateY(0%);}
+.r-9jpwak{min-width:auto;}
+.r-9z1w0z{left:28px;}
+.r-a21fva{box-shadow:0px -1px 2px rgba(0,0,0,0.69);}
+.r-a2tzq0{justify-content:space-around;}
+.r-a5pmau{margin-right:2px;}
+.r-adacv{min-height:64px;}
+.r-adyw6z{font-size:20px;}
+.r-ah5dr5>*{pointer-events:none;}
+.r-ah5dr5{pointer-events:auto!important;}
+.r-ak0haq{color:rgba(121,192,255,1.00);}
+.r-aqxs90{-moz-transition:opacity 500ms ease-in, z-index 1000ms ease-in;-webkit-transition:opacity 500ms ease-in, z-index 1000ms ease-in;transition:opacity 500ms ease-in, z-index 1000ms ease-in;}
+.r-ar5de{height:112px;}
+.r-b3pvzv{left:-63px;}
+.r-b4cb4{max-height:440px;}
+.r-b88u0q{font-weight:700;}
+.r-bcqeeo{min-width:0px;}
+.r-bcycc3{box-shadow:0px -1px 2px rgba(0,0,0,0.12);}
+.r-bgnin{min-width:150px;}
+.r-bnwqim{position:relative;}
+.r-bsjocg{@media print:[object Object];}
+.r-bta5j5{right:40px;}
+.r-buy8e9{overflow-y:hidden;}
+.r-bv2aro{padding-left:env(safe-area-inset-left);}
+.r-bxaprw{border-top-left-radius:7px;}
+.r-c68hjy{color:rgba(161,161,161,1.00);}
+.r-c8fpu0{background-color:rgba(0,136,71,1.00);}
+.r-cdhzog{padding-right:80px;}
+.r-ceakki{border-right-color:rgba(245,247,249,1.00);}
+.r-cpa5s6{scroll-snap-align:start;}
+.r-cqilzk{height:400px;}
+.r-d822y2{color:rgba(5,80,174,1.00);}
+.r-deolkf{box-sizing:border-box;}
+.r-dflpy8{height:1.2em;}
+.r-dkge59{background-color:rgba(170,184,194,1.00);}
+.r-dnmrzs{max-width:100%;}
+.r-dse9kg{outline-style:auto;}
+.r-dvzd6p{right:-1px;}
+.r-dvzwsg{border-left-color:rgba(211,220,228,1.00);}
+.r-dwliz8{border-left-width:2px;}
+.r-e1k2in{right:16px;}
+.r-e9uq0i{animation-duration:1200ms;}
+.r-ea455c{border:none;}
+.r-eafdt9{transition-duration:0.15s;}
+.r-ecifi{max-width:970px;}
+.r-ehq7j7{background-size:contain;}
+.r-epq5cr{height:2px;}
+.r-eqo98v{top:24px;}
+.r-eqz5dr{flex-direction:column;}
+.r-ero68b{min-height:40px;}
+.r-eu3ka{height:40px;}
+.r-f5cfds{min-height:160px;}
+.r-fdjqy7{text-align:left;}
+.r-flmpir{border-bottom-color:rgba(40,49,67,1.00);}
+.r-fnigne{border-right-width:0px;}
+.r-fpub7{color:rgba(0,0,0,0.00);}
+.r-g3mlsw{animation-name:r-t2lo5v;}
+.r-gay1rn{border-right-color:rgba(34,39,46,1.00);}
+.r-gg6oyi{font-family:gitbook-content-font,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;}
+.r-ggadg3{left:-2px;}
+.r-givd4m{left:-5px;}
+.r-gl891g{min-width:420px;}
+.r-gtdqiz{position:-webkit-sticky;position:sticky;}
+.r-gu0qjt{padding-left:32px;}
+.r-gxnn5r{border-left-width:0px;}
+.r-gxopl6{left:316px;}
+.r-gy4na3{padding-left:0px;}
+.r-gys0vz{color:rgba(0,136,71,1.00);}
+.r-h1b427{width:225px;}
+.r-h2mvr{min-width:8px;}
+.r-h2q2x{transform:scaleX(-1);}
+.r-h3s6tt{height:48px;}
+.r-h7ga17{background-color:rgba(43,46,57,1.00);}
+.r-h7gdob{color:currentColor;}
+.r-ha54is{icon-color:#a2a9b9;}
+.r-hbpseb{line-height:22px;}
+.r-hd655f{color:rgba(162,169,185,1.00);}
+.r-homxoj{color:inherit;}
+.r-hq6u89{left:92%;}
+.r-hqnlqz{border-left-color:rgba(52,109,219,1.00);}
+.r-htfu76{margin-left:-8px;}
+.r-hu79xy{min-width:196px;}
+.r-hvns9x{max-width:400px;}
+.r-hxflta{padding-right:env(safe-area-inset-right);}
+.r-i023vh{padding-right:16px;}
+.r-i7h7g2{-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);}
+.r-i8xx8x{color:rgba(207,34,46,1.00);}
+.r-ia06lx{background-color:rgba(115,92,255,1.00);}
+.r-ibjss6{background-color:rgba(136,153,168,1.00);}
+.r-icoktb{opacity:0.5;}
+.r-ifefl9{min-height:0px;}
+.r-ihd41t{border:1px solid #374151;}
+.r-iphfwy{padding-bottom:4px;}
+.r-ipm5af{top:0px;}
+.r-iqs06e{background-image:radial-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 1));}
+.r-ir6n1k{border-top-right-radius:6px;}
+.r-ixzivm{@media print:[object Object];}
+.r-iyfy8q{width:auto;}
+.r-j300sb{animation-name:r-1rx4pb;}
+.r-jfrpv2{color:rgba(130,80,223,1.00);}
+.r-jn0m22{top:54px;}
+.r-jn5ml{right:-5px;}
+.r-jvuzdy{top:-5px;}
+.r-jwli3a{color:rgba(255,255,255,1.00);}
+.r-jxjwwx{left:24px;}
+.r-k200y{align-self:flex-start;}
+.r-k923pl{background-color:rgba(218,212,255,1.00);}
+.r-kcufgn{cursor:ew-resize;}
+.r-key0ze{height:240px;}
+.r-kicko2{border-top-left-radius:4px;}
+.r-kls4rr{padding-right:40px;}
+.r-knv0ih{margin-top:8px;}
+.r-kquydp{right:-4px;}
+.r-ky29hr{bottom:2px;}
+.r-l0gwng{width:200px;}
+.r-l13dpy{z-index:200;}
+.r-l27s25{background-color:rgba(204,207,212,1.00);}
+.r-l9hqf4{box-shadow:0px 1px 1px rgba(0,0,0,0.69);}
+.r-l9st2p{-webkit-text-decoration-color:rgba(162,169,185,1.00);text-decoration-color:rgba(162,169,185,1.00);}
+.r-labphf{height:-webkit-fit-content;height:-moz-fit-content;height:fit-content;}
+.r-lchren{margin-right:auto;}
+.r-lk1fr1{icon-color:#8899a8;}
+.r-lltvgl{overflow-x:auto;}
+.r-lqms97{margin-left:-1px;}
+.r-lrsllp{width:24px;}
+.r-lrvibr{-moz-user-select:none;-webkit-user-select:none;user-select:none;}
+.r-lv5dtd{padding-left:110px;}
+.r-lx1l9k{background-image:radial-gradient(rgba(255, 255, 255, 0.1), #ffffff);}
+.r-m0vln2{border-left-color:rgba(43,46,57,1.00);}
+.r-m2pi6t{padding-left:4px;}
+.r-m5arl1{width:2px;}
+.r-mabqd8{height:32px;}
+.r-majxgm{font-weight:500;}
+.r-mbgqwd{margin-right:24px;}
+.r-me5xia{height:104px;}
+.r-mfh4gg{scroll-snap-type:x mandatory;}
+.r-mfzc6t{background-color:rgba(0,0,0,0.10);}
+.r-mhe3cw{z-index:10;}
+.r-ms8t9i{border-left-width:3px;}
+.r-mwitap{pointer-event:none;}
+.r-n9piew{min-height:260px;}
+.r-na6qhi{;}
+.r-ng8e2f{cursor:-webkit-grab;cursor:-moz-grab;cursor:grab;}
+.r-njp1lv{padding-top:1px;}
+.r-nkouq2{box-shadow:-5px 0px 7px rgba(36,42,49,0.60);}
+.r-notknq{border-top-right-radius:4px;}
+.r-nvplwv{animation-timing-function:ease-out;}
+.r-nvvorq{top:3.5px;}
+.r-nwxazl{line-height:40px;}
+.r-nzcix3{border-bottom-color:rgba(227,232,237,1.00);}
+.r-o8yidv{border-top-left-radius:6px;}
+.r-o9xkwf{top:2px;}
+.r-obd0qt{align-items:flex-end;}
+.r-oebo59{height:128px;}
+.r-onxxid{background-color:rgba(27,30,33,0.77);}
+.r-op3p1c{width:520px;}
+.r-orgf3d{opacity:0;}
+.r-ou6ah9{border-top-left-radius:0px;}
+.r-oucylx{border-bottom-color:rgba(0,0,0,0.00);}
+.r-oz83uh{box-shadow:0px 1px 1px rgba(0,0,0,0.12);}
+.r-p1pxzi{margin-bottom:0px;}
+.r-pex7a0{color:rgba(130,7,30,1.00);}
+.r-pi8zqv{box-shadow:0px 0px 7px rgba(0,0,0,0.04);}
+.r-pm2fo{border-bottom-left-radius:0px;}
+.r-pm9dpa{max-height:100%;}
+.r-puj83k{padding-left:24px;}
+.r-py1axk{border-bottom-right-radius:7px;}
+.r-q4m81j{text-align:center;}
+.r-qd89wu{max-width:900px;}
+.r-qklmqi{border-bottom-width:1px;}
+.r-ql8eny{min-height:200px;}
+.r-qn3fzs{padding-bottom:24px;}
+.r-qyrhsv{border-right-color:rgba(40,49,67,1.00);}
+.r-r1s0sa{background-color:rgba(255,235,233,1.00);}
+.r-r7ey0d{background-color:rgba(218,212,255,0.50);}
+.r-r9hte5{-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);}
+.r-rs94m5{background-image:url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcKICAgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIgogICB4bWxuczpjYz0iaHR0cDovL2NyZWF0aXZlY29tbW9ucy5vcmcvbnMjIgogICB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiCiAgIHhtbG5zOnN2Zz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgdmVyc2lvbj0iMS4xIgogICB2aWV3Qm94PSIwIDAgMSAxIgogICBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWluWU1pbiBtZWV0Ij4KICA8cGF0aAogICAgIGQ9Ik0gMC4wNDAzODA1OSwwLjYyNjc3NjcgMC4xNDY0NDY2MSwwLjUyMDcxMDY4IDAuNDI5Mjg5MzIsMC44MDM1NTMzOSAwLjMyMzIyMzMsMC45MDk2MTk0MSB6IE0gMC4yMTcxNTcyOSwwLjgwMzU1MzM5IDAuODUzNTUzMzksMC4xNjcxNTcyOSAwLjk1OTYxOTQxLDAuMjczMjIzMyAwLjMyMzIyMzMsMC45MDk2MTk0MSB6IgogICAgIGlkPSJyZWN0Mzc4MCIKICAgICBzdHlsZT0iZmlsbDojZmZmZmZmO2ZpbGwtb3BhY2l0eToxO3N0cm9rZTpub25lIiAvPgo8L3N2Zz4K");}
+.r-rwqe4o{width:48px;}
+.r-s09aw7{background-image:linear-gradient(to left, #735cff, rgb(109 28 169), rgb(96 104 191), #008847, #FFD139, #b95e04, #d33d3d);}
+.r-s0e3za{padding-left:80px;}
+.r-sa2ff0{min-height:100vh;}
+.r-sfbmgh{z-index:9999;}
+.r-sga3zk{height:64px;}
+.r-sgscqh{width:250px;}
+.r-t12b5v{border-top-right-radius:0px;}
+.r-t3lkjx{background-color:rgba(228,79,137,1.00);}
+.r-t9hbny{background-color:rgba(211,61,61,1.00);}
+.r-tceitz{left:16px;}
+.r-tni569{background-color:rgba(11,79,47,1.00);}
+.r-tskmnb{padding-top:8px;}
+.r-tsynxw{text-transform:uppercase;}
+.r-ty80ws{max-width:1510px;}
+.r-u529wo{transform:translateY(-2px);}
+.r-u6sd8q{background-repeat:no-repeat;}
+.r-u8s1d{position:absolute;}
+.r-u92y06{background-color:rgba(255,165,0,1.00);}
+.r-u9bbvc{;}
+.r-u9z937{bottom:80px;}
+.r-ubezar{font-size:16px;}
+.r-ud0q2t{letter-spacing:1px;}
+.r-ufs8t{background-clip:text;}
+.r-uibjmv{font-family:gitbook-code-font, Menlo, monospace;}
+.r-upfvwg{box-shadow:0px 0px 1px rgb(255 255 255 / 30%);}
+.r-uweo6c{bottom:136px;}
+.r-ux9zog{background-color:rgba(51,61,85,1.00);}
+.r-v2u3o6{right:4px;}
+.r-v5byei{top:-12px;}
+.r-vjwmdu{max-width:75px;}
+.r-vlcob{color:rgba(24,28,31,1.00);}
+.r-vq47rg{color:rgba(211,61,61,1.00);}
+.r-vvn4in{background-position:center;}
+.r-w0va4e{margin-right:40px;}
+.r-w9n8ly{transition-delay:200ms;}
+.r-wc24c3{z-index:20;}
+.r-wech8c{max-width:1280px;}
+.r-wgabs5{border-bottom-width:2px;}
+.r-wk8lta{padding-top:0px;}
+.r-ws9h79{left:4px;}
+.r-wwqw7s{left:-1px;}
+.r-wy61xf{height:72px;}
+.r-x1dlf0{max-width:200px;}
+.r-x3cy2q{background-size:100% 100%;}
+.r-x3dn3n{height:196px;}
+.r-xb2eav{font-size:40px;}
+.r-xbwjba{border-bottom-color:rgba(52,109,219,1.00);}
+.r-xd6kpl{padding-bottom:8px;}
+.r-xifl00{left:-4px;}
+.r-xky0vn{background-color:rgba(104,60,17,1.00);}
+.r-xnn892{background-color:rgba(218,251,225,1.00);}
+.r-xx3c9p{animation-name:r-imtty0;}
+.r-xzortm{margin-right:-16px;}
+.r-y3rmyz{width:120px;}
+.r-ye2ihm{background-image:none;}
+.r-yh6aho{background-image:linear-gradient(270deg, #2b2e39 10%, #22272e, #2b2e39 90%);}
+.r-yj30ev{right:24px;}
+.r-yrgyi6{white-space:pre;}
+.r-ywxogp{color:rgba(115,92,255,1.00);}
+.r-z3s97b{border-right-color:rgba(43,46,57,1.00);}
+.r-z80fyv{height:20px;}
+.r-z9jf92{color:rgba(234,242,247,1.00);}
+.r-zchlnj{right:0px;}
+.r-zh076v{height:100vh;}
+.r-zits6j{right:8%;}
+.r-zmljjp{border-bottom-right-radius:0px;}
+.r-znv4k7{border-right-color:rgba(52,109,219,1.00);}
+.r-ztyd71{background-color:rgba(0,0,0,0.20);}
+@-webkit-keyframes r-1ak6360{0%{background-position-x:0%;}100%{background-position-x:100%;}}
+@-webkit-keyframes r-1hunrpy{0%{transform:translateY(100%);}100%{transform:translateY(0%);}}
+@-webkit-keyframes r-1rx4pb{0%{transform:translateX(-100%);}100%{transform:translateX(400%);}}
+@-webkit-keyframes r-9p3sdl{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+@-webkit-keyframes r-imtty0{0%{opacity:0;}100%{opacity:1;}}
+@-webkit-keyframes r-ndfo3d{0%{transform:translateY(0%);}100%{transform:translateY(100%);}}
+@-webkit-keyframes r-t2lo5v{0%{opacity:1;}100%{opacity:0;}}
+@keyframes r-1ak6360{0%{background-position-x:0%;}100%{background-position-x:100%;}}
+@keyframes r-1hunrpy{0%{transform:translateY(100%);}100%{transform:translateY(0%);}}
+@keyframes r-1rx4pb{0%{transform:translateX(-100%);}100%{transform:translateX(400%);}}
+@keyframes r-9p3sdl{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+@keyframes r-imtty0{0%{opacity:0;}100%{opacity:1;}}
+@keyframes r-ndfo3d{0%{transform:translateY(0%);}100%{transform:translateY(100%);}}
+@keyframes r-t2lo5v{0%{opacity:1;}100%{opacity:0;}}
+[stylesheet-group="10"]{}
+[data-rnwrdesktop-13lvk87]{margin-left:110px;}
+[data-rnwrdesktop-166pt5r]{width:max(220px, calc(100vw - max(300px, calc((100vw - 970px) / 2 - 0px)) - 750px - 110px - 300px - 0px));}
+[data-rnwrdesktop-18u37iz]{flex-direction:row;}
+[data-rnwrdesktop-1hy97zq-1q6rxnj-lv5dtd-9111t9]{padding-left:110px;padding-right:410px;padding-top:80px;}
+[data-rnwrdesktop-1ph75f1]{height:80px;}
+[data-rnwrdesktop-1q6rxnj]{padding-right:110px;}
+[data-rnwrdesktop-1uwte3a]{padding-bottom:40px;}
+[data-rnwrdesktop-1x93onp-h3s6tt]{height:48px;width:110px;}
+[data-rnwrdesktop-fnigne]{border-right-width:0px;}
+[data-rnwrdesktop-gg6oyi-1x35g6-37tt59-b88u0q]{font-family:gitbook-content-font,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;font-size:24px;font-weight:700;line-height:32px;}
+[data-rnwrdesktop-gg6oyi-ubezar-135wba7-1kfrs79]{font-family:gitbook-content-font,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;font-size:16px;font-weight:600;line-height:24px;}
+[data-rnwrdesktop-gg6oyi-xb2eav-1dn12g7-b88u0q]{font-family:gitbook-content-font,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;font-size:40px;font-weight:700;line-height:48px;}
+[data-rnwrdesktop-hidden]{display: none;}
+[data-rnwrdesktop-iyfy8q-1qhn6m8-11g3r6m-1h0z5md]{justify-content:flex-start;padding-left:16px;padding-right:24px;width:auto;}
+[data-rnwrdesktop-visible]{display: flex;}
+[stylesheet-group="11"]{}
+@media (max-width: 1024px) and (max-width: 9999999.494850524510111312253100114px) { [data-rnwr1024-eqz5dr] {flex-direction:column;} }
+@media (max-width: 1024px) and (max-width: 9999999.49485052454910510212011610048px) { [data-rnwr1024-1ifxtd0] {margin-bottom:16px;} }
+@media (max-width: 1430px) and (max-width: 9999999.495251484511810511510598108101px) { [data-rnwr1430-visible] {display: flex;} }
+@media (max-width: 1490px) and (max-width: 9999999.4952574845104105100100101110px) { [data-rnwr1490-hidden] {display: none;} }
+@media (max-width: 1490px) and (max-width: 9999999.495257484511810511510598108101px) { [data-rnwr1490-visible] {display: flex;} }
+@media (max-width: 1490px) and (max-width: 9999999.49525748454955555510299105px) { [data-rnwr1490-1777fci] {justify-content:center;} }
+[stylesheet-group="12"]{}
+@media (max-width: 700px) and (max-width: 9999999.5548484510111312253100114px) { [data-rnwr700-eqz5dr] {flex-direction:column;} }
+@media (max-width: 700px) and (max-width: 9999999.55484845103103541111211054511798101122971144549515311998975545491071021141155557px) { [data-rnwr700-gg6oyi-ubezar-135wba7-1kfrs79] {font-family:gitbook-content-font,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;font-size:16px;font-weight:600;line-height:24px;} }
+@media (max-width: 700px) and (max-width: 9999999.55484845103103541111211054549117105531011015645110119120971221084598565611748113px) { [data-rnwr700-gg6oyi-1ui5ee8-nwxazl-b88u0q] {font-family:gitbook-content-font,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;font-size:32px;font-weight:700;line-height:40px;} }
+@media (max-width: 700px) and (max-width: 9999999.5548484510310354111121105459710012111954122454951531199897554598565611748113px) { [data-rnwr700-gg6oyi-adyw6z-135wba7-b88u0q] {font-family:gitbook-content-font,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;font-size:20px;font-weight:700;line-height:24px;} }
+@media (max-width: 700px) and (max-width: 9999999.55484845104105100100101110px) { [data-rnwr700-hidden] {display: none;} }
+@media (max-width: 700px) and (max-width: 9999999.554848451051211021215611345103121521109751451054850511181044549119981045397504549104481225310910045px) { [data-rnwr700-iyfy8q-gy4na3-i023vh-1wbh5a2-1h0z5md-] {flex-shrink:1;justify-content:flex-start;padding-left:0px;padding-right:16px;width:auto;} }
+@media (max-width: 700px) and (max-width: 9999999.554848451151039751122107px) { [data-rnwr700-sga3zk] {height:64px;} }
+@media (max-width: 700px) and (max-width: 9999999.5548484511810511510598108101px) { [data-rnwr700-visible] {display: flex;} }
+@media (max-width: 700px) and (max-width: 9999999.55484845491111195412210412045px) { [data-rnwr700-1ow6zhx-] {margin-left:16px;} }
+@media (max-width: 700px) and (max-width: 9999999.554848454911111954122104120px) { [data-rnwr700-1ow6zhx] {margin-left:16px;} }
+@media (max-width: 700px) and (max-width: 9999999.55484845491195410154114106454955555510299105px) { [data-rnwr700-1w6e6rj-1777fci] {flex-wrap:wrap;justify-content:center;} }
+@media (max-width: 700px) and (max-width: 9999999.5548484549511085011652103px) { [data-rnwr700-13l2t4g] {border-right-width:1px;} }
+@media (max-width: 700px) and (max-width: 9999999.55484845505653102114484510512110212156113451011175110797px) { [data-rnwr700-285fr0-iyfy8q-eu3ka] {height:40px;min-width:16px;width:auto;} }
+@media (max-width: 700px) and (max-width: 9999999.554848455449122495411645px) { [data-rnwr700-61z16t-] {margin-right:0px;} }
+@media (max-width: 700px) and (max-width: 9999999.5548484557531061221021014549113104110541095645105485051118104px) { [data-rnwr700-95jzfe-1qhn6m8-i023vh] {padding-left:16px;padding-right:16px;padding-top:16px;} }
+@media (max-width: 970px) and (max-width: 9999999.5755484510111312253100114px) { [data-rnwr970-eqz5dr] {flex-direction:column;} }
+[stylesheet-group="13"]{}
+@media (max-width: 700px) and (max-width: 9999999.55484845105485051118104454955555510299105px) { [data-rnwr700-i023vh-1777fci] {justify-content:center;padding-right:16px;} }
+@media (max-width: 700px) and (max-width: 9999999.55484845105485051118104px) { [data-rnwr700-i023vh] {padding-right:16px;} }
+[stylesheet-group="20"]{}
+[data-rnwi-1rasi3h-]{color:rgba(136,153,168,1.00);}
+[data-rnwi-handle="nearest"] [data-rnwinearest-1nf4jbm-]{color:rgba(59,69,78,1.00);}
+body:not(.dragging) [data-rnwi--1ghhsy9-hover-focus]:hover, body:not(.dragging) [data-rnwi--1ghhsy9-hover-focus]:focus{color:rgba(52,109,219,1.00);}
+body:not(.dragging) [data-rnwi--1tgwseu--focus]:focus{border-bottom-color:rgba(52,109,219,1.00);border-left-color:rgba(52,109,219,1.00);border-right-color:rgba(52,109,219,1.00);border-top-color:rgba(52,109,219,1.00);}
+body:not(.dragging) [data-rnwi-190qawg-hover-focus]:hover, body:not(.dragging) [data-rnwi-190qawg-hover-focus]:focus{border-bottom-color:rgba(227,232,237,1.00);border-left-color:rgba(227,232,237,1.00);border-right-color:rgba(227,232,237,1.00);border-top-color:rgba(227,232,237,1.00);}
+body:not(.dragging) [data-rnwi-1b00too-hover]:hover{background-color:rgba(236,239,241,1.00);}
+body:not(.dragging) [data-rnwi-1vckr1u-hover-focus]:hover, body:not(.dragging) [data-rnwi-1vckr1u-hover-focus]:focus{background-color:rgba(245,247,249,1.00);}
+body:not(.dragging) [data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible]:focus-visible{outline-color:#2662d7;outline-offset:0px;outline-style:auto;outline-width:2px;}
+body:not(.dragging) [data-rnwi-handle="BaseCard"]:hover [data-rnwibasecard--1ghhsy9-hover-focus], body:not(.dragging) [data-rnwi-handle="BaseCard"]:focus [data-rnwibasecard--1ghhsy9-hover-focus]{color:rgba(52,109,219,1.00);}
+body:not(.dragging) [data-rnwi-handle="BaseCard"]:hover [data-rnwibasecard--1ghhsy9-hover]{color:rgba(52,109,219,1.00);}
+body:not(.dragging) [data-rnwi-handle="button"]:hover [data-rnwibutton--1ghhsy9-hover-focus], body:not(.dragging) [data-rnwi-handle="button"]:focus [data-rnwibutton--1ghhsy9-hover-focus]{color:rgba(52,109,219,1.00);}
+body:not(.dragging) [data-rnwi-handle="button"]:hover [data-rnwibutton-1bnj018-hover-focus], body:not(.dragging) [data-rnwi-handle="button"]:focus [data-rnwibutton-1bnj018-hover-focus]{color:rgba(92,105,117,1.00);}
+body:not(.dragging) [data-rnwi-handle="nearest"]:hover [data-rnwinearest--1ghhsy9-hover-focus], body:not(.dragging) [data-rnwi-handle="nearest"]:focus [data-rnwinearest--1ghhsy9-hover-focus]{color:rgba(52,109,219,1.00);}
+body:not(.dragging) [data-rnwi-handle="nearest"]:hover [data-rnwinearest--1ghhsy9-hover]{color:rgba(52,109,219,1.00);}
+body:not(.dragging) [data-rnwi-handle="nearest"]:hover [data-rnwinearest-1nf4jbm-hover-focus], body:not(.dragging) [data-rnwi-handle="nearest"]:focus [data-rnwinearest-1nf4jbm-hover-focus]{color:rgba(59,69,78,1.00);}
+body:not(.dragging) [data-rnwi-u529wo-aq1qub-c1zw6o-1khlhp8-1cut0bx-na6qhi--hover]:hover{box-shadow:0px 12px 13px rgba(0,0,0,0.02);transform:translateY(-2px);}</style>
+                <style>
+                    html,
+                    body {
+                        -webkit-font-smoothing: antialiased;
+                        text-rendering: optimizelegibility;
+                        width: 100%;
+                        min-height: 100vh;
+                        user-select: none;
+                        outline: none;
+                        position: relative;
+                    }
+                    /* Avoid Chrome to see Safari hack */
+                    @supports (-webkit-touch-callout: none) {
+                        html,
+                        body,
+                        .gitbook-root {
+                            /* The hack for Safari */
+                            min-height: -webkit-fill-available;
+                        }
+                    }
+                    .gitbook-root {
+                        display: flex;
+                        min-height: 100vh;
+                    }
+                </style>
+            
+        <script type="text/javascript" defer src="https://cdn.iframe.ly/embed.js" async></script>
+        <script
+            type="text/javascript"
+            defer
+            src="https://cdn.polyfill.io/v2/polyfill.js?features=Intl.~locale.en"
+            crossorigin="anonymous"
+        ></script>
+    </head>
+    <body>
+        <div class="gitbook-root"><div class="css-175oi2r r-13awgt0 r-12vffkv"><div class="css-175oi2r r-13awgt0 r-12vffkv"><!--$--><header data-rnwrdesktop-1ph75f1="true" data-rnwr700-sga3zk="true" class="r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-1mlwlqe r-1q142lx r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-14lw9ot r-nzcix3 r-qklmqi r-gtdqiz r-ipm5af r-184en5c r-18u37iz r-1awozwy"><div class="css-175oi2r r-6koalj r-18u37iz r-1jgb5lz r-ty80ws r-1pn2ns4 r-13qz1uu r-1awozwy"><div aria-label="Show Table of Content" role="button" data-rnwrdesktop-hidden="true" data-rnwr700-visible="true" data-rnwi-1vckr1u-hover-focus="true" data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="button" tabindex="0" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-1awozwy r-42olwf r-rs99b7 r-18u37iz r-18kxxzh r-1777fci r-1ny4l3l r-eu3ka r-1bnj018 r-1kb76zh r-18c69zk r-mk0yit r-1aockid" style="transition-duration:0.15s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" preserveAspectRatio="xMidYMid meet" data-rnwibutton-1bnj018-hover-focus="true" data-rnwi-handle="nearest" class="r-h7gdob" style="vertical-align:middle;width:18px;height:18px"><path d="M3 12h18M3 6h18M3 18h18"></path></svg></div><a href="index.html" aria-label="DVL-75 User Manual" data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="nearest" data-rnwrdesktop-iyfy8q-1qhn6m8-11g3r6m-1h0z5md="true" data-rnwr700-iyfy8q-gy4na3-i023vh-1wbh5a2-1h0z5md-="true" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-18u37iz r-1awozwy" style="transition-duration:0.15s" data-testid="public.headerHomeLink"><div class="css-175oi2r r-6wscbn r-1ro0kt6 r-16y2uox r-1wbh5a2 r-18u37iz r-1h0z5md r-1awozwy"><div class="css-175oi2r"><div data-rnwrdesktop-visible="true" data-rnwr700-hidden="true" class="css-175oi2r"><div class="css-175oi2r r-18u37iz r-1awozwy r-1777fci r-z2wwpe r-14lw9ot r-1l94q7l r-88pszg" style="width:40px;height:40px;overflow-x:hidden;overflow-y:hidden"><div class="css-175oi2r r-1awozwy r-1777fci" style="width:40px;height:40px"><div dir="auto" class="css-1rynq56 r-1nf4jbm" style="font-size:28px">D</div></div></div></div><div data-rnwrdesktop-hidden="true" data-rnwr700-visible="true" class="css-175oi2r"><div class="css-175oi2r r-18u37iz r-1awozwy r-1777fci r-z2wwpe r-14lw9ot r-1l94q7l r-88pszg" style="width:24px;height:24px;overflow-x:hidden;overflow-y:hidden"><div class="css-175oi2r r-1awozwy r-1777fci" style="width:24px;height:24px"><div dir="auto" class="css-1rynq56 r-1nf4jbm" style="font-size:16.799999999999997px">D</div></div></div></div></div><div dir="auto" data-rnwrdesktop-gg6oyi-ubezar-135wba7-1kfrs79="true" data-rnwr700-gg6oyi-ubezar-135wba7-1kfrs79="true" class="css-1rynq56 r-1udh08x"><span data-rnwinearest-1nf4jbm-="true" data-rnwinearest--1ghhsy9-hover-focus="true" data-rnwi-handle="nearest" class="css-1qaijid r-8akbws r-krxsd3 r-dnmrzs r-1udh08x r-1udbk01" style="-webkit-line-clamp:2">DVL-75 User Manual</span></div></div></a><div data-rnwr700-hidden="true" class="css-175oi2r r-18u37iz r-17s6mgv r-1awozwy r-1ro0kt6 r-16y2uox r-1wbh5a2 r-1qhn6m8"></div><div data-rnwrdesktop-visible="true" data-rnwr700-hidden="true" class="css-175oi2r r-1jj8364 r-puj83k r-1pyaxff r-16vg0q1 r-1ro0kt6 r-16y2uox r-1wbh5a2"><div aria-label="Search…" data-rnwi-190qawg-hover-focus="true" data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="nearest" tabindex="0" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-42olwf r-kdyh1x r-rs99b7 r-eu3ka r-13qz1uu r-18u37iz r-1wtj0ep r-1awozwy r-1qhn6m8 r-1pyaxff" style="background-color:rgba(0,0,0,0.05);transition-duration:0.15s"><div class="css-175oi2r r-18u37iz r-1awozwy"><svg viewBox="0 0 24 24" fill="none" preserveAspectRatio="xMidYMid meet" class="r-1bnj018 r-1kb76zh" style="vertical-align:middle;width:14px;height:14px"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.5 4a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM2 10.5a8.5 8.5 0 1117 0 8.5 8.5 0 01-17 0z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M15.093 15.093a1 1 0 011.414 0l5.2 5.2a1 1 0 01-1.414 1.414l-5.2-5.2a1 1 0 010-1.414z" fill="currentColor"></path></svg><div dir="auto" data-rnwinearest-1nf4jbm-hover-focus="true" data-rnwi-handle="nearest" class="css-1rynq56 r-gg6oyi r-1b43r93 r-16dba41 r-hbpseb r-1bnj018">Search…</div></div><div class="css-175oi2r"><div class="css-175oi2r r-14lw9ot r-z2wwpe r-1472mwg r-s1qlax r-7xmw5f r-18u37iz r-1awozwy"><div dir="auto" class="css-1rynq56 r-gg6oyi r-1enofrn r-1kfrs79 r-19r33im r-14yzgew r-tsynxw r-1ghhsy9">⌃K</div></div></div></div></div><div data-rnwrdesktop-hidden="true" data-rnwr700-visible="true" class="css-175oi2r r-1jj8364 r-puj83k r-1pyaxff"><div aria-label="Search…" role="button" data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="button" tabindex="0" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-1awozwy r-42olwf r-rs99b7 r-18u37iz r-18kxxzh r-1777fci r-1ny4l3l r-z2wwpe r-mabqd8 r-1bnj018 r-mk0yit r-1yvhtrz" style="transition-duration:0.15s"><svg viewBox="0 0 24 24" fill="none" preserveAspectRatio="xMidYMid meet" data-rnwibutton--1ghhsy9-hover-focus="true" data-rnwi-handle="nearest" class="r-h7gdob" style="vertical-align:middle;width:14px;height:14px"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.5 4a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM2 10.5a8.5 8.5 0 1117 0 8.5 8.5 0 01-17 0z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M15.093 15.093a1 1 0 011.414 0l5.2 5.2a1 1 0 01-1.414 1.414l-5.2-5.2a1 1 0 010-1.414z" fill="currentColor"></path></svg></div></div></div></header><div data-rnwrdesktop-hidden="true" data-rnwr700-visible="true" class="css-175oi2r"></div><div data-rnwrdesktop-18u37iz="true" data-rnwr700-eqz5dr="true" class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2"><div data-rnwrdesktop-visible="true" data-rnwr1430-visible="true" data-rnwr700-hidden="true" class="css-175oi2r r-k200y r-14lw9ot r-18ayb63 r-13l2t4g r-12dqhl9 r-1rnoaur r-gtdqiz r-1fo40xd r-18u37iz r-17s6mgv" style="width:max(300px, calc((100vw - 910px) / 2 - 0px))" data-testid="page.desktopTableOfContents"><nav aria-label="Table of contents" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-1mlwlqe r-1q142lx r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1ipicw7 r-eqz5dr"><div class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-puj83k"><div data-rnwrdesktop-hidden="true" data-rnwr700-visible="true" class="css-175oi2r r-14lw9ot r-nzcix3 r-qklmqi r-sga3zk r-1pn2ns4 r-1wtj0ep r-1awozwy r-18u37iz"><div aria-label="Close" role="button" data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="button" tabindex="0" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-1awozwy r-42olwf r-rs99b7 r-18u37iz r-18kxxzh r-1777fci r-1ny4l3l r-z2wwpe r-eu3ka r-1bnj018 r-1kihuf0 r-mk0yit r-1aockid" style="transition-duration:0.15s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" preserveAspectRatio="xMidYMid meet" data-rnwibutton--1ghhsy9-hover-focus="true" data-rnwi-handle="nearest" class="r-h7gdob" style="vertical-align:middle;width:18px;height:18px"><path d="M18 6L6 18M6 6l12 12"></path></svg></div></div><div class="css-175oi2r r-150rngu r-eqz5dr r-11yh6sk r-1rnoaur r-1sncvnh r-1ro0kt6 r-16y2uox r-1wbh5a2"><div class="css-175oi2r r-1yzf0co r-1sc18lr"><!--$--><div class="css-175oi2r"><a href="index.html" data-rnwrdesktop-fnigne="true" data-rnwr700-13l2t4g="true" data-rnwi-1b00too-hover="true" data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="nearest" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-1awozwy r-42olwf r-z2wwpe r-rs99b7 r-18u37iz r-1ceczpf r-1pn2ns4 r-1kb76zh r-15zivkp" style="transition-duration:0.15s"><div dir="auto" class="css-1rynq56 r-1ro0kt6 r-16y2uox r-1wbh5a2 r-oyd9sg r-gg6oyi r-1b43r93 r-16dba41 r-hbpseb r-1bnj018">Copyright</div></a></div><!--/$--><!--$--><div class="css-175oi2r"><a href="dvl-75-user-manual-overview.html" data-rnwrdesktop-fnigne="true" data-rnwr700-13l2t4g="true" data-rnwi-1b00too-hover="true" data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="nearest" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-1awozwy r-42olwf r-z2wwpe r-rs99b7 r-18u37iz r-1ceczpf r-1pn2ns4 r-1kb76zh r-15zivkp" style="transition-duration:0.15s"><div dir="auto" class="css-1rynq56 r-1ro0kt6 r-16y2uox r-1wbh5a2 r-oyd9sg r-gg6oyi r-1b43r93 r-16dba41 r-hbpseb r-1bnj018">DVL-75 User Manual Overview</div><div tabindex="0" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-18u37iz r-1awozwy" style="transition-duration:0.15s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" preserveAspectRatio="xMidYMid meet" class="r-1bnj018" style="vertical-align:middle;width:16px;height:16px"><path d="M9 18l6-6-6-6"></path></svg></div></a></div><!--/$--><!--$--><div class="css-175oi2r"><a href="usage-considerations-and-scenarios.html" data-rnwrdesktop-fnigne="true" data-rnwr700-13l2t4g="true" data-rnwi-1b00too-hover="true" data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="nearest" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-1awozwy r-42olwf r-z2wwpe r-rs99b7 r-18u37iz r-1ceczpf r-1pn2ns4 r-1kb76zh r-15zivkp" style="transition-duration:0.15s"><div dir="auto" class="css-1rynq56 r-1ro0kt6 r-16y2uox r-1wbh5a2 r-oyd9sg r-gg6oyi r-1b43r93 r-16dba41 r-hbpseb r-1bnj018">Usage Considerations and Scenarios</div><div tabindex="0" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-18u37iz r-1awozwy" style="transition-duration:0.15s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" preserveAspectRatio="xMidYMid meet" class="r-1bnj018" style="vertical-align:middle;width:16px;height:16px"><path d="M9 18l6-6-6-6"></path></svg></div></a></div><!--/$--><!--$--><div class="css-175oi2r"><a href="using-other-than-the-bottom-for-the-dvl-side-tracking-capability.html" data-rnwrdesktop-fnigne="true" data-rnwr700-13l2t4g="true" data-rnwi-1b00too-hover="true" data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="nearest" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-1awozwy r-42olwf r-z2wwpe r-rs99b7 r-18u37iz r-1ceczpf r-1pn2ns4 r-1kb76zh r-15zivkp" style="transition-duration:0.15s"><div dir="auto" class="css-1rynq56 r-1ro0kt6 r-16y2uox r-1wbh5a2 r-oyd9sg r-gg6oyi r-1b43r93 r-16dba41 r-hbpseb r-1bnj018">Using Other Than the Bottom for the DVL (Side-Tracking Capability)</div><div tabindex="0" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-18u37iz r-1awozwy" style="transition-duration:0.15s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" preserveAspectRatio="xMidYMid meet" class="r-1bnj018" style="vertical-align:middle;width:16px;height:16px"><path d="M9 18l6-6-6-6"></path></svg></div></a></div><!--/$--><!--$--><div class="css-175oi2r"><a href="mounting-the-dvl-components.html" data-rnwrdesktop-fnigne="true" data-rnwr700-13l2t4g="true" data-rnwi-1b00too-hover="true" data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="nearest" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-1awozwy r-42olwf r-z2wwpe r-rs99b7 r-18u37iz r-1ceczpf r-1pn2ns4 r-1kb76zh r-15zivkp" style="transition-duration:0.15s"><div dir="auto" class="css-1rynq56 r-1ro0kt6 r-16y2uox r-1wbh5a2 r-oyd9sg r-gg6oyi r-1b43r93 r-16dba41 r-hbpseb r-1bnj018">Mounting the DVL Components</div><div tabindex="0" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-18u37iz r-1awozwy" style="transition-duration:0.15s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" preserveAspectRatio="xMidYMid meet" class="r-1bnj018" style="vertical-align:middle;width:16px;height:16px"><path d="M9 18l6-6-6-6"></path></svg></div></a></div><!--/$--><!--$--><div class="css-175oi2r"><a href="assembling-the-electronics-stack.html" data-rnwrdesktop-fnigne="true" data-rnwr700-13l2t4g="true" data-rnwi-1b00too-hover="true" data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="nearest" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-1awozwy r-42olwf r-z2wwpe r-rs99b7 r-18u37iz r-1ceczpf r-1pn2ns4 r-1kb76zh r-15zivkp" style="transition-duration:0.15s"><div dir="auto" class="css-1rynq56 r-1ro0kt6 r-16y2uox r-1wbh5a2 r-oyd9sg r-gg6oyi r-1b43r93 r-16dba41 r-hbpseb r-1bnj018">Assembling the Electronics Stack</div><div tabindex="0" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-18u37iz r-1awozwy" style="transition-duration:0.15s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" preserveAspectRatio="xMidYMid meet" class="r-1bnj018" style="vertical-align:middle;width:16px;height:16px"><path d="M9 18l6-6-6-6"></path></svg></div></a></div><!--/$--><!--$--><div class="css-175oi2r"><a href="inertial-measurement-unit-imu.html" data-rnwrdesktop-fnigne="true" data-rnwr700-13l2t4g="true" data-rnwi-1b00too-hover="true" data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="nearest" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-1awozwy r-42olwf r-z2wwpe r-rs99b7 r-18u37iz r-1ceczpf r-1pn2ns4 r-1kb76zh r-15zivkp" style="transition-duration:0.15s"><div dir="auto" class="css-1rynq56 r-1ro0kt6 r-16y2uox r-1wbh5a2 r-oyd9sg r-gg6oyi r-1b43r93 r-16dba41 r-hbpseb r-1bnj018">Inertial Measurement Unit (IMU)</div><div tabindex="0" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-18u37iz r-1awozwy" style="transition-duration:0.15s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" preserveAspectRatio="xMidYMid meet" class="r-1bnj018" style="vertical-align:middle;width:16px;height:16px"><path d="M9 18l6-6-6-6"></path></svg></div></a></div><!--/$--><!--$--><div class="css-175oi2r"><a href="communicating-with-the-dvl.html" data-rnwrdesktop-fnigne="true" data-rnwr700-13l2t4g="true" data-rnwi-1b00too-hover="true" data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="nearest" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-1awozwy r-42olwf r-z2wwpe r-rs99b7 r-18u37iz r-1ceczpf r-1pn2ns4 r-1kb76zh r-15zivkp" style="transition-duration:0.15s"><div dir="auto" class="css-1rynq56 r-1ro0kt6 r-16y2uox r-1wbh5a2 r-oyd9sg r-gg6oyi r-1b43r93 r-16dba41 r-hbpseb r-1bnj018">Communicating with the DVL</div><div tabindex="0" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-18u37iz r-1awozwy" style="transition-duration:0.15s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" preserveAspectRatio="xMidYMid meet" class="r-1bnj018" style="vertical-align:middle;width:16px;height:16px"><path d="M9 18l6-6-6-6"></path></svg></div></a></div><!--/$--><!--$--><div class="css-175oi2r"><a href="mechanical-drawings.html" data-rnwrdesktop-fnigne="true" data-rnwr700-13l2t4g="true" data-rnwi-1b00too-hover="true" data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="nearest" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-1awozwy r-42olwf r-z2wwpe r-rs99b7 r-18u37iz r-1ceczpf r-1pn2ns4 r-1kb76zh r-15zivkp" style="transition-duration:0.15s"><div dir="auto" class="css-1rynq56 r-1ro0kt6 r-16y2uox r-1wbh5a2 r-oyd9sg r-gg6oyi r-1b43r93 r-16dba41 r-hbpseb r-1bnj018">Mechanical Drawings</div><div tabindex="0" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-18u37iz r-1awozwy" style="transition-duration:0.15s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" preserveAspectRatio="xMidYMid meet" class="r-1bnj018" style="vertical-align:middle;width:16px;height:16px"><path d="M9 18l6-6-6-6"></path></svg></div></a></div><!--/$--><!--$--><div class="css-175oi2r"><a href="electrical-drawings.html" data-rnwrdesktop-fnigne="true" data-rnwr700-13l2t4g="true" data-rnwi-1b00too-hover="true" data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="nearest" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-1awozwy r-42olwf r-z2wwpe r-rs99b7 r-18u37iz r-1ceczpf r-1pn2ns4 r-1kb76zh r-15zivkp" style="transition-duration:0.15s"><div dir="auto" class="css-1rynq56 r-1ro0kt6 r-16y2uox r-1wbh5a2 r-oyd9sg r-gg6oyi r-1b43r93 r-16dba41 r-hbpseb r-1bnj018">Electrical Drawings</div><div tabindex="0" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-18u37iz r-1awozwy" style="transition-duration:0.15s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" preserveAspectRatio="xMidYMid meet" class="r-1bnj018" style="vertical-align:middle;width:16px;height:16px"><path d="M9 18l6-6-6-6"></path></svg></div></a></div><!--/$--><!--$--><div class="css-175oi2r"><a href="appendix-coordinate-systems.html" data-rnwrdesktop-fnigne="true" data-rnwr700-13l2t4g="true" data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="nearest" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-1awozwy r-42olwf r-z2wwpe r-rs99b7 r-18u37iz r-1ceczpf r-1pn2ns4 r-1kb76zh" style="background-color:rgba(133,163,224,0.10);transition-duration:0.15s"><div dir="auto" class="css-1rynq56 r-1ro0kt6 r-16y2uox r-1wbh5a2 r-oyd9sg r-gg6oyi r-1b43r93 r-hbpseb r-1ghhsy9 r-b88u0q">Appendix – Coordinate Systems</div></a></div><!--/$--></div></div></div><div class="css-175oi2r r-1p0dtai r-u8s1d r-13qz1uu r-184en5c"><div class="css-175oi2r r-10ptun7" style="background-image:linear-gradient(3.141592653589793rad,#ffffff00,#ffffff)"></div><div class="css-175oi2r r-ymttw5 r-1l7z4oj r-14lw9ot"><a href="https://www.gitbook.com/?utm_source=content&amp;utm_medium=trademark&amp;utm_campaign=IUx8F0dEX9C01W3iSbva" data-rnwi--1ghhsy9-hover-focus="true" data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="nearest" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-18u37iz r-1awozwy r-1b00too r-1xfd6ze r-5njf8e r-ymttw5" style="transition-duration:0.15s"><svg viewBox="0 0 1000 1000" fill="none" preserveAspectRatio="xMidYMid meet" data-rnwi--1ghhsy9-hover-focus="true" data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="nearest" class="r-1rasi3h" style="vertical-align:middle;width:40px;height:40px"><path fill-rule="evenodd" clip-rule="evenodd" d="M562.168 159.724l325.95 162.727c15.062 7.519 15.298 28.898.404 36.746L465.19 582.283a82.875 82.875 0 01-75.639.83L123.74 450.409c-32.376-12.972-68.568 10.748-68.568 46.474 0 28.728 16.256 54.991 41.99 67.839l266.48 133.036c16.267-16.537 38.918-26.795 63.967-26.795 24.334 0 46.404 9.68 62.558 25.394L822.075 521.45a89.893 89.893 0 01-1.385-15.755c0-49.44 40.14-89.519 89.655-89.519S1000 456.255 1000 505.695c0 49.439-40.14 89.518-89.655 89.518-24.21 0-46.178-9.581-62.31-25.153L515.94 745.065a90.036 90.036 0 011.324 15.417c0 49.439-40.14 89.518-89.655 89.518s-89.655-40.079-89.655-89.518c0-4.572.343-9.063 1.006-13.451L68.622 612.068C26.566 591.072 0 548.153 0 501.205v-26.15c0-35.755 19.82-68.574 51.49-85.261l435.039-229.24a82.87 82.87 0 0175.639-.83zM427.609 794.912c19.044 0 34.483-15.415 34.483-34.43 0-19.016-15.439-34.431-34.483-34.431-19.044 0-34.482 15.415-34.482 34.431 0 19.015 15.438 34.43 34.482 34.43zm517.219-289.217c0 19.015-15.438 34.43-34.483 34.43-19.044 0-34.482-15.415-34.482-34.43s15.438-34.43 34.482-34.43c19.045 0 34.483 15.415 34.483 34.43z" fill="currentColor"></path></svg><div class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-1qhn6m8"><div dir="auto" data-rnwinearest--1ghhsy9-hover-focus="true" data-rnwi-handle="nearest" class="css-1rynq56 r-gg6oyi r-1b43r93 r-16dba41 r-hbpseb r-1rasi3h">Powered By <span class="css-1qaijid r-b88u0q">GitBook</span></div></div></a></div></div></nav></div><div class="css-175oi2r r-13awgt0" style="background-color:rgba(255,255,255,1.00)"><!--$--><div class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-18u37iz"><div class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-18u37iz r-1777fci"><main class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1ro0kt6 r-16y2uox r-1wbh5a2 r-eqz5dr"><div data-rnwrdesktop-1q6rxnj="true" data-rnwr1490-1777fci="true" data-rnwr700-i023vh="true" class="css-175oi2r r-18u37iz r-1777fci"><div class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-ecifi"><div class="css-175oi2r r-eqz5dr r-1ygmrgt r-1peese0"><div class="css-175oi2r r-18u37iz"><div data-rnwrdesktop-1x93onp-h3s6tt="true" data-rnwr700-285fr0-iyfy8q-eu3ka="true" class="css-175oi2r r-18u37iz r-17s6mgv r-1awozwy"></div><div class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2"><h1 data-rnwrdesktop-gg6oyi-xb2eav-1dn12g7-b88u0q="true" data-rnwr700-gg6oyi-1ui5ee8-nwxazl-b88u0q="true" class="r-1xnzce8 r-crgep1 r-1nf4jbm" data-testid="page.title">Appendix – Coordinate Systems</h1></div><div data-rnwrdesktop-hidden="true" data-rnwr1490-visible="true" data-rnwr700-visible="true" class="css-175oi2r r-18u37iz r-1awozwy"><div aria-label="Page actions" role="button" data-rnwi-1vckr1u-hover-focus="true" data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="button" tabindex="0" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-1awozwy r-42olwf r-rs99b7 r-18u37iz r-18kxxzh r-1777fci r-1ny4l3l r-eu3ka r-1bnj018 r-18c69zk r-mk0yit r-1aockid" style="transition-duration:0.15s" data-testid="pageCompactToolbar.paletteButton"><svg viewBox="0 0 16 16" fill="none" preserveAspectRatio="xMidYMid meet" data-rnwibutton-1bnj018-hover-focus="true" data-rnwi-handle="nearest" class="r-h7gdob" style="vertical-align:middle;width:18px;height:18px"><path d="M8 4a1 1 0 100-2 1 1 0 000 2zM8 8.75a1 1 0 100-2 1 1 0 000 2zM8 13.5a1 1 0 100-2 1 1 0 000 2z" fill="currentColor"></path></svg></div></div></div><div data-rnwrdesktop-13lvk87="true" data-rnwr700-1ow6zhx="true" class="css-175oi2r r-1wzrnnt"></div><div data-rnwrdesktop-13lvk87="true" data-rnwr700-1ow6zhx="true" class="css-175oi2r"></div></div></div></div><div data-rnwrdesktop-1uwte3a="true" class="css-175oi2r"><div class="css-175oi2r r-bnwqim"><div data-testid="page.contentEditor" data-slate-editor="true" data-document-key="1c72f6e287354d1fb567cdd274356718" data-key="1c72f6e287354d1fb567cdd274356718" autoCorrect="on" spellcheck="true" style="outline:none;white-space:pre-wrap;word-wrap:break-word"><div style="content-visibility:auto;contain-intrinsic-size:0 208px"><div class="css-175oi2r r-bnwqim"><div data-rnwrdesktop-1q6rxnj="true" data-rnwr1490-1777fci="true" data-rnwr700-i023vh-1777fci="true" class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-18u37iz r-1777fci"><div class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-ecifi"><div data-rnwrdesktop-13lvk87="true" data-rnwr700-1ow6zhx-="true" class="css-175oi2r"><div class="css-175oi2r"><div data-key="06961a179204451db2e34d7f0016e678" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-1mlwlqe r-eqz5dr r-1q142lx r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1yzf0co r-tskmnb r-xd6kpl"><div data-block-content="06961a179204451db2e34d7f0016e678" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-eqz5dr r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1ro0kt6 r-16y2uox r-1wbh5a2"><div dir="auto" class="css-1rynq56 r-gg6oyi r-ubezar r-16dba41 r-135wba7 r-1nf4jbm r-fdjqy7 r-1xnzce8"><span data-key="37f4756e4ded4b9eb78c7d04b14cdb76"><span data-offset-key="37f4756e4ded4b9eb78c7d04b14cdb76:0">The DVL operates in five different coordinate systems. “Magnetic Frame” is the local coordinate system referenced to magnetic north.  “World Frame” is the local coordinate frame referenced to true north.  “Sensor Frame” is the coordinate system referenced to the DVL sensor array. “Vehicle Frame” is the coordinate system referenced to the vehicle chassis. “Vehicle Frame” is Sensor Frame rotated to compensate for mechanical mounting offsets. These frames are usually given in Euler angles (e.g., pitch, roll, yaw), although quaternions are given for some as described in the message definitions. Euler and quaternions are different representations of equivalent orientations.</span></span></div></div></div></div></div></div></div></div></div><div style="content-visibility:auto;contain-intrinsic-size:0 105px"><div class="css-175oi2r r-bnwqim"><div data-rnwrdesktop-1q6rxnj="true" data-rnwr1490-1777fci="true" data-rnwr700-i023vh-1777fci="true" class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-18u37iz r-1777fci"><div class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-ecifi"><div data-rnwrdesktop-13lvk87="true" data-rnwr700-1ow6zhx-="true" class="css-175oi2r"><div class="css-175oi2r"><div data-key="13454713554e435097795eee361dd7b5" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-1mlwlqe r-eqz5dr r-1q142lx r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1yzf0co r-1ygmrgt r-xd6kpl"><div data-block-content="13454713554e435097795eee361dd7b5" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-eqz5dr r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1ro0kt6 r-16y2uox r-1wbh5a2"><h2 class="r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-1mlwlqe r-1q142lx r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-18u37iz r-obd0qt" id="right-hand-rule"><div dir="auto" data-rnwrdesktop-gg6oyi-1x35g6-37tt59-b88u0q="true" data-rnwr700-gg6oyi-adyw6z-135wba7-b88u0q="true" class="css-1rynq56 r-1nf4jbm r-fdjqy7 r-1xnzce8" id="text-right-hand-rule"><span data-key="68f4aca292cb4653be654e8cbf2e8ddc"><span data-offset-key="68f4aca292cb4653be654e8cbf2e8ddc:0">Right-Hand Rule</span></span><a href="appendix-coordinate-systems.html#right-hand-rule" aria-label="Direct link to heading" data-rnwi-1rasi3h-="true" data-rnwi--1ghhsy9-hover-focus="true" data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="nearest" class="css-1qaijid r-1awozwy r-xoduu5 r-1jkjb r-orgf3d r-1loqt21"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" preserveAspectRatio="xMidYMid meet" role="presentation" style="vertical-align:middle;width:20px;height:20px"><path d="M4 9h16M4 15h16M10 3L8 21M16 3l-2 18"></path></svg></a></div></h2></div></div></div></div></div></div></div></div><div style="content-visibility:auto;contain-intrinsic-size:0 136px"><div class="css-175oi2r r-bnwqim"><div data-rnwrdesktop-1q6rxnj="true" data-rnwr1490-1777fci="true" data-rnwr700-i023vh-1777fci="true" class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-18u37iz r-1777fci"><div class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-ecifi"><div data-rnwrdesktop-13lvk87="true" data-rnwr700-1ow6zhx-="true" class="css-175oi2r"><div class="css-175oi2r"><div data-key="5f3a5ed1679449a7a3c20b01c2646010" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-1mlwlqe r-eqz5dr r-1q142lx r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1yzf0co r-tskmnb r-xd6kpl"><div data-block-content="5f3a5ed1679449a7a3c20b01c2646010" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-eqz5dr r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1ro0kt6 r-16y2uox r-1wbh5a2"><div dir="auto" class="css-1rynq56 r-gg6oyi r-ubezar r-16dba41 r-135wba7 r-1nf4jbm r-fdjqy7 r-1xnzce8"><span data-key="a4c01fa78a034f7d958fbbc3075e484a"><span data-offset-key="a4c01fa78a034f7d958fbbc3075e484a:0">Right-hand rule is used to describe rotations around an axis in Cartesian coordinate system. In right-hand rule, you conceptually grasp an axis in your right hand, with your thumb laid along the axis pointed in the positive direction. Your fingers curl around the axis, and they point in the direction of increasing (more positive Euler angles) rotation. All rotations in this manual except “Heading” are right-hand rule.</span></span></div></div></div></div></div></div></div></div></div><div style="content-visibility:auto;contain-intrinsic-size:0 105px"><div class="css-175oi2r r-bnwqim"><div data-rnwrdesktop-1q6rxnj="true" data-rnwr1490-1777fci="true" data-rnwr700-i023vh-1777fci="true" class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-18u37iz r-1777fci"><div class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-ecifi"><div data-rnwrdesktop-13lvk87="true" data-rnwr700-1ow6zhx-="true" class="css-175oi2r"><div class="css-175oi2r"><div data-key="d9ffe8f966414827ab4bfbe5ddd04f80" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-1mlwlqe r-eqz5dr r-1q142lx r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1yzf0co r-1ygmrgt r-xd6kpl"><div data-block-content="d9ffe8f966414827ab4bfbe5ddd04f80" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-eqz5dr r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1ro0kt6 r-16y2uox r-1wbh5a2"><h2 class="r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-1mlwlqe r-1q142lx r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-18u37iz r-obd0qt" id="left-hand-rule"><div dir="auto" data-rnwrdesktop-gg6oyi-1x35g6-37tt59-b88u0q="true" data-rnwr700-gg6oyi-adyw6z-135wba7-b88u0q="true" class="css-1rynq56 r-1nf4jbm r-fdjqy7 r-1xnzce8" id="text-left-hand-rule"><span data-key="7cde78ee12a74bce95b462c6e7bbfcff"><span data-offset-key="7cde78ee12a74bce95b462c6e7bbfcff:0">Left-Hand Rule</span></span><a href="appendix-coordinate-systems.html#left-hand-rule" aria-label="Direct link to heading" data-rnwi-1rasi3h-="true" data-rnwi--1ghhsy9-hover-focus="true" data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="nearest" class="css-1qaijid r-1awozwy r-xoduu5 r-1jkjb r-orgf3d r-1loqt21"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" preserveAspectRatio="xMidYMid meet" role="presentation" style="vertical-align:middle;width:20px;height:20px"><path d="M4 9h16M4 15h16M10 3L8 21M16 3l-2 18"></path></svg></a></div></h2></div></div></div></div></div></div></div></div><div style="content-visibility:auto;contain-intrinsic-size:0 160px"><div class="css-175oi2r r-bnwqim"><div data-rnwrdesktop-1q6rxnj="true" data-rnwr1490-1777fci="true" data-rnwr700-i023vh-1777fci="true" class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-18u37iz r-1777fci"><div class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-ecifi"><div data-rnwrdesktop-13lvk87="true" data-rnwr700-1ow6zhx-="true" class="css-175oi2r"><div class="css-175oi2r"><div data-key="ba4b2e350c0d4ff38dfa82b5dc7d61c1" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-1mlwlqe r-eqz5dr r-1q142lx r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1yzf0co r-tskmnb r-xd6kpl"><div data-block-content="ba4b2e350c0d4ff38dfa82b5dc7d61c1" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-eqz5dr r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1ro0kt6 r-16y2uox r-1wbh5a2"><div dir="auto" class="css-1rynq56 r-gg6oyi r-ubezar r-16dba41 r-135wba7 r-1nf4jbm r-fdjqy7 r-1xnzce8"><span data-key="df40df09db184438873f53e45d7827b4"><span data-offset-key="df40df09db184438873f53e45d7827b4:0">Left-hand rule is used to describe rotations around an axis in Cartesian coordinate system. In left-hand rule, you conceptually grasp an axis in your left hand, with your thumb laid along the axis pointed in the positive direction. Your fingers curl around the axis, and they point in the direction of increasing (more positive Euler angles) rotation. In this manual, only “Heading” is given using left-hand rule, since it matches the rule used by magnetic Boy Scout and Mariner compasses for indicating directions.</span></span></div></div></div></div></div></div></div></div></div><div style="content-visibility:auto;contain-intrinsic-size:0 105px"><div class="css-175oi2r r-bnwqim"><div data-rnwrdesktop-1q6rxnj="true" data-rnwr1490-1777fci="true" data-rnwr700-i023vh-1777fci="true" class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-18u37iz r-1777fci"><div class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-ecifi"><div data-rnwrdesktop-13lvk87="true" data-rnwr700-1ow6zhx-="true" class="css-175oi2r"><div class="css-175oi2r"><div data-key="e915ceef92ab43878b85eced1a5259f4" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-1mlwlqe r-eqz5dr r-1q142lx r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1yzf0co r-1ygmrgt r-xd6kpl"><div data-block-content="e915ceef92ab43878b85eced1a5259f4" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-eqz5dr r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1ro0kt6 r-16y2uox r-1wbh5a2"><h2 class="r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-1mlwlqe r-1q142lx r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-18u37iz r-obd0qt" id="z-axis-definition"><div dir="auto" data-rnwrdesktop-gg6oyi-1x35g6-37tt59-b88u0q="true" data-rnwr700-gg6oyi-adyw6z-135wba7-b88u0q="true" class="css-1rynq56 r-1nf4jbm r-fdjqy7 r-1xnzce8" id="text-z-axis-definition"><span data-key="4484451a1d0a466abdbe917d355c1616"><span data-offset-key="4484451a1d0a466abdbe917d355c1616:0">Z-Axis Definition</span></span><a href="appendix-coordinate-systems.html#z-axis-definition" aria-label="Direct link to heading" data-rnwi-1rasi3h-="true" data-rnwi--1ghhsy9-hover-focus="true" data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="nearest" class="css-1qaijid r-1awozwy r-xoduu5 r-1jkjb r-orgf3d r-1loqt21"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" preserveAspectRatio="xMidYMid meet" role="presentation" style="vertical-align:middle;width:20px;height:20px"><path d="M4 9h16M4 15h16M10 3L8 21M16 3l-2 18"></path></svg></a></div></h2></div></div></div></div></div></div></div></div><div style="content-visibility:auto;contain-intrinsic-size:0 88px"><div class="css-175oi2r r-bnwqim"><div data-rnwrdesktop-1q6rxnj="true" data-rnwr1490-1777fci="true" data-rnwr700-i023vh-1777fci="true" class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-18u37iz r-1777fci"><div class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-ecifi"><div data-rnwrdesktop-13lvk87="true" data-rnwr700-1ow6zhx-="true" class="css-175oi2r"><div class="css-175oi2r"><div data-key="9a45e17d3fcc4fe6946c1e4afca9cd13" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-1mlwlqe r-eqz5dr r-1q142lx r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1yzf0co r-tskmnb r-xd6kpl"><div data-block-content="9a45e17d3fcc4fe6946c1e4afca9cd13" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-eqz5dr r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1ro0kt6 r-16y2uox r-1wbh5a2"><div dir="auto" class="css-1rynq56 r-gg6oyi r-ubezar r-16dba41 r-135wba7 r-1nf4jbm r-fdjqy7 r-1xnzce8"><span data-key="b2e1072affc743d2905e919320dcbd19"><span data-offset-key="b2e1072affc743d2905e919320dcbd19:0">In Magnetic, World, and Body Frames, the Z axis is referenced to local gravity. It passes through the DVL. The negative Z axis points straight down thought the center of the earth. The positive Z axis points straight up. The local horizontal plane is perpendicular to the Z axis.</span></span></div></div></div></div></div></div></div></div></div><div style="content-visibility:auto;contain-intrinsic-size:0 105px"><div class="css-175oi2r r-bnwqim"><div data-rnwrdesktop-1q6rxnj="true" data-rnwr1490-1777fci="true" data-rnwr700-i023vh-1777fci="true" class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-18u37iz r-1777fci"><div class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-ecifi"><div data-rnwrdesktop-13lvk87="true" data-rnwr700-1ow6zhx-="true" class="css-175oi2r"><div class="css-175oi2r"><div data-key="1e4e0ebe81ce4a559e0c4973c0f0e546" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-1mlwlqe r-eqz5dr r-1q142lx r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1yzf0co r-1ygmrgt r-xd6kpl"><div data-block-content="1e4e0ebe81ce4a559e0c4973c0f0e546" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-eqz5dr r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1ro0kt6 r-16y2uox r-1wbh5a2"><h2 class="r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-1mlwlqe r-1q142lx r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-18u37iz r-obd0qt" id="magnetic-frame"><div dir="auto" data-rnwrdesktop-gg6oyi-1x35g6-37tt59-b88u0q="true" data-rnwr700-gg6oyi-adyw6z-135wba7-b88u0q="true" class="css-1rynq56 r-1nf4jbm r-fdjqy7 r-1xnzce8" id="text-magnetic-frame"><span data-key="d51e0be7826d4606af6af3d2e212ec28"><span data-offset-key="d51e0be7826d4606af6af3d2e212ec28:0">Magnetic Frame</span></span><a href="appendix-coordinate-systems.html#magnetic-frame" aria-label="Direct link to heading" data-rnwi-1rasi3h-="true" data-rnwi--1ghhsy9-hover-focus="true" data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="nearest" class="css-1qaijid r-1awozwy r-xoduu5 r-1jkjb r-orgf3d r-1loqt21"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" preserveAspectRatio="xMidYMid meet" role="presentation" style="vertical-align:middle;width:20px;height:20px"><path d="M4 9h16M4 15h16M10 3L8 21M16 3l-2 18"></path></svg></a></div></h2></div></div></div></div></div></div></div></div><div style="content-visibility:auto;contain-intrinsic-size:0 88px"><div class="css-175oi2r r-bnwqim"><div data-rnwrdesktop-1q6rxnj="true" data-rnwr1490-1777fci="true" data-rnwr700-i023vh-1777fci="true" class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-18u37iz r-1777fci"><div class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-ecifi"><div data-rnwrdesktop-13lvk87="true" data-rnwr700-1ow6zhx-="true" class="css-175oi2r"><div class="css-175oi2r"><div data-key="2919e9cbb4dd4a9eae46de45b6e0b8e4" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-1mlwlqe r-eqz5dr r-1q142lx r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1yzf0co r-tskmnb r-xd6kpl"><div data-block-content="2919e9cbb4dd4a9eae46de45b6e0b8e4" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-eqz5dr r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1ro0kt6 r-16y2uox r-1wbh5a2"><div dir="auto" class="css-1rynq56 r-gg6oyi r-ubezar r-16dba41 r-135wba7 r-1nf4jbm r-fdjqy7 r-1xnzce8"><span data-key="5e202037e0ec42bab9783a3383048aaf"><span data-offset-key="5e202037e0ec42bab9783a3383048aaf:0">In Magnetic, World, and Body Frames, the Z axis is referenced to local gravity. It passes through the DVL. The negative Z axis points straight down thought the center of the earth. The positive Z axis points straight up. The local horizontal plane is perpendicular to the Z axis.</span></span></div></div></div></div></div></div></div></div></div><div style="content-visibility:auto;contain-intrinsic-size:0 112px"><div class="css-175oi2r r-bnwqim"><div data-rnwrdesktop-1q6rxnj="true" data-rnwr1490-1777fci="true" data-rnwr700-i023vh-1777fci="true" class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-18u37iz r-1777fci"><div class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-ecifi"><div data-rnwrdesktop-13lvk87="true" data-rnwr700-1ow6zhx-="true" class="css-175oi2r"><div class="css-175oi2r"><div data-key="12e20d5c928843df907155598684edda" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-1mlwlqe r-eqz5dr r-1q142lx r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1yzf0co r-tskmnb r-xd6kpl"><div data-block-content="12e20d5c928843df907155598684edda" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-eqz5dr r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1ro0kt6 r-16y2uox r-1wbh5a2"><div dir="auto" class="css-1rynq56 r-gg6oyi r-ubezar r-16dba41 r-135wba7 r-1nf4jbm r-fdjqy7 r-1xnzce8"><span data-key="51b4361e1e0f48ee8efb268bdc62f4be"><span data-offset-key="51b4361e1e0f48ee8efb268bdc62f4be:0">The Y axis lies in the local horizontal plane and is tangent to a great circle that includes the DVL and the magnetic north pole, with the +Y direction toward north. In colloquial terms, the Y axis points at the magnetic north pole, like a Boy Scout compass. The +X axis is rotated -90 degrees (right hand rule) from the Y axis in the local horizontal plane.</span></span></div></div></div></div></div></div></div></div></div><div style="content-visibility:auto;contain-intrinsic-size:0 40px"><div class="css-175oi2r r-bnwqim"><div data-rnwrdesktop-1q6rxnj="true" data-rnwr1490-1777fci="true" data-rnwr700-i023vh-1777fci="true" class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-18u37iz r-1777fci"><div class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-ecifi"><div data-rnwrdesktop-13lvk87="true" data-rnwr700-1ow6zhx-="true" class="css-175oi2r"><div class="css-175oi2r"><div data-key="da23f29cf30c43899b54d7cfab6d2dfc" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-1mlwlqe r-eqz5dr r-1q142lx r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1yzf0co r-tskmnb r-xd6kpl"><div data-block-content="da23f29cf30c43899b54d7cfab6d2dfc" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-eqz5dr r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1ro0kt6 r-16y2uox r-1wbh5a2"><div dir="auto" class="css-1rynq56 r-gg6oyi r-ubezar r-16dba41 r-135wba7 r-1nf4jbm r-fdjqy7 r-1xnzce8"><span data-key="fda6ac82e36348f088eb9cf51a6b07e2"><span data-offset-key="fda6ac82e36348f088eb9cf51a6b07e2:0">The IMU determines the Magnetic Frame using magnetometers and accelerometers.</span></span></div></div></div></div></div></div></div></div></div><div style="content-visibility:auto;contain-intrinsic-size:0 105px"><div class="css-175oi2r r-bnwqim"><div data-rnwrdesktop-1q6rxnj="true" data-rnwr1490-1777fci="true" data-rnwr700-i023vh-1777fci="true" class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-18u37iz r-1777fci"><div class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-ecifi"><div data-rnwrdesktop-13lvk87="true" data-rnwr700-1ow6zhx-="true" class="css-175oi2r"><div class="css-175oi2r"><div data-key="86dc3e08ebfb467390c4634f5572b68e" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-1mlwlqe r-eqz5dr r-1q142lx r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1yzf0co r-1ygmrgt r-xd6kpl"><div data-block-content="86dc3e08ebfb467390c4634f5572b68e" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-eqz5dr r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1ro0kt6 r-16y2uox r-1wbh5a2"><h2 class="r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-1mlwlqe r-1q142lx r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-18u37iz r-obd0qt" id="world-frame"><div dir="auto" data-rnwrdesktop-gg6oyi-1x35g6-37tt59-b88u0q="true" data-rnwr700-gg6oyi-adyw6z-135wba7-b88u0q="true" class="css-1rynq56 r-1nf4jbm r-fdjqy7 r-1xnzce8" id="text-world-frame"><span data-key="8af5e48ddb284a46b9d21aba389f9917"><span data-offset-key="8af5e48ddb284a46b9d21aba389f9917:0">World Frame</span></span><a href="appendix-coordinate-systems.html#world-frame" aria-label="Direct link to heading" data-rnwi-1rasi3h-="true" data-rnwi--1ghhsy9-hover-focus="true" data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="nearest" class="css-1qaijid r-1awozwy r-xoduu5 r-1jkjb r-orgf3d r-1loqt21"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" preserveAspectRatio="xMidYMid meet" role="presentation" style="vertical-align:middle;width:20px;height:20px"><path d="M4 9h16M4 15h16M10 3L8 21M16 3l-2 18"></path></svg></a></div></h2></div></div></div></div></div></div></div></div><div style="content-visibility:auto;contain-intrinsic-size:0 88px"><div class="css-175oi2r r-bnwqim"><div data-rnwrdesktop-1q6rxnj="true" data-rnwr1490-1777fci="true" data-rnwr700-i023vh-1777fci="true" class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-18u37iz r-1777fci"><div class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-ecifi"><div data-rnwrdesktop-13lvk87="true" data-rnwr700-1ow6zhx-="true" class="css-175oi2r"><div class="css-175oi2r"><div data-key="b76cbfa5eb4e40a19a5f45a827fd6091" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-1mlwlqe r-eqz5dr r-1q142lx r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1yzf0co r-tskmnb r-xd6kpl"><div data-block-content="b76cbfa5eb4e40a19a5f45a827fd6091" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-eqz5dr r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1ro0kt6 r-16y2uox r-1wbh5a2"><div dir="auto" class="css-1rynq56 r-gg6oyi r-ubezar r-16dba41 r-135wba7 r-1nf4jbm r-fdjqy7 r-1xnzce8"><span data-key="b46256922c03464387ea4418e3086461"><span data-offset-key="b46256922c03464387ea4418e3086461:0">In Magnetic, World, and Body Frames, the Z axis is referenced to local gravity. It passes through the DVL. The negative Z axis points straight down thought the center of the earth. The positive Z axis points straight up. The local horizontal plane is perpendicular to the Z axis.</span></span></div></div></div></div></div></div></div></div></div><div style="content-visibility:auto;contain-intrinsic-size:0 136px"><div class="css-175oi2r r-bnwqim"><div data-rnwrdesktop-1q6rxnj="true" data-rnwr1490-1777fci="true" data-rnwr700-i023vh-1777fci="true" class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-18u37iz r-1777fci"><div class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-ecifi"><div data-rnwrdesktop-13lvk87="true" data-rnwr700-1ow6zhx-="true" class="css-175oi2r"><div class="css-175oi2r"><div data-key="de6bafb32c90491196452f8a50af34ae" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-1mlwlqe r-eqz5dr r-1q142lx r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1yzf0co r-tskmnb r-xd6kpl"><div data-block-content="de6bafb32c90491196452f8a50af34ae" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-eqz5dr r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1ro0kt6 r-16y2uox r-1wbh5a2"><div dir="auto" class="css-1rynq56 r-gg6oyi r-ubezar r-16dba41 r-135wba7 r-1nf4jbm r-fdjqy7 r-1xnzce8"><span data-key="ab4236d5efbf4748af8c2c3cd67a3948"><span data-offset-key="ab4236d5efbf4748af8c2c3cd67a3948:0">The Y axis lies in the local horizontal plane and is tangent to a great circle that includes the DVL and the north pole, with the +Y direction toward north. In colloquial terms, the Y axis points at the north pole. The +X axis is rotated -90 degrees (right hand rule) from the Y axis in the local horizontal plane. World Frame is created from Magnetic Frame by adding the magnetic declination supplied by the user (i.e., you).</span></span></div></div></div></div></div></div></div></div></div><div style="content-visibility:auto;contain-intrinsic-size:0 105px"><div class="css-175oi2r r-bnwqim"><div data-rnwrdesktop-1q6rxnj="true" data-rnwr1490-1777fci="true" data-rnwr700-i023vh-1777fci="true" class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-18u37iz r-1777fci"><div class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-ecifi"><div data-rnwrdesktop-13lvk87="true" data-rnwr700-1ow6zhx-="true" class="css-175oi2r"><div class="css-175oi2r"><div data-key="fa113cab9b0d49ae813ac89dd06c3a62" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-1mlwlqe r-eqz5dr r-1q142lx r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1yzf0co r-1ygmrgt r-xd6kpl"><div data-block-content="fa113cab9b0d49ae813ac89dd06c3a62" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-eqz5dr r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1ro0kt6 r-16y2uox r-1wbh5a2"><h2 class="r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-1mlwlqe r-1q142lx r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-18u37iz r-obd0qt" id="sensor-frame"><div dir="auto" data-rnwrdesktop-gg6oyi-1x35g6-37tt59-b88u0q="true" data-rnwr700-gg6oyi-adyw6z-135wba7-b88u0q="true" class="css-1rynq56 r-1nf4jbm r-fdjqy7 r-1xnzce8" id="text-sensor-frame"><span data-key="c6f57b3ac8ea40c18256f76bd8a24234"><span data-offset-key="c6f57b3ac8ea40c18256f76bd8a24234:0">Sensor Frame</span></span><a href="appendix-coordinate-systems.html#sensor-frame" aria-label="Direct link to heading" data-rnwi-1rasi3h-="true" data-rnwi--1ghhsy9-hover-focus="true" data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="nearest" class="css-1qaijid r-1awozwy r-xoduu5 r-1jkjb r-orgf3d r-1loqt21"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" preserveAspectRatio="xMidYMid meet" role="presentation" style="vertical-align:middle;width:20px;height:20px"><path d="M4 9h16M4 15h16M10 3L8 21M16 3l-2 18"></path></svg></a></div></h2></div></div></div></div></div></div></div></div><div style="content-visibility:auto;contain-intrinsic-size:0 64px"><div class="css-175oi2r r-bnwqim"><div data-rnwrdesktop-1q6rxnj="true" data-rnwr1490-1777fci="true" data-rnwr700-i023vh-1777fci="true" class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-18u37iz r-1777fci"><div class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-ecifi"><div data-rnwrdesktop-13lvk87="true" data-rnwr700-1ow6zhx-="true" class="css-175oi2r"><div class="css-175oi2r"><div data-key="2cad49f22d9745d3b90721a5893a844c" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-1mlwlqe r-eqz5dr r-1q142lx r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1yzf0co r-tskmnb r-xd6kpl"><div data-block-content="2cad49f22d9745d3b90721a5893a844c" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-eqz5dr r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1ro0kt6 r-16y2uox r-1wbh5a2"><div dir="auto" class="css-1rynq56 r-gg6oyi r-ubezar r-16dba41 r-135wba7 r-1nf4jbm r-fdjqy7 r-1xnzce8"><span data-key="65b92420fd4d40859e312a3a08467644"><span data-offset-key="65b92420fd4d40859e312a3a08467644:0">Sensor frame is shown in the diagram below. Sensor frame is not directly available via DVL messages. Sensor frame is used to generate Body Frame and Vehicle Frame.</span></span></div></div></div></div></div></div></div></div></div><div style="content-visibility:auto;contain-intrinsic-size:0 232px"><div class="css-175oi2r r-bnwqim"><div data-rnwrdesktop-1q6rxnj="true" data-rnwr1490-1777fci="true" data-rnwr700-i023vh-1777fci="true" class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-18u37iz r-1777fci"><div class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-ecifi"><div data-rnwrdesktop-13lvk87="true" data-rnwr700-1ow6zhx-="true" class="css-175oi2r"><div class="css-175oi2r"><div data-key="e7b6d20ae6e741878b0a843871c2eb15" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-1mlwlqe r-eqz5dr r-1q142lx r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1yzf0co r-95jzfe r-1l7z4oj"><div data-block-content="e7b6d20ae6e741878b0a843871c2eb15" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-eqz5dr r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1ro0kt6 r-16y2uox r-1wbh5a2"><div data-rnwr700-1w6e6rj-1777fci="true" class="css-175oi2r r-18u37iz r-1777fci"><div data-slate-void="true" data-key="6b7ea3165dfe416e818b1d6ab10ae4e2"><div><div data-rnwr700-61z16t-="true" class="css-175oi2r"><div class="css-175oi2r r-z2wwpe r-bnwqim"><div data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="nearest" tabindex="0" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73" style="transition-duration:0.15s"><img alt="" src="https://1233112051-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FIUx8F0dEX9C01W3iSbva%2Fuploads%2FdICaHakrXPstwzx4KZaV%2Fimage.png?alt=media&amp;token=e35b539e-bee6-46a8-933e-12ee26bc10ab" width="838" height="426" decoding="async" loading="lazy" style="width:100%;height:auto;border-top-left-radius:4px;border-top-right-radius:4px;border-bottom-right-radius:4px;border-bottom-left-radius:4px;max-width:100%"/></div></div><div class="css-175oi2r r-bnwqim r-q4m81j r-tskmnb"><div data-key="ab0ff49ba0b84271b0f99badaf52f55b" data-fragment="true" data-slate-editor="true" data-document-key="1c72f6e287354d1fb567cdd274356718"><div data-key="fbdc143a21384167a6d9405fe70122b3" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-1mlwlqe r-eqz5dr r-1q142lx r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010"><div dir="auto" class="css-1rynq56 r-q4m81j r-1rasi3h r-gg6oyi r-1enofrn r-16dba41 r-14yzgew r-1xnzce8"><span data-key="e3c46a3de79c4279a682db366e991673"><span data-offset-key="e3c46a3de79c4279a682db366e991673:0">Coordinates for Detached Head</span></span></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div><div style="content-visibility:auto;contain-intrinsic-size:0 232px"><div class="css-175oi2r r-bnwqim"><div data-rnwrdesktop-1q6rxnj="true" data-rnwr1490-1777fci="true" data-rnwr700-i023vh-1777fci="true" class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-18u37iz r-1777fci"><div class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-ecifi"><div data-rnwrdesktop-13lvk87="true" data-rnwr700-1ow6zhx-="true" class="css-175oi2r"><div class="css-175oi2r"><div data-key="7d35f204f0134891b5e6fb6a71f7b406" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-1mlwlqe r-eqz5dr r-1q142lx r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1yzf0co r-95jzfe r-1l7z4oj"><div data-block-content="7d35f204f0134891b5e6fb6a71f7b406" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-eqz5dr r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1ro0kt6 r-16y2uox r-1wbh5a2"><div data-rnwr700-1w6e6rj-1777fci="true" class="css-175oi2r r-18u37iz r-1777fci"><div data-slate-void="true" data-key="9a7a65fe1b8f4c9f8c4fc0575985c659"><div><div data-rnwr700-61z16t-="true" class="css-175oi2r"><div class="css-175oi2r r-z2wwpe r-bnwqim"><div data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="nearest" tabindex="0" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73" style="transition-duration:0.15s"><img alt="" src="https://1233112051-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FIUx8F0dEX9C01W3iSbva%2Fuploads%2FsQIxAeIOhzGf3je1agi8%2Fimage.png?alt=media&amp;token=3345b388-a9dc-4ac9-9c26-5d0c082a94e6" width="591" height="536" decoding="async" loading="lazy" style="width:100%;height:auto;border-top-left-radius:4px;border-top-right-radius:4px;border-bottom-right-radius:4px;border-bottom-left-radius:4px;max-width:100%"/></div></div><div class="css-175oi2r r-bnwqim r-q4m81j r-tskmnb"><div data-key="90aeca77f5924395a7cac1f2b9eeb79b" data-fragment="true" data-slate-editor="true" data-document-key="1c72f6e287354d1fb567cdd274356718"><div data-key="194d3ea042eb4f2f8f25723d0aa9d1c6" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-1mlwlqe r-eqz5dr r-1q142lx r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010"><div dir="auto" class="css-1rynq56 r-q4m81j r-1rasi3h r-gg6oyi r-1enofrn r-16dba41 r-14yzgew r-1xnzce8"><span data-key="196f5ac21c444f539208026f95021607"><span data-offset-key="196f5ac21c444f539208026f95021607:0">Coordinates for All-in-One and Most-in-One configurations</span></span></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div><div style="content-visibility:auto;contain-intrinsic-size:0 105px"><div class="css-175oi2r r-bnwqim"><div data-rnwrdesktop-1q6rxnj="true" data-rnwr1490-1777fci="true" data-rnwr700-i023vh-1777fci="true" class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-18u37iz r-1777fci"><div class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-ecifi"><div data-rnwrdesktop-13lvk87="true" data-rnwr700-1ow6zhx-="true" class="css-175oi2r"><div class="css-175oi2r"><div data-key="14c52287311f431ab7ef74be1d22aa15" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-1mlwlqe r-eqz5dr r-1q142lx r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1yzf0co r-1ygmrgt r-xd6kpl"><div data-block-content="14c52287311f431ab7ef74be1d22aa15" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-eqz5dr r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1ro0kt6 r-16y2uox r-1wbh5a2"><h2 class="r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-1mlwlqe r-1q142lx r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-18u37iz r-obd0qt" id="vehicle-frame"><div dir="auto" data-rnwrdesktop-gg6oyi-1x35g6-37tt59-b88u0q="true" data-rnwr700-gg6oyi-adyw6z-135wba7-b88u0q="true" class="css-1rynq56 r-1nf4jbm r-fdjqy7 r-1xnzce8" id="text-vehicle-frame"><span data-key="c5d506e90fc34fa0b12acb28160814a7"><span data-offset-key="c5d506e90fc34fa0b12acb28160814a7:0">Vehicle Frame</span></span><a href="appendix-coordinate-systems.html#vehicle-frame" aria-label="Direct link to heading" data-rnwi-1rasi3h-="true" data-rnwi--1ghhsy9-hover-focus="true" data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="nearest" class="css-1qaijid r-1awozwy r-xoduu5 r-1jkjb r-orgf3d r-1loqt21"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" preserveAspectRatio="xMidYMid meet" role="presentation" style="vertical-align:middle;width:20px;height:20px"><path d="M4 9h16M4 15h16M10 3L8 21M16 3l-2 18"></path></svg></a></div></h2></div></div></div></div></div></div></div></div><div style="content-visibility:auto;contain-intrinsic-size:0 136px"><div class="css-175oi2r r-bnwqim"><div data-rnwrdesktop-1q6rxnj="true" data-rnwr1490-1777fci="true" data-rnwr700-i023vh-1777fci="true" class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-18u37iz r-1777fci"><div class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-ecifi"><div data-rnwrdesktop-13lvk87="true" data-rnwr700-1ow6zhx-="true" class="css-175oi2r"><div class="css-175oi2r"><div data-key="b2fec8d008f241849ad779bc96dbad6f" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-1mlwlqe r-eqz5dr r-1q142lx r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1yzf0co r-tskmnb r-xd6kpl"><div data-block-content="b2fec8d008f241849ad779bc96dbad6f" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-eqz5dr r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1ro0kt6 r-16y2uox r-1wbh5a2"><div dir="auto" class="css-1rynq56 r-gg6oyi r-ubezar r-16dba41 r-135wba7 r-1nf4jbm r-fdjqy7 r-1xnzce8"><span data-key="670120c9527945789ce052d241fe9e70"><span data-offset-key="670120c9527945789ce052d241fe9e70:0">Vehicle Frame (or “ROV Frame” is Sensor Frame rotated in three axes as specified in the “SET-SENSOR-ORIENTATION” command. This can used to compensate heading, roll, and pitch for side-tracking setups or any mounting offset (e.g., you mount  the sensor rotated by 90 degrees compared to the labeling in the diagram above to get a better placement for the cable exiting the sensor head).</span></span></div></div></div></div></div></div></div></div></div><div style="content-visibility:auto;contain-intrinsic-size:0 105px"><div class="css-175oi2r r-bnwqim"><div data-rnwrdesktop-1q6rxnj="true" data-rnwr1490-1777fci="true" data-rnwr700-i023vh-1777fci="true" class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-18u37iz r-1777fci"><div class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-ecifi"><div data-rnwrdesktop-13lvk87="true" data-rnwr700-1ow6zhx-="true" class="css-175oi2r"><div class="css-175oi2r"><div data-key="d1c56a8f4db54fb2b9798b04d4e0cd46" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-1mlwlqe r-eqz5dr r-1q142lx r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1yzf0co r-1ygmrgt r-xd6kpl"><div data-block-content="d1c56a8f4db54fb2b9798b04d4e0cd46" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-eqz5dr r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1ro0kt6 r-16y2uox r-1wbh5a2"><h2 class="r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-1mlwlqe r-1q142lx r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-18u37iz r-obd0qt" id="quaternion-coordinates-and-notations"><div dir="auto" data-rnwrdesktop-gg6oyi-1x35g6-37tt59-b88u0q="true" data-rnwr700-gg6oyi-adyw6z-135wba7-b88u0q="true" class="css-1rynq56 r-1nf4jbm r-fdjqy7 r-1xnzce8" id="text-quaternion-coordinates-and-notations"><span data-key="5a07a48e8ce844f3a9ec2e4bc2d8d98f"><span data-offset-key="5a07a48e8ce844f3a9ec2e4bc2d8d98f:0">Quaternion Coordinates and Notations</span></span><a href="appendix-coordinate-systems.html#quaternion-coordinates-and-notations" aria-label="Direct link to heading" data-rnwi-1rasi3h-="true" data-rnwi--1ghhsy9-hover-focus="true" data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="nearest" class="css-1qaijid r-1awozwy r-xoduu5 r-1jkjb r-orgf3d r-1loqt21"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" preserveAspectRatio="xMidYMid meet" role="presentation" style="vertical-align:middle;width:20px;height:20px"><path d="M4 9h16M4 15h16M10 3L8 21M16 3l-2 18"></path></svg></a></div></h2></div></div></div></div></div></div></div></div><div style="content-visibility:auto;contain-intrinsic-size:0 112px"><div class="css-175oi2r r-bnwqim"><div data-rnwrdesktop-1q6rxnj="true" data-rnwr1490-1777fci="true" data-rnwr700-i023vh-1777fci="true" class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-18u37iz r-1777fci"><div class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-ecifi"><div data-rnwrdesktop-13lvk87="true" data-rnwr700-1ow6zhx-="true" class="css-175oi2r"><div class="css-175oi2r"><div data-key="066e7297d6ab46668b06b3ff199d4cc3" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-1mlwlqe r-eqz5dr r-1q142lx r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1yzf0co r-tskmnb r-xd6kpl"><div data-block-content="066e7297d6ab46668b06b3ff199d4cc3" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-eqz5dr r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1ro0kt6 r-16y2uox r-1wbh5a2"><div dir="auto" class="css-1rynq56 r-gg6oyi r-ubezar r-16dba41 r-135wba7 r-1nf4jbm r-fdjqy7 r-1xnzce8"><span data-key="3b160c85234f4a90a8013301a03474d2"><span data-offset-key="3b160c85234f4a90a8013301a03474d2:0">The conversion between Euler and quaternion is shown in the diagram below. Our standard notation for the quaternion is (w, x, y, z), where “w” is the real part of the quaternion. This corresponds to similar notations (a + bi + cj + dk) or (a, b, c, d), where “w” corresponds to “a”, “x” corresponds to “b”, “y” corresponds to “c”, and “z” corresponds to “d”.</span></span></div></div></div></div></div></div></div></div></div><div style="content-visibility:auto;contain-intrinsic-size:0 232px"><div class="css-175oi2r r-bnwqim"><div data-rnwrdesktop-1q6rxnj="true" data-rnwr1490-1777fci="true" data-rnwr700-i023vh-1777fci="true" class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-18u37iz r-1777fci"><div class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-ecifi"><div data-rnwrdesktop-13lvk87="true" data-rnwr700-1ow6zhx-="true" class="css-175oi2r"><div class="css-175oi2r"><div data-key="4f344a6b246844619476386ae198a1b7" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-1mlwlqe r-eqz5dr r-1q142lx r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1yzf0co r-95jzfe r-1l7z4oj"><div data-block-content="4f344a6b246844619476386ae198a1b7" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-eqz5dr r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-bnwqim r-417010 r-1ro0kt6 r-16y2uox r-1wbh5a2"><div data-rnwr700-1w6e6rj-1777fci="true" class="css-175oi2r r-18u37iz r-1777fci"><div data-slate-void="true" data-key="f9812278310d4e9b87f8c2c145f8b9c9"><div><div data-rnwr700-61z16t-="true" class="css-175oi2r"><div class="css-175oi2r r-z2wwpe r-bnwqim"><div data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="nearest" tabindex="0" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73" style="transition-duration:0.15s"><img alt="" src="https://1233112051-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FIUx8F0dEX9C01W3iSbva%2Fuploads%2Fenon7gABfTVHJpzY3Y2C%2Fimage.png?alt=media&amp;token=0df8286a-2ba6-4cd1-a865-a510ffdb0181" width="835" height="634" decoding="async" loading="lazy" style="width:100%;height:auto;border-top-left-radius:4px;border-top-right-radius:4px;border-bottom-right-radius:4px;border-bottom-left-radius:4px;max-width:100%"/></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div><div data-rnwrdesktop-1q6rxnj="true" data-rnwr1490-1777fci="true" data-rnwr700-i023vh="true" class="css-175oi2r r-11c0sde r-18u37iz r-1777fci"><div class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-ecifi"><div data-rnwrdesktop-13lvk87="true" data-rnwr700-1ow6zhx="true" class="css-175oi2r"><div data-rnwrdesktop-18u37iz="true" data-rnwr970-eqz5dr="true" class="css-175oi2r r-1peese0"><a href="electrical-drawings/serial-to-usb-interface-using-blue-robotics-bluart-board.html" data-rnwi-u529wo-aq1qub-c1zw6o-1khlhp8-1cut0bx-na6qhi--hover="true" data-rnwi--1tgwseu--focus="true" data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="BaseCard" class="css-175oi2r r-lrvibr r-1loqt21 r-1otgn73 r-190qawg r-z2wwpe r-rs99b7 r-1udh08x r-1clhhh9 r-18u37iz r-1awozwy r-nsbfu8 r-1ro0kt6 r-16y2uox r-1wbh5a2" style="background-color:rgba(255,255,255,1.00);transition-duration:0.15s"><div class="css-175oi2r r-88pszg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" preserveAspectRatio="xMidYMid meet" data-rnwibasecard--1ghhsy9-hover="true" data-rnwi-handle="nearest" class="r-1rasi3h" style="vertical-align:middle;width:24px;height:24px"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg></div><div class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2 r-obd0qt"><div class="css-175oi2r"><div dir="auto" class="css-1rynq56 r-gg6oyi r-1enofrn r-16dba41 r-14yzgew r-1rasi3h">Previous</div></div><div dir="auto" data-rnwibasecard--1ghhsy9-hover-focus="true" data-rnwi-handle="nearest" class="css-1rynq56 r-dnmrzs r-1udh08x r-1udbk01 r-3s2u2q r-1iln25a r-gg6oyi r-ubezar r-135wba7 r-majxgm r-1nf4jbm">Serial to USB Interface Using Blue Robotics BLUART Board</div></div></a></div><div class="css-175oi2r r-1ygmrgt r-1yv4afn r-5kkj8d"><div data-rnwrdesktop-18u37iz="true" data-rnwr1024-eqz5dr="true" class="css-175oi2r r-1awozwy r-1wtj0ep"><div data-rnwr1024-1ifxtd0="true" class="css-175oi2r r-1ro0kt6 r-16y2uox r-1wbh5a2"><div dir="auto" class="css-1rynq56 r-1rasi3h r-gg6oyi r-1b43r93 r-16dba41 r-hbpseb">Last modified <span aria-label="2022-07-05 15:57 UTC" class="css-1qaijid">6mo ago</span></div></div></div></div></div></div></div></div></main></div><aside aria-label="Page outline" data-rnwrdesktop-166pt5r="true" data-rnwr1490-hidden="true" data-rnwr700-hidden="true" class="r-1oszu61 r-1xc7w19 r-1phboty r-1yadl64 r-deolkf r-6koalj r-1mlwlqe r-eqz5dr r-1q142lx r-crgep1 r-ifefl9 r-bcqeeo r-t60dpp r-417010 r-k200y r-1rnoaur r-gtdqiz r-pw2am6 r-1mkpi1y" style="top:104px;max-height:calc(100vh - 104px)" data-testid="page.outline"><div class="css-175oi2r r-hu79xy r-1peese0"><div class="css-175oi2r r-5njf8e r-wk8lta r-1mdbw0j"><div data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="nearest" tabindex="0" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-18u37iz r-1awozwy r-1guathk r-oyd9sg r-dnmrzs r-7xmw5f" style="transition-duration:0.15s"><div class="css-175oi2r r-1kb76zh"><svg viewBox="0 0 16 16" fill="none" preserveAspectRatio="xMidYMid meet" data-rnwinearest--1ghhsy9-hover-focus="true" data-rnwi-handle="nearest" class="r-1rasi3h" style="vertical-align:middle;width:16px;height:16px"><path d="M14.11 6.6l-.16-.09c-.042.343-.13.68-.26 1A3 3 0 0115 10a3 3 0 01-3 3H8a3 3 0 010-6h.82A3 3 0 009 6H8a4 4 0 000 8h4a4 4 0 002.11-7.4z" fill="currentColor"></path><path d="M1.89 9.4l.16.09c.042-.343.13-.68.26-1A3 3 0 011 6a3 3 0 013-3h4a3 3 0 110 6h-.82A3 3 0 007 10h1a4 4 0 000-8H4a4 4 0 00-2.11 7.4z" fill="currentColor"></path></svg></div><div dir="auto" data-rnwinearest--1ghhsy9-hover-focus="true" data-rnwi-handle="nearest" class="css-1rynq56 r-dnmrzs r-1udh08x r-1udbk01 r-3s2u2q r-1iln25a r-gg6oyi r-1b43r93 r-16dba41 r-hbpseb r-1bnj018 r-1ro0kt6 r-16y2uox r-1wbh5a2">Copy link</div></div></div></div><div class="css-175oi2r r-146iojx"><div class="css-175oi2r r-18u37iz r-1awozwy r-1guathk r-5oul0u"><div dir="auto" class="css-1rynq56 r-gg6oyi r-1enofrn r-19r33im r-14yzgew r-tsynxw r-1rasi3h r-b88u0q">On this page</div></div><div data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="nearest" tabindex="0" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-18u37iz r-1guathk r-855088 r-ms8t9i r-15zivkp r-lqms97 r-14gqq1x r-dnmrzs r-7xmw5f" style="transition-duration:0.15s"><div dir="auto" data-rnwinearest--1ghhsy9-hover="true" data-rnwi-handle="nearest" class="css-1rynq56 r-dnmrzs r-1udh08x r-1udbk01 r-3s2u2q r-1iln25a r-gg6oyi r-1b43r93 r-16dba41 r-hbpseb r-1bnj018">Right-Hand Rule</div></div><div data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="nearest" tabindex="0" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-18u37iz r-1guathk r-855088 r-ms8t9i r-15zivkp r-lqms97 r-14gqq1x r-dnmrzs r-7xmw5f" style="transition-duration:0.15s"><div dir="auto" data-rnwinearest--1ghhsy9-hover="true" data-rnwi-handle="nearest" class="css-1rynq56 r-dnmrzs r-1udh08x r-1udbk01 r-3s2u2q r-1iln25a r-gg6oyi r-1b43r93 r-16dba41 r-hbpseb r-1bnj018">Left-Hand Rule</div></div><div data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="nearest" tabindex="0" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-18u37iz r-1guathk r-855088 r-ms8t9i r-15zivkp r-lqms97 r-14gqq1x r-dnmrzs r-7xmw5f" style="transition-duration:0.15s"><div dir="auto" data-rnwinearest--1ghhsy9-hover="true" data-rnwi-handle="nearest" class="css-1rynq56 r-dnmrzs r-1udh08x r-1udbk01 r-3s2u2q r-1iln25a r-gg6oyi r-1b43r93 r-16dba41 r-hbpseb r-1bnj018">Z-Axis Definition</div></div><div data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="nearest" tabindex="0" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-18u37iz r-1guathk r-855088 r-ms8t9i r-15zivkp r-lqms97 r-14gqq1x r-dnmrzs r-7xmw5f" style="transition-duration:0.15s"><div dir="auto" data-rnwinearest--1ghhsy9-hover="true" data-rnwi-handle="nearest" class="css-1rynq56 r-dnmrzs r-1udh08x r-1udbk01 r-3s2u2q r-1iln25a r-gg6oyi r-1b43r93 r-16dba41 r-hbpseb r-1bnj018">Magnetic Frame</div></div><div data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="nearest" tabindex="0" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-18u37iz r-1guathk r-855088 r-ms8t9i r-15zivkp r-lqms97 r-14gqq1x r-dnmrzs r-7xmw5f" style="transition-duration:0.15s"><div dir="auto" data-rnwinearest--1ghhsy9-hover="true" data-rnwi-handle="nearest" class="css-1rynq56 r-dnmrzs r-1udh08x r-1udbk01 r-3s2u2q r-1iln25a r-gg6oyi r-1b43r93 r-16dba41 r-hbpseb r-1bnj018">World Frame</div></div><div data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="nearest" tabindex="0" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-18u37iz r-1guathk r-855088 r-ms8t9i r-15zivkp r-lqms97 r-14gqq1x r-dnmrzs r-7xmw5f" style="transition-duration:0.15s"><div dir="auto" data-rnwinearest--1ghhsy9-hover="true" data-rnwi-handle="nearest" class="css-1rynq56 r-dnmrzs r-1udh08x r-1udbk01 r-3s2u2q r-1iln25a r-gg6oyi r-1b43r93 r-16dba41 r-hbpseb r-1bnj018">Sensor Frame</div></div><div data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="nearest" tabindex="0" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-18u37iz r-1guathk r-855088 r-ms8t9i r-15zivkp r-lqms97 r-14gqq1x r-dnmrzs r-7xmw5f" style="transition-duration:0.15s"><div dir="auto" data-rnwinearest--1ghhsy9-hover="true" data-rnwi-handle="nearest" class="css-1rynq56 r-dnmrzs r-1udh08x r-1udbk01 r-3s2u2q r-1iln25a r-gg6oyi r-1b43r93 r-16dba41 r-hbpseb r-1bnj018">Vehicle Frame</div></div><div data-rnwi-5xr8s6-dse9kg-2fw26j-15n4387-focus-visible="true" data-rnwi-handle="nearest" tabindex="0" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73 r-18u37iz r-1guathk r-855088 r-ms8t9i r-15zivkp r-lqms97 r-14gqq1x r-dnmrzs r-7xmw5f" style="transition-duration:0.15s"><div dir="auto" data-rnwinearest--1ghhsy9-hover="true" data-rnwi-handle="nearest" class="css-1rynq56 r-dnmrzs r-1udh08x r-1udbk01 r-3s2u2q r-1iln25a r-gg6oyi r-1b43r93 r-16dba41 r-hbpseb r-1bnj018">Quaternion Coordinates and Notations</div></div></div></aside></div><!--/$--></div></div><!--/$--></div></div></div>
+        <script>
+            // Rendered with GitBook 10.9.236-841586b2b7629d7ddb3c0baceca20a16cb339edf-3986028514
+            // Space IUx8F0dEX9C01W3iSbva
+            
+            window.__GITBOOK_WAS_SSR = true;
+            window.__GITBOOK_INITIAL_PROPS__ = "㞂‖འ츂аⶁ䱀⸐ᣅɰ⮀㘨✀두䢮ǐ๠▌Ę䄀혴ㄈÐ賁ᐔ\u0014ჃƄ\u0013n蓈ݠ૆弰\udc64銗삐鼐䎄쀁ⴞ㈴飀솀Ǌ㨀ᇛ뽉ꬎ㒰䉀攇悃膊Ç؇蓀మꌏ׮⷇ƀ٧갯석⊀Ǣ贠Ң謠씆锢 쉠ؠ໠ঠड逃‍℀ˀৠীӄ턂⾄で蜃Ԇဋ₋薆ි耵⋔耊‌쀏‎ ꀰ瀇⃀֠ȦҀ怆ꒊ瀂ꀄ⒅뫽้厓춤适줠᩠ྖ᥂헸Ŕڧ:럃ꫜ庄ྥ횢퉊緞띷ꇀꔈ蔵渘銘ᛤ脫끚⌇댣ჳ댰䰥䈖ฅਛ瑌벇考婆8ᔈ霸⊺䆈ŉ䀐ᣠ嘜筊ꆄ⡭䆦곹䫨紒믟⩼䮒䀈⁔拉湶ᑈ쵒ㅨƕ樃溠洕స㕎┘葤쿰ᬰ䙶䈋壢協㳣䥋蘺䝦鎜햲擬ԃဂㄴ끈↻Ì႑䣤ਕ᪃䖡퇨ర☱੄璔쨀Ċ⍆㪇矴ﰊ镙胄ℰ㬾ᦂ뫂ш魭껓ꥐ〣縖ᜂ䆃ᔓ刔ቐ㥘ᢡ﹉簝鏮睸Ùͪ頔㸰ѧ㤫ค䄘౩ᜀ䀲᠆⌁䠺ԃ⠀䝼ԅ肖琖ꂼ꽱ᢥ瑠やؐﰸᩅ쌫῏ꑐ虥\u0000飾ᄃ膠ᐒ躢て㣥꤄ꄵ曁邸ᔈ슰鰣ҭ⭾ႂၠᑐ눣ꐻ팀粟៍뽟\udff4΀퀼ಃꃾᢢ悡ࠟ⊑ࠈଇ憊̂׀ᤥ䥏䰔킓ᶇꐆᄅꅩ饄ಡ㕊哨ㄘ│좈᠄䏀遊蓷䤰ࢊ◀顧㜇쥰㚊谨ꑚ老ӊ옅섰猺䉡烐ፎ絟矓＀⠉ˀ蠽节좏\uda45剈눢誡磴ᚏꊆ䔏ꙑᑣ鶍₸鸷ਙ⬾衎ሯࠟXぅѢᦖᄱ쭜䀶蔐⢘蚖ꚑษ䡡襪䫃ᘸᡀ\ud985逐̊ꩌ຤楚ງ꟩蘱艢顀ᄽ䛂戶ᶀ憰첛⅁阠\u0000";
+            window.__GITBOOK_INITIAL_STATE__ = "㞂⁦ॠ上惎Ű㶬䀮净ค〱밃퀉‪耞pؠ̀☂蠁ꀧÂ됈쀺背ဃ⠂〆⠈ìX슁Ļ®袐ְ耋윂ࡉꞣ΀ග᠀桀쾣᲌稀鑢袇Ñ될*퀁ⵀ໠ব䘀̠ത耂쀉ӄᒃ숍枉ꆣഠ蜉∀ྡྷ傏ᖃຂҌ 指肂\u000b掅ދ┓༓刑꣇쀏‎ 꼔〇℀֠ȫ↠뽐ڡꨰʠСꬳ룍ꨴ뱍ꀋ↭䬮란ૂᎺ会㏅뺸쭋㊺溹㖠薴᭺곞꣇≝칁妏ো▘梜k႒䅨觠Ⲱ쉿᎔잆鉝塑缎Ⅼ잢좆ⓚ住ꃰR瀜༈᭑쮩鋫䚠눶찀㦬䧏变ꊜ᭱䏒涠ȋ逶\uda59阔蒑攤䊂娼䨨╺崘푑鎝虯⒖ᓂᏡ㡙ଛ皒揇ꅡᙨ釘膃낸䄼ڕ芊좁瀈复床┰Ũì༴\uda81䚘탡ꐪ㌜罀蔳喼䬍葓ヰ\u0012逬偺뱝㇆\udc1e愄ᓄꀛ碰⩡㽯ܜ竽ං菈杁▲뀽⎞퍑荩ќ碌཭ꅑ怶耍遂졂赘᭙ቜ旂䂢籉㣽ਃ范⥤藱䰅쀂㢨亂탋谊믐⪋䆂铥╉墀羽䢀ᘁ㤴蘽ёꁜ⧫ၦ갃쥁炤疍∖䠅莓䢸稊䗰됋᫇될ཋﯾ【ህᜍ折㠢੃祖竭\udbaeệ駡神㞝㸯鱨霒ݠ풦ሇ肢踜抃誅躇ꉸ㔨찠Ǿਫ௄㸈䈐ꢳψ≜ⲳĐ谂您ꘂϠ⡚ᰏ㥸㘜股⢦吇慀쐽ὠ풴\u0003녜ȅ͸혖騅쇒仧렞䞉廗귯稾쾫Ỵᐓܔ攅䕐퐨䠞虡ᴶ὇焑髄༆柂凔洓藡갗଒녬癄肨Ժƙ⒬⭎윙莈ف側ጆ쉰밀舣衱갍󦘟蠒蓡㑇ሤ⤚䆑됝⸀䇀␅̀〬܍쏰䈘莂ၷ箉佰䘒䐱Ɍ銤䜄ᴵ∲㗶擖⸇李ꀎ츲屲Ị恄⨐섒邳⌀갞\u0007ᑅ䔲ʕ뉅傧嗊嵖꘵씋囖솠❘蓵ဪႃ崐쟡ꍫඵ炴٣㝈㑐\udeae쓤䫒잱㤆\udb06쑻疆塖㔒쿣뀾㵠Q⳱ᔕꇠ荄⃵묈所臻㵣䠲Β頀─圁ᘉὅ熎㷡匴䰳䳋㛌獜쓯⃀끈Ғゲ⌌撪︰胹ⳬᎋህ퐏Ɍ耨궃净闋䩌읐蝵\ude17䇸ಶ젂쏄㰀ᥰ⳴ቇ쉐霽਱㱅쌈丱佭ⅎ઩状佘ꪭ䙰ꍇ쉂൓壽ﴘ㼏\ud9ff䍒⿋봷뛵\udefb탻Ἆ藽및ވ舛䃬窋⢆逰㑁䑉腡搎쓒䇳Ů嗤镒劵啈㔍ⳕ쒋㋞ॵ␫퓐蘕図崀ᄢ⫁࢒䇖𢡄\ud9ab㰪祘㋓㘖\udafa섾༼睎駆ꇆ㉯'봉꠳윁콶⫁萩Ŕℸ冎礦㢤恁ባ谤訠懦렸ꪀȗ┪ꊑꨪ庫ꤦꨁⶦ퍀퍄ŋ樞퓠鲲黈兙ᠵೖᦋ臰叉䅸峖᫨ᘣ炳歀퇾\ude13䝨\udd1fꌌ熍㇦㋇墻撠ᶷ艰谇惰䘋勓㄄뢤Թ꜈ƜẈޑ揑䔄짤蕔峰脰સ푡螱堿腐㸋Ǭ✉燿㤂䃤ᒃ걘웼޷舞ꌥꎱІ₅郌ᡂ젍褱宅䉘첔艨즌倔弶ঃ⨂켟Ƛ牲ᐹ윴쮟ᆮ淏뤸⼄왕ᱰ넡긼塐퀏⁍阃⅙⬕椓塆냡ꞃ称嘄銍鸕衤䌦被斵舀腑䔄胐ⷱ僈Ø桵꜁͑堉È䃫ばᮇ㊲㫁䣶駒᜷肮묦ꉐ愎섯㒃࢑㡒ࠠ鰜캐儜荧ⶒv壏拌ἐⱢ௱옷䞠⥏掌碏凼㴤禽㧦ꋩ푇췦䨐꜒ⵈ守隔㖨Ӛዲ텸䠚蚨靄踛ፏ║ⴂⵦ∢횅⧱咲ꖟ䘇녆⻇픟\udb65缱开╬躕濋꜎欭疭뗶뇗㪑阳밵߮ᨅ鏔甍ꀞ㒂䡂᫠ꈽ萐㹒쇰Ⲕ抂㠀ἃ엌\b氣⥀㘱䜕㈫ꓴ펔䞯移䃕᪑쬒ᐐ谗熃笆ﺇ婶컹\ud8bb靟Ϡꮽ璢䷚૬缰薂좇㣑晃\udc71䋱숢騔ꏥ랄懊숦월\udec2욗Ɉ뢥㕢곃걄糷㷩冒鸝躄„쌀ᬔ浀난⢀壚Ϥ氺潁젻Ɛ쀼夂览⬂샢譻墸≇밹ڐ⢕芐ႊ䆈Ȇ⁬鶂頩䂰yᖺ䑴퍇臨Ú 臐ἄᄘ◄飔́␈襱昭ɘࠕ芌㣂ꂖˆგᄀŰ㐰膀됔⼰ഁ筏዁聼ᩃ偊ଢ଼⸟ܘ눙⪞ᤱࣣ⣦ეᡀⱱ膘㌏Ȅ笇ʞ戅肰ˇᑱ襣䠅褱鸊▐砉쀛昋Ⴂ㔤ႂࢣ塓켑⤩ᦆĠ冿Ⴀ྅庚꤃钐ી㐔䙝퐊\u0011ᔁቁ哬܀ꉭҰﶳ뗑몷疆ꂌँ䑯㞰阆臠ࠔ䌐叁飠ሢ陣逐裀瀶芈ⲋ臉뚲衍ꬆ榭㫂谈쥀ᘬ䘠ଜ脄稄낰ⱆ惱ᲁ聪Ԑ䘠숞菐ᶌ₢㄃ᓲ頥耐‼䇘흱浨鴗ꈌ悂ㄦⳄ墫᜘夬䍋E勮⸵셌၆違氀ꈞఠŔ碙댰ᐉㄮ࢟惔Ӳ절ܙ☊ꊔ\uda1d芌樄荈٤\udbfe܃條肰蔈錈†挖ᑂ쀡\tⱉ肀唸ऀℊ쵀ᶏ䂐\u0017ꢗᩑ␨°​璠﹚쏸ᕅ삜ⳅ㳳ḣ뀔䳀瀟Ő̈儷ᣀᚴ顉ᦁ䀔佁昌ިꈋ育娅腤༁吓鋲찴笱堎샐淖腓옅჊졆➓Ȁ謱옔䛐샬䨃ŢⓃìૡ왚เ렿肈尒掐䶴鄿\u0011䒻\ud880昖䜙橘嚯Ú樝厨礀ᝂꕞ赃܆耖ヒ\udf1e\u0010ϳ퀽挈㱃혢惀㵣嘄䂖봂缬ꨕⶋ᯺됨뢘뎐螉ढ葫모䮢騛Ⓔ뉡隲퀧ૄḘ꒚ĕ菁銖歸躳켎炀㬚頧᭱뒂ᨉ낚覥썘묒퀊ꋐԘ̰㌀Հ⩻쐽τ੓ᐏ݈沄爂蔨䪅ꡆ蕨昅芉僠含Ⴞف表⊉Сꇩↅ݆謋ねۢ蜱⸈őƳ偞Ꮃᬆ暇ᆈ먂鸷֞륨耎黩ᦟ䢢釨耐졼딫砭⯤ᝀ᠓⤶ಃ訽怾ꂂ\udf24厸ת䦈ʞỀ䀊\uda2cꢁ耬䈈ྂ䰃셪鷣礇줤ⳁ䐵ø►ࠨ腀ቂ젻ʞ⽠氒쀼᠀\ud8b9蟘ꖅଵ葁끫슱ֆ꤆ↈ䢡蘫ꆖ⡸汁⚣Ӹ泑욚ʑ٣끈䝦菃ᆤࢀ㌁᢭ʈ㷢蠩Ɠ倨苌ⱃ谊荨↺沩樚鑅ꑈéᖱ懬ߡᤕ珖᠀ꀽ戈㹁쀼⟸␓䁼☰գ㐬獈Ё⨰㒁釀㡱堬◠萦頰Ꮸ蛁␟뉁㻳혎솥骀뼋捼坁ꁭ樝❇瑯䗠㽆౰욌䐃豤쟮艅킳蒤笐쑤ꥧ㬓퐜鋸꾚雸臭㚆䑆݄敪ꨙꗩ咯肪ڪ「ꩶ蠂谏ᏼᐁи쌐㢢苈ᎁ育ῆ粡팪糺⾲絛뫺澶﫯뻹顐ᠸ볇膐槂鄇솲⭊䛅蒓ࣆ뾇욖᪑㞆ॢꔀ㰩䰛ꀄ讱Ꮛ걫좞묐堕酘閈䆕蕙喍墟Ṩ튩ø⏪〯寞辂ࠋ㵧嬕꥛閥孕굛ﱚ֖膤徭藺閇왬⨐撰㡊晆눛Ꙫᩦ燆크䠑⧡ぺ네ቃࢊ펒랈\udb25暺땤ꢧꬌꆥꗈ蝫圔䀁⬀ꂜ\u0001㝂쁃쁬㾀⇰㤃퀌ﮱቂ䰆腰ࡁ䐺\udbb0ం〆惬ၸ\udc84ϸᐂ癠ۧ㲀䉈釢䈧쐨恨ට圭\u001c鉃ࠍĠ㌀꠭鬐ዃ犷룬਄䇁䈕⅊ᖡ䘕慮ૡ孋ᩖ獆瘆깜昆蛥䆨歋Ꮵ؞䘘쒄텍㧤ⴭ͞櫐屷襞糱噓蒄겧칺ܚ떀팯㌀ꔆဠ─ 莹ۀ\udf8bꠞꉄ쩋륇〄ø㌀㔀氫̗遂頺័ể꒨趔ĝ靈Ε㥋雌ᮔ沿ㅠ澪䊌铂脇쥽蚬掅祚撩宄큺铫Īᱟ蜜偄\ude47ہ│ᒀ₃⬽ᅲ絢。Հ㒀쉏胈㫒脮饖鱅ꙙ䠃햣嬵꭛떣ᕵ轙쓆峅膬锕嶇᢬抔饃௮囅晶⥡霂倝埦秕ᙒ䆒뭗驒숰㬀䐅ꢪໃဢ琢宩⑙靍䀤醄힉柦ɬꭸ⮧သ쉌ể『ꮌ㤀Ąể뀀Ⴒ஠蹕怵鍛腒푵꫖젯夔㬐树懰⤀氃샸⣂ࠆ샸಄㰹ʌᰂࠖ㊀㆗镍敺鲥ᩬ䒚楡癷膕薃ퟖⰻᅑ鎊Ɒ洷␥瞃鍊艓甶퍽㘳洃㍫㞳樄奙䓜塕\u0001ః厩菄㐂㖽Dྃ䠑☁钗형涇ⱙ斠Ǉ♙Ԥ曅偑蛲뀸Ꮥ䅧ぁᨽ糲蠄䅔䰃倬䉜კT㣃栝臠⧡㕄圶ꙏ㚾伇䝬矇扴ⰲ皧穵㐖璃䂴䥙ꔡ⠤ᐸ␠录扞刘Ḧ犗埠㙗⹬읉䮴\ud852씐䞶⒡힆銔롆敕䣐턈隖⸙왇埤퐶荨ᐃ쮆艌ઁ␨쌰ቃ訽䀅侂쐽ē묐Ĭ芐ἂ别叄ଢ찥뫻需Ⱘ삪ᄇᨏ䁪뭈楔׻檔뉸开ᱭ휜开㰆欵绖꒷ռ뗶\udf7d鏴뽈䆿䟶븚㒃ᲆ쇢缆逊胰πⰩ菔ᎁfቢ흇뱢㹱휾䧫饢耇驆䟒뙇혋耠㡲菤爁ﬦ荔㬒ධ\uda8d룚䶴\udacd鎃춶䬎驷僶Ɫ昀퇗獔棏昫롌䭡霁瞝笰撦䢵祤ꃡ폈趘\ud84d虡䶌\ud82c᳘ⶻ砶佗۹瀨쎐ᰁ␂ìೈ쀩茒⡀쀸쇬Ⴔ畍ᩢ㑃䤬᩠宖二଱ᶼ䗽瞖홵荴᠁耞슈ᮁ怹ˈࠖ教집賸键咮玵ｰ\udc10筙嫄烲隸妏啂榤댑⽚椤ፕ넳賔╏哭䱴荍㓆살쑀쾷಄\ud895흘㗧滧⑏鞱㥆蕗ʐਡ‸ꃬ㱁駬ỀĂ쏌⺁ꓹꛤ䒍β唒頴焠၂㼐䄨Ⲁ≜冘ၰⶊ\ud924᫘涖\ud8ed默ᶑ\udb63೔庼ꐙ锔퐽䂨㱂倆莐\u0010蚈ȁൻ\udac5訢찣뗥栛瓾蹮䊖佰콏䇦콶敫㘙␸㰧ખ桄䨝㰮궺\uda9e⛛骪⿭ꇛ복蛂〄䊌㬃ဎ삄᩠ꨒ삲ڨꄜ⿕佬ꗈ챙얂夥詙ꖇ\uda65떧듌쓿坍⼕刍ꚜ᭮侷㡨ི엖᠌抱旌聆⳷荅걛얢孙鶯ꖣ궚윬Ͱ➛돷း슐㧱絏휰჈ϓ㵁쐊ꍨだ萳Ǭ᎘昒Ȉི㾎첑묓Ű๯슐πꠢ㐐昽㜯ڏ빑泥䮮Ⱖ欮碘갼ྭß걕棏汹賢蛲倯覆૮镆\udc42쁈푂鞟嬐㜃谊处ⲃ퀆抈㘋煷莶逷滶ｭ∐뛮瞰ắ㗰튖䘲낍團買刃혎΂쀽愠᠃혔䀛ಸˇ艧⤴\udd9d\ud83d苁㶋\ud9bd蟙綏\ud9e1瘱粭\udbddꏛ㶫\udbbdꟛ綁懡慭䵡쾐䀴퓎\udc95땏䁭賜軒ऍ輜槡䃨꽦蕧᛬승ⷡ첄䃩堀꠆态Ȃ宬쁦ޛﻁ꜂䷩\udeb5悰㘉뛽䍉꜠ⓠ٢倶폐ਣဓ䌟☬ꓰ羀姴腙춝\ud9c3鴹쮜㋧䴲ﮮ컧걻瘙⻑迧䦍狰鳲鄞攜橪炡ᣞ叕℀㺓곃騊ꏖᨐ允칀聾䇘㐆尌舫઀栁䔎愀銁⁞聈ㅬ ؔ斄¢ৣDⲃ͙ࠗ廍棪洁铴䜐ં㛶䀒谄䉺⫈槖覎୨᳔ઢ頺惈Ṍ䭡拕쁱ꘅ\ude8cҵ㝾腼痒兙Ↄ앹䟔ӑ跈厍᧯〆쏐ۀ눼䇠౳捲\udead켃귝酭컟宀Ꮽ쥏髉쿩燯\udf1f뭘곰ꃍ镬岌껸켑ᒝ欀꺥혪ⴃ픑볰먈᷷퐰芌ᵻဩ脤㜿쐆折㄀浓뚅싇藞푻嵔েⴉ\ud93c觖뀽曳䳎폘홋᛽Ⅾᚫ⠀ኞḀ䐵Ǭ཭䐈䆅庴⹨쓯ɝ㌁ろ퐜煷瑱䫐ሇ렎䊈ʁ쁌燇↑‿춻㽗젠퓂䏜孲猾㏫㾳珯㿳ꏚ沜﬑蘖ΰཹꎕ骈諸මꆯ┞耰┽Ⱈ䡵堛甴ݶ␢犱᤬\udc4e켅Ᶎ粪ᙿメ뱃ⷈṎ揨뻣퉦﫠麝羵ꥼᙣ䳫ɐા㣧둄箟ӹ䙂笈눎슳Ἶ慓㬀萤샸ߋந뮋붃蘴뫋阃쮢뭨埉忔Ƌ蒹\udfcc맋芹⮒簭쀴煥㕲襰ᑀ҇뀒æ䰦綃࠘耀䞈壨ീ鬃䆺㒤椑鴄ը㲙㠘肷ꇘ⟕뺯䭉⨲휂\udab2쒥᥻鵘ⓡኽ⍠塖嶈࣢ࠒ㡑얟䱳掗᳸ޔꔤ献㡴쁺溷⁛딧槺啁⹁떉㟨溣佰虎瞐\udf8aʢ␀ꎹꀽ⊷ꗉ땠簄뀮⫬\udbc0ｦ힎쇙Ӫ枃뀝耕ؠπဏ⠨箰㎁꣧䜏ɱ잎ɲ彝㲙⹹駀帢貼ᗤꀱ䇊⩠䙨⁰ؠЄ‏⊈జ⪂\ud838⳰㳁ฯ⥹쯉幣뢾캚餷햒쁪䯖悹蠤廫邠棴앫؏욁ǐ䴹ᆸ䒿砚꽍瞮蜝ﺮ轤߫䏤ꌅ蠸ᕄචḁⰑ栋Āꔀꀇ惊弊铫⾘苑ヰሢ눅卪昐荷門ㄬ脮ൻᑀ姊₲̀ዀ璇ᡚ᳾钷ᐒõ窃뵋\u0000䓓鱡⸊ƏḠ錂䄣૳㌃๎\ud8a4Ȉዀ灋飬ɠ淣㚃쁶ͺ㣁䘃ツ鄈π쀐芰Հ蠼蓸Ìጄ聁x㢡䧃I臰ᙠꐅ㰵ňϹᕃ鿎ぼတ輘☡ら豌熂枊ꁙ᣹\ud94e㹉ϧ肼⁖ϔ᪀倱恂ਰ䮀越‸ֈ㤁Ӈᠼẘ賀퀳ㅙ軌乡ﻑ氰ڛ遁ﰋて邪Ạ砆 䁙ศ䯀Ⱊ耠߿ࣂ췢蒢੡㌋顂슖ᣥ喅뇇䅘絃␘捶子♾怰\udd98퀦蒚◺銘⋽㚸萴䀎こfᙠ倁䦈퐠⯱ཱྀ总¿묑昂ษ냾你鄰昮ᆄݶඃ핡륅ଌ쁊姠ހ鐆‥ƘԐ⌆退傢ܘ⢀߬⃡蓰䦱儁汀მᜀ໅쀋녈Ǭ橌㇡穸엔❪䦋斐쵓ᬠ\ud978桄䇝늂⼤샛쫁̰奱ꔄⷾ攣൑娅Pঀࠈ\ud80fż\udade蠓冰臭㶃㌘㰻鈀뤡熫腀᫢耖롵잮窀ᮐ䆥㔲냃脮びতⴣ䰻Uɠ肚谤脡猠扢g팱奻䩾틳䱠注ᚒ僚㸯ࡧᄬ茼⏢蓿Ϋ鍜\udae7ᐮ맵쟩洇흜ꊸ興ഘ≣ᠪf෈ᬅㄎ°૆瘣ḝ䉠ǘᜀ릂ꁚ騰ॠ怂騝ㅣ܄ᤥ荛挸鏴∋ဨτ᪀B瀒싀ੀ䙲鯗春೪꟢ꅣ଄䨞᧐င瀽慶ᘋ八쓆䂈ᓄ赼焠\udffe菰ڏմ齀紦ᤨࠦ䬲䖓䰇\udd51ں퓱ￕ䫄넺উ⛰⢁❔톑վ೰턽ꉰࣨ尕퇮賴瞢ဋ쟬햆茋⦰ﱸ⫀产甥텮裴垢紗⒍䯦滁䨯챡⫷໫ﳑ撑䗩㑱掏᰿稻쉆け톘୰炘዇삤遘ᤡ戨驤⑾싰扙饔㐭襗譝뵒ፍ숮蜵⬔▐㶦䠴ᨰ퐑摍拠Ⓣ煃쀸ʥ嬐躅ꄱ镌웜䨀б〲祹頀耀⅄Ր簇蠛㦈ڰ⯂簼倨萅⤀ʐᆀ㑤ѡ∠र⏁櫇쀙虠ઠ怀뀸ªԐ왍Ⰿ졎䙲஑岆줅㩸㭥\udb1e\ud9f6쁶㾰\ud828ڃ㯩刓ۏ폀⯵\udfa9ﴃ乂ؖ傔\ud98c⦡⌃堅運ʈ㞢吊䀙䄜麠逤ɼઅ沫栈⃤ڠᘁ훂꠸˄ᆊ㤁窰聂ր᭧⑉⃄ո仁됃砌샸Ԑ툅㰥쁮ᭀ㵻諸㺰칤不ᆔ遤暣⟌턶澔푨鐘먦퐣䮝ꄽ聫◈⏂དྷⲴ첤㴨筍됬帀唀꓄ꉐᚦ륆呿㋰౤\uda00ꠙ嘵ɬǓ廡뫡\ude0e䒸ᰙ䞇ဂ쐞\ud9d2Ԕༀ怅耇舰ᚦ\udae1搊脨҅㖇府訯쉫뀅祄㔂腽웢砀耤ꌮೀႃ쐒֧ఁ㟉䀖䈂݌膋഼꺔鸮뤽の摝ꪓᜣ馴⹾ᓷܑᆦ欒㚦旂嘵מ䘜ྔ粓⬀៊빑㥣ᢩ欁匡怴좈ᴲᦔ첈³⶙宣舡鴷鐣䊉쫏욲ᔊ솣셚័놅쳆慫௙鍜튥삣훢꒼ﺚ킖⠶뢢벒舚ꪚ㶋㸨쪀皁圌⺕͟䞞䇠ጣ䃠੠⸁怌ꈼ䟈ﴍǰࠠ켂쁕؀嶲퀙聘ʈᎀᜤ彡椝ࡪ倇퀤ⴖ䈤㉉ׄꁱ횒퉳ꓰ䧅䤁煛証嗢鼕┊튮䐋쨫そ稰༒숅ꀍ䴮ଓ䴺훒İ昲䀌ဇ脤฀켠腙蠠碁Ⰵ진ކ鱡閪괚槓䆚䳑暛㕻蹮㰀峜恔䚠㚀 菔ഐ㠁倿脼섀爀쐔䁑廁敨찕Հ将✵ᆠᑀĂ⃈ࢁ熑ﲖ䄠㲀懁耯䑂Ҁᶀ쀅䀐ډ谀∋〧Þ᜹潍⁚酔웤껄佨壑롄嘬៓켱ⱌ鄅볷䜣䊘뢧̋ᔵ䓁ᘇ胩Ạ㟉꠸쇲 䡙㘑ɻ悰㱕욐䓃ᓙⁱ㜐찶臢ʨἁ‪ɳ耐Ḇᠭᘠ调ﾢ됪⎊〟ᔰХ擢㐂䪤ƒ멅펱잃䎠싄꘹䗰ꭁ䤑⠈䐐\ud8d8쯵䭛浠⁇ㄔᇠ诋␢࣓̎嫉颩큰⑙⢁䑊⠒ᘛ䠂縁徎ૺ♂뺹麱桊੔堌詺炃硘⺺骃궇ꊨᜮヅ牞셵賜絃嵐䀏ݠめ頀鏘밅ꠉꩁỢﭗࠑ헎긜뻐築䀺茰Ԑઢ瀹 ࿠䂲퀃䃣ә尐饐嵯傕㵕ሊ社⩤ဌ葕欄\ud8f1≟躕፜荓퉯싴삕᠂ꔡ揂金⠂䙐ડ魘媶ힷᎵ\uddac붟欶堢뙖ᘼ傅꺐⬁灇㨤莐῀怏膯ꤰ▃踝袛憦ᜁ度艎⃐눅㰩憌ﴖꚲ楘독豭ﶖꝶ̬︅—ŀꞔࢁ‘ꛁ궮桫᝭噎뚩펨㕂䦶覢냫ᬟ隽൥榤㍠ꁠꉁᩀ촓尒鶉仫ퟐ鋄醢ᤥ訡恠끛䨞ﾮ造ᨐᒀ့缸檃䟈⁓슐ᶑ됁咵\\ʨ㏻這聼᮫읩峸㟹◀榁\ud810ⲫ脔鸕郣썊氛弮兓쏢꧀睈蠞ǘ༐⩙謵聠ܔ㿁䭛˂㗈꼞\ud9a2몎꬯ឪ胁㐺呚ዼ↙಼᝸्⩫卆骴펦봴䠏旳㾙ˍꁠ늅鰬酣쉚㴌尖芩ᆿ蹊ⲍ纫拕虚;謅ᥴ䆇들캪㒝嫚눠䈚躋っ酀ਠ㶱ࠎßꐐ܄ꈟ黾欓繚ﳊᐢ뒕갬븯⭵⥪꿢鳟벃⣹㠁㸩ඦꀁö\ude40⇰辌糇溟⾓倝嚽ᦋ찭㽌譑㰚팖賆눩狑仅㞋탲袂ꨠꘁ吀梨΀ἂ通ⅈӴ鎀췈齈ᔈ㎎쌈捜ˌ戂儰䂙㕄婡촊酸䘢㤑⢅䑂혶걅㫓7ᇘ⚛―聓쀉陀뙠ȩ腈Ҁ洂ﲶ⁐ऺ鄓絲疢⪝颎쑚꩸镙Ԡ㊍䳫р鈇쐃밺됅䕏珑劺촄ᩈ疜㘟뀤封怄̽퉆䑐\ud846탱⇷㼳䜋ꃨ䊳吁㥅⍪Ϡᤀ⹊䂠凖刔૦୍뚵궠⌀眏䴼Ȗϐᬃ耔F츰ᆥ췁쵨盚ೢዄ䧹蔒梐䒄ì๦ꡋ뼟∥꧜‎⡔ꯤÚ薈찶酘ᰃ谑肣ܔ㊢复ࡢϸཎ酈孞\ud8d0轂㗲俚ꓨ陪㗝䣕ᚪ盧灔頓꺔㴋܏摺砍Ỷ∾踀Ⳮ父ꂐെムĒ惄ŀᾣݓ۸\ud9ed뱴핳፤㻷㜠緤ᚱ嫚೦ী쁉련辪ﯗ픜깷澥䂻吁隗탾앭꓍ᝏી嘀鈭僚i댁⸁့꠰댝䖊ꕇ栠⪃뼲!蟈蹍ᵓ쎰Ẁ簇怺ꅡ籔囇쀃곦뇺蘐麯鄐戠␛⃅ص饰樏䡛䁴ᭀﹻफ़丒ⶀ綸흟ɉቄ鉤釷絴쿝⺉푻䤅몪ﭩ㶣僁删骷觨؎諵\udfd6媨讔塀\udae4荨솖쵑ࠁ胵ɚ၀컶⇛⇙៎癄۬轥怋\ud930ʲ栀㇜孖ˈᑀ鐇ॹ寐妘鮌²ʤ泲⏪摸痙늗ቾ퟉⡼痐꬞蟚鮟疩剨⵬לּ텹ᕻ븽≜ⲃ鋀聾鞇Ằꌂ쎌塰ഁᜁᤓ멻ꡱ笑⸃쫯䈇꜀㠁ﲏ腉얀繧삒냧欀᠟ℰߡ됁â㹾঻谂唚֐►䀔䋡妀㰇ᐿ臆Е突怙聠ꢭ烇☊ㇱ谁ባ숆飵욃幑⣀ހ࡚貸઀෠Ш䃸ሬ䠅㰏嶺\ud9f3粊谀櫌釼ᬛ宧뀸ম戟\ud862֐⻬䄂枦Ù려聞쏶ʠ죣Ᏺ㾏შ\udfb8ꍷ긩ꀾ❓各塖畵ੀ࿶䁳Δ᳠␹ꇋช뜧얕Ლᅗ즹㐎ၱ莂Შ舔쭈퀴杜驩ꆤ隀复䈻퍖킵䠮嶷緺ᐑᚪ跡ᙦ䮯徿獭⺨ᕃ〕兡䓓Ȕ킢ၚͼ䍀죬佬퓸Ͳ칖뀐䁞⯘ለ憧☽脛횄삒綒食ᑁদ\"殀꽊몗鄨祺怈㺛䴃㤰惎虱Ⴄ퐪ᮛ䧕\uda68煝ፃ褧爗﯊涰洏ࡁ毗쏇堅䀸샠(ⲍぷ髬䚯١每幆閼祻섦ᮋ谗䐬Ѡ⃲瘇ᇖŜ㱐ࠅ꤄悡ꇌ㞉밭ݸ믃\ude4d䶎늓䖟ꭿ稍㜯墓댚ٺ᧱်텕咨杗㮭퐂ꉌ當씐㵙Ⱂꇽ閄䨻㪾椙럝噓ꑃ⊙ወ뙄爫酢䜊䉚〖偼㰒뙨㩵PX䊁埋ፒ㟶∀ꇫ䣺䘲␬큟摧⎹ᯈࠀ這胘㶝伃졦胬Ƭ厉吡㨴퀎꺤숊騘凘嗅쳪諬罏ፕ\udeac籐䌵庀彀⦘볩朸䇹\udece䤄玳鳚쩤稃騎Ť⺀䈆舮轨ઑࠁ惠ǰꂁ긽໹昍ᕸ膀ᨽ혅쁞쑠ఠٶ倜肋⥤持伈쁽ⴭꩩⲦ婠ඦ尰Ɉ㴳藀䐋뙠䆩袸\udff0悤߼฀瘎ຫᢀ⢁ਸ਼耐Ҵ牕嘆끵蘂揰\udb04塈媌Ϟ倃瀌ħ䄟ඁꭅ峾踁䪾善ɕ窫鋫ᾙ兹﵎陠햤䘕誺棐∩ꎚ殂 췘橦俴툛ﵛ忺纸슞ᩕ碨╂ꄕ岪핔휞ઈ噂霁傮蕌⯪쑊䠈ⅾ鱂폦蠜聯캾䁣\udde0ꀶ颇䏓旭뒎삖\u0019Ⱌ聗⽘ኴ끽쏤⢄렋䶯成瑯\udf81´ިڀ岍㛬댞ꎯ훪퍔ﾦ쵩괌᝗左꒷葭\uda18獝쾟\ud908䬄ㆉꐈ혈㢚ɾ楻ᆋꚌऀ됅〳첺\u0004ᆁ윰䴰ڀ꽙⫴湣澀\ud8dc렮㟱롍냳⎱ꗜ̀⿋乔ༀ뗣噫ꈀ䧴ި㶳糺⏕ặ삭쵮\udb82㰨㒏ᑸ耘뫡䴮鉴厤嬸笁ࠣ쀟䨶䨂뱞‚Øⷁ᎝闽鏢뤄㲀唒섩꼐穃蝧삎熪적莅耩넗뙀អ۔A냢裹ഡݎﬁ㎺༻\ud953흰ᱲ㹍覮ᙪ比\ude8b洶㝦䑯큍῭䭚\uda3b嫙링昇熒৚ܖﻇ昃䠽㳋鼏簚鰉ᦝ㸁檼ⷂ媝惷왤檶ࠉѽ윗⳰㩮∁䮀䰼傤єρ䘈ဌ싋鲀㬇鱂蛤仄᝱鿝\udc9e㞹総蒛둏鋨꘍툒ꜗ礭べ뚴룖ጛ\uddf9ᛉ\udf7b摬㻵踴榚쐙\ude82䫢╓ﶷ灻醀廡렃쐞ჳ鑒Ҡ㱀逄큺∊બេ㠽䇉ᇲ䲭⮹慫ṗ㸕䂼ꡞႮ퓗筷뷢䗚醦鯱畑燤ꬶ㷳꫄Әಥ쭏൲󵲨䟏⩀䝶蟪率澔䅠ଇ궓耟䒂稃警蠑ƀ⊰䅗馤䘩䂔듶쿘愀䜓산郄븀셧園襇'㴆撘䠁搋ᛃ렖柬঑\ud88c틖鞴뉑崩䨆呾铗摭ᯔ瞤䩎夁틴黴덂̭곱油ከ欺ࠝ肓謡檸ᩏ⅁굌儇敍꭛\udb60貚夜ཾ䝚Ớᖉ琴춶ጫ\udf07惛䃛転餭ᚑ䋛잾㳻뜏䧎乊獓障朿膙쫎ㄜ蚢䜓큷⎱Ⱊꅁ䵉擹搞஢蟈뎯鐷浉퉂謸싙㣉셎⩰펎鰌ସ\ud9cd턂ꕀྃ䜵ÿ⴮ᕂ鸑ゾऀଲ砆캕ʞǙ舅䷨桤ᬝ胵㤐哬⦼菎麤裧봹㧝㜄䋄攞䧒箇납릶彘镅฀嗵䊔X\ud858暸ŧ芈빅씎评䭞\udc6cꀠ\udbea案趙А蟡昁鸸ƙ츌\udb2d\ud97e쨸둲ꐪﱌস耐뀈쀞͕龴켶—ை䟐萂啖ⱒ▥ⴞ츀窱⢨憠⊔┃쾟㹏㳎\ud8ddϐṃᇳ漏쪐޲퐹櫣儺봹秊玑혒憪ꛞꛩ㕹\udbc4ﴗ㤸ꦰ鼽ﱧ\udfdb쀆쇈඲ⲻ精䔐㾳젋匘삳ꁴ횳熃쒺倒肪㺙菀ퟹ⦗旿蹛૝๝狭趧眻뒁⻯ᓙఉ딀ᇲ⒥澫祰嫞䰞랍빭⁰á螔嘠믪బ䆶彡섃訖胚뜲㄁⮱텆ʼ⟀夨ϰ쪳ﰬ㌡⧘݉㥅᱿愄Ḃ灶ꀭ膹뱀坡\udf1dӥひ㰌庈ꕈ얣ⶄྂ肆ꠜ㯢椽鈽颚熏씳竛䭧羥엊淿㲠َⰂ㰽肼꒡撪帖灾ﯡ뼍﷫쾏ቔ툂삖흸뚁ꐋ〈舺鯑䞄怜Ěජ䚈只᲼년∓憑ڗ\uda2f씪흓瞳艪᪋䚆奄◒⍓\ud867榢䴤璒稰䡂蠅倸孠㘋䀋ᆶ㬸⍞츯\udb2e祿쵨쾧㿅㈪䴾聞\udf07䢷끇ࢥꝂ憰⺃읂虐ݏ胄糇_뼏첪臇呼ࠋ䟡䛱縏ꉋ榨쁄㱚玔镥ꁬ붰춇N祳ﴀ\udcf8箌瞱఼搼輴祣켞䓳➜悩頸琶뱇証㇣輽䀓쒞ᓱꞀ蜓뜨뛬߉䁱䁄ྍ擦选樓ୀ✃丯譩룩\udc9e೰ꞿ㷓曳셮뇍㗖䇧麨䃆겧ᲄ⍠⧋乆犳鎜ᘲ骬Ҍẽ愅偂䙩❠Ṉⵞ\ude90玧᷷켔밟缭㍸遫볘毱ⷷ嬩嘒졚泥參캀耞뀄ⶢ㺚弗⮊郎鿣餰䓧✵㧩쳎絁뎔Ʋ\udcdd躘沏อ蟼࿠Ө蜑㑽腷ᙉ쐭蟼턳₰醼呸⾯匃돪ﻧ秳~紾\ud8c3뫪\udad1큀ꢈ坅ⰑԤ夭ꠎ쀍耶瑿澧米㻹 썞᛭聇밃ะꦟ䳿ꚳ㎙邀底菬ἠ렳䆾ഫ澒㴓쒆∱ㆈ䱕Ꝿ⇠рs㩡²ᲀ⸭ည⁝㚹췏堜傟ᐐ㌀赙⟗⟸櫈鐄끎腛꫟逆럒έ쑀᭽䀦\ude2e㫀ﲽ\udea0꾅禋녜㇥ᅐ✢쐠胇铀甿꬟ū泍␂罵虭렻쇏䥳폃㿃嘠찤韇뉱㊏딺쀚ʸ⌸戇ꁭƶ꬀퐄蛄â䟌ḋႴȿ죗俾羲寧ᆜ倈筅煿訞⫳倫㸡鋢뾬ﲧ穯δዼ줂彨墴哟凰ಌ대痫訁쀟Ễ죀ംᇂ밓\uda8d钁鉆䯥⹤꓾䕊椁䁼ZໍӘ㸃谋㚏̾荶㖞䶻嗠廎硐죗곞홐瀋攽鐙쎥䫥㮔濁㚢\uda89ꥶꏚꗪ쫣絆섒쁖孍荒Ⳍ誡镭ⶭ킛ᬬ읓ᫌᬃ㓎ږ챿挶⨶ꛢꠉ\ud8b7抽蠆⻳밚㠫砬쀺匿輀䛸鯧ꨢᘝ冎배嗰Ɡ褋您酴暗뀖얳◩➋⃷怤왞ఀ㓑䶄릱Èꗺ瞓\u001c瞪︌颛ஆၞⰐ憻칟⍘ᶯ뵀뫸ﲠ膦悔⧂౅炗ꚷ௜⣰賾\ud93aꎬ鮪糝\ud943ꉁ崺ﴯ\udd88ǩ诟ꠢ㜈첛\ude65頍䘩桔Ꮬᕁ霋尧偃쉏ଖ쒀㄀㚡㠍ôĄԀ㵀哃㎯ູ㉨᥺ꟕÔ塹︮줠ቁꮌ묐팪첯㊢쫋⮙暲蛊ך䳤카쉁葊纹頀᮵몇䨙࣠ᡮᝋ言촗驸âी⋀ሡ洠ᩖ怄ᾮꄞꁚ⡦큻一ٴᣄ㉁烺耓큞რ֪怘灩s⣠²鋊⬨㰙늣戻磸෨ꈆ㥢⟩ꀞ쀰̰⸮ါ쐟뎺⇸䃒槛襦❻飆冼䠐檙譊뉘ᘫ椇ꬖ⃰Ϙૡ龖¬ʈຍᐼ삫丠졆㚦˖꬜ڀ겇눘鮜\ude53匂䊨ᕘ핳沯堠ÈѼ\ud8a0ஂᔐ⿁酁䔣⪌᠑ల㩘䧯ꖡ集寐੥葀ꁊꓙ炙쐕ጨ墚䈂ﰪ僐ᄬ෗⳾孩粋ꐮ难蚝꿨恡솆䏪衂䇟䪵䦈坮䊆ᩢ쐱ႝ쭾贀涤ই䠆\ude3f胗Ѿᑀ怀╡0견4껨穞藒堝進왔舰ڱ蛆嬛풫‮웮祪拶輡\ude7a쏤塪䆉猱ఝኼ驡ឿ鈸饧ꛗĦ⽲椭ଟ怃聻ꒇ鬚뒨儠ꆷ㡺ẵ蠆荫쒩、袐륹ะༀ⨃ဉ〗i죘ꛎ㧁銩Ⱨ耊옃蒩쐸嬺⎅踞쐸Èᜠ彤訄눌ꁭ㩪ﬄ졧ሤ槩瑥쨴É馴鹡쯸ꐝ衡ꛩԌ媎慸軤抳꛵Ίਠɀ七䐄သ塦⊐ɲ❠䉋䠒ᄊߦꌄ䷊࠺験ꂙ㹋玙譀▘홢\ud98f昣风抹軦Þب旦ᡞ岗ϐᤪ肑䉄\ud987昃顎悹蛦᭺\udc85秭葖ⅽ٠㖌了幋▚ﰵ飱Ὕ១$삞郡⻺錁讅혅↼간⟊\udf2a᭠ઐ⨠ꮰ꽢ਡ顅丕稂藂궛蚰㞙끆ꖎ๕馌ޑἫ倅쩿⫹ᰊ꠪螻Ɇ␬둝ᡅ⧣럁㸺ﰞ覐㣡㬄ਜӡ᎞䁑㨿ଓ薡慈餀쮹䒴謫묀뾄⒂전䀧쩺ఠ᠀Y\ud98d\ud8ccƲ✝⍬\udb44聐ȴ슠ⵘ呲ᴍ䀸퇹子Դ浪辡촐둹廦虅ܙ꣠ⷑᅎﾏ᫝퍆栶뺒℃䠊䀋⃭쏔π㵀⁐ḻ옳羽뢚鉫ƪڜ骐梧䘊낶\uda44쮥㳅顅ᢧ껄笐ᄞ甧\ud8ac\uda1e셬ڀ碈먈䢱⊤讒⥈딢鲇隥⋸誣ቈ餢ᒈ\ud865豒渗葡᧞衑Ố죮౨隸䝞敢㠸λᙋ킰⑈맨ҁᰜ귒귫⁫悬栀࿈㚣è櫄ഠເ፣候Ⰱ偨ހ㝪糨尝怶㊸쨠ΰĲ薫ጪ䲹㈁䑙ᘍ〱Ꭺ팒伱愌騌ᑤ緦ꑁ뾥㶫启顀ꏁ㊱磉ꬕ쀡㊚얓⅌騆壻劯菂᧝꾔㜑鲥㲟쩐쵽⢘꣑珂蠽䐟≜ৌ뜲ᬂ철닂쪋⸬닑㔂윕儼熉쐋␬袲拊럡璑裚낲แ蚀㚀ሢ羯䂣¦Ӯ᫡㊏Ӡ酥鹬䮡\ude9f棡ᾤ扜鞒\udc9b⛄䒜䲚덁섞漒⅟\ud9c1肟鉾Ⲁ꟦龞龜敕ꓨ䴅Š衊溣ᚈ瓡㷅쒄ెꢯ짜뙁棹竎摰뛅踉ゆ킒܎覼爮㋮ﱪ鉋\u0015粐ȔՉത쾨㉄⨜Ь鉲ܤ얂┈㚶킫ٲ⒀㽸붃皪얕噄䉱鳱\udca8⼚龺縫읧㬐뻋ﬨᲗÁ쪇Ⳁ㡲䜥冩뫯ᖄ䅆멆츟䱿熸ꄌᙧ긨▦䱗憩ႄ꬇辮蘂䋊퓍Ǹ你箇ꈡኈш訠ᇩ怃쀔\t露ฏⳀ㞔㰄␇␜衲懊䉴牉葼訠ᖖ育\ud96e聕኎嬹櫥钑蹨픸愌팘┘漶귇욵\udcb7쁈션޺⅀複챾툾욖륄鳀䴊쀖㢶ઐ؀➠됂榌꾯詐鵥ꖉ\ud898쀋陮塷ᶧ蝁﯅ᑨ⡜삊ᔧᗤ鷉쒊떄廬䌛詮㦸離蠍渭룶䓮۱镩솫얅㆞碃ᡬ本씥焦섒밉⍖歑꼄ꌂ녆䒩\u0014䥑⠶驈@\udb4f䎔䃣ʳ䄆誀⪁ 壥磰䭒戺它渑中☻艢笐쪊ꨮꢦꋚ諪⾨ꆢ⸅펨墭詄灀Ȑༀꓣᙀ먿聸Ȱഭ需쐊䪡牚ꈮ卜鎨輀窈ᨤ梗ঁُ᎘灑㩅芩\ude0f勄耻闔ꌦ帝얚ہ۬Ⱎ뀂䔅ܲⓔ鉧߰燒䧀粁峞堥蟥谴搅բᖋ滀ࣜ䳀㣐툃逌 쨁⫈࠺㬀퍫靅嘯녆㨸鹩᫘ꌡ衩욛죰鍸銔⒩훪䋊萝驒⛤龷黱థᒔ쉼苪䴳ᅤꙆ弝ᬈTꕹ揥鴩Ś㊘搪॒ᄟ艾᧸១縭怿辫ꅢ\uda6a槉临₂϶샰∆Ⲃ鸍䑓눦❴餸云鵪ᘙ꩟燲ࠑ๷ꙁ暘┘琡蹾◸亥\udf8a⥛쑳懕ᕂ뎋焒쾿〤֐ᆴ欀鐇倕㐭ꘉ쟘鮓ꭁ㐦ᑢ⤥ᦀᵵ⌶寺쒀橪蘶욠⵼䡊墘磌㛶탗쟣ꐠ﵀㬌嬃ศ菦궜贠ꈀČ䀳Ꙇ૗̠ᐼ　隞䁹椼Őፀ畩쾣ᶤ瘾͇欝뱶觚囌쩎苛⾚黀눏樺ǠศⓀ유\udd62㑽캜\udadfᗳ㜮⪀ꠅ宿恝ǀ䋳葼䝠癶熞邝阈鞦蚞纯䧡䗓ᴚ䞄흑⏩達೧윰☽ཀྵ㭪龡级茗⥾糖韤㾛ꦶ鏌膐Ề닡쨊ဟứ쫙ᬠ㩼↦䪧龃䓄暑鹆䐀鑦埪ꩭ॔쒑곚紦㶸꿎⡝푚틴◺梩跒ﺟ鄳⹈鉸ᐜ㌚헩놡↟ᩲ᦮咄仆᭢ꀱ뙎兵ṭꀔ켐뿄驁饿⤙鉭ꦙ亃馕涹䒇˖پ쾀悋쨒䃢왹꘭鰩铄⊒虑넃⑀춆姶ꦣ贊떆㺈䚧ꯠ空뜱怅溮튊摱闸岙澀閣䂥拌㩖饚專뢏\udeb6送൮༞駡৤뀩\udcf2↴徐스攤䡗좙春掖嫦祦얀噡燺앒渖뺞߆ゖ虌䢴ɽ踖縘䥩쥨溞☖櫬联䳎錎둎ŵ◗㊰뗧뾁울鄜扱鐀朘履熼ࢷᥞ饤埈﬚ᱬ熩웧ᩜ浱觙\ud947➫覾♆䈒掸䤦ﮅ⼫覠湿串ဖ爙㴆籎⢶ᡳҿ܉롥殭驟놑磔೨ꬸዛ얊怇砣醙ਰ⦀뎩¿₥走ꡱ릏骔ఉ얤Đ֡ᄘ눃Გa⠠ꘁ㠊砑㹸͐°㽀뼩芭耠樵̝ఌ᧐惂崉఍퀕ㄠܜྀ᫺흦鶞墍\ud967拝魶粊뙿嘥妕慕눉ꙁ顠岂㊱ꢗ⋶ᥲឡ౧耈웓炼曱蟆댛朁趸ᩘ\ud8e3憘Ḷә፬躪턓䑭ቖᛑ덆潋둜恩⡤껢묀鸫碩쀮䪁⧆ะ꓂팊찦ﴤ拋ࣆⓒ鬾쯬縂빊臾ℨﾻ웏著Ῐ璄졁ꅆ葲᠍諠㹺ඔ籴冴ϙ좵誎譃鱉\u0005恼슈ը₀碊塢栞쁔펎☀Ȃ각\udc6cꞆ龏⑩Ⴧᬓ\udbabᎬᒡ\udfdb\udba3倢낽 ݍᲹ幑聤ᝆ린蘒\u0019瘈ē℀萂䀋0肧薻ꪾ䟂휳垨陜+졀⢀됂ဌ‡â脨ऄ鏠榃逆頠犺䂯馤鄾베 ﹦肄Ġࡀ᜹｀\n䢋⼹Ꝃ茁琄プ䃠༁甀螃澛萆ս꣰ഘ㧸댂倅푀嫝⡦Ҳ눼᠗⾗裸㏳ᙠȀ\u0002ஂ฀\u0001錠౤㒀谖ⴋ朷ࢧ膀ঘ㥘됁ꘂ氃౩茈ড়㙠㫱⦪㈕貛썇ᘪ㣮ᐏ 皯诶ࠬ★됛ҧヨक़᱈铱壁Ἣ祎η鞀❹舃瞐언䃽暴㿢Ԁ▔萵԰Ȑ຾澔⨁Ђ䬣縗숏⸰ˀ㩁Ћ紏㲖昏ϡ待뙺專ᅰ䖀놄哄瑄쨔⳧К蔍蠻떀\uda16袢⌸匓㎄硟톴䒀눲ࢄ봀믤퐀繑蠟闥ꗹ⠃徚⹀媐䏟鸁䚀쿦뾞﹧龜Ϳ銈⿹￦윏䀐Օ捠ܜᝅ逗䁗\u0018ᘠ刌㧐崅ఆ՘ᕔ圀؅ꈂ钬⠔嚧芜깮Ṗ䄃ᤫゼ䁔ᐖ́竹蔌셖郬ᙰ徐⌅㠃\uda2f䀬䃯ౙḢꈗ\ud9cc‚怫脡䛰텀␃\n옚衡狴뢣瀃㐞䁋匀ⴅ禀㦇욷℃ᖌ४搚풦黳삺䩀《ꘃḎ쫬ʈক耞⥅檨八蔈雴詑仉弢ቜ䥩◶酻⥉磀풗泄♈刺晦倹捂㔪쉖︛쉛ᅼ摜鈠呝腍䗞ǔ圀ㇹ꟧䀄텃⩗卾筅驋렍ㅋ說闾梹䌕ﾐŘ엀ᙌ嘁叹倔쁟ㅂՀ선岱悹栗걜씘ᗠ৊絀Ⲁ\udc25쀥準荈Đᚨᚅ鎑煪輪ᐰ坱欅ᰕ㸄墪㯐콀─馀Ⅰ᩸顟靧᩠뒋䴥톑墳㉳೮⋹\ude03로襛ᗹ豐ๅ䦁Ꚉ뼾癩㡤壄⃮ؔិ$䁨譀ⷠ쀹㓣ó誼㛞찁鷊錜პ솸墉奥抢쩕兼ꗻ꽑䪥㑑ꕭᗟ鮩叹歹楏簾隌帱䠅北婛ㅠ橛៚剴ዅ˦ꁖ녢Ⱋᕴ慹甀ᢀ昈쀥x˟䒰㢠Ꞁꨂ뉤ꀪ耨䈐ᡥ圕큙᥋׳嗁挅ꨋ莆\u0012敩莂嶘রꘈ됐ꩩ腬鰫₈\udb42ࢌꚔ㳁퍶寙罥莖릢㥩肜媢埝ꂥᏤ薙묎訸㤈辉厅놅ᑒሉ䕞ᔨ几橅ꀃꑖ嶘䐸靖御陠ⶕᡝ㹴६୨ϯ鱸㰃犌撵Ąͮ㣄\ud823ꜝ삒吠ഥ沕錨ꕊ胊培鏒䆱䅧ꩱ⃢徛谥⏅瀉∅敼숉孙䲎뱗嬄夂藺钖唹䜕邖뙐家⌱婞봥鹖㉝秊ᓯ鵄浅讕⩐텪ꔗ勑童럤瑕륄Ի阚倱熥쌕驔祥ꗓᓚ圱句謗腪엢ʺ嶁句숀沓ട˄сꚉ쀥ᕈ鑆孱砕༖왝셄ӗ僀!圀ꈗ閇覚䣣䄂制婠⇪砛씙臘ഷ⦉ခЇ䊈㺊\ud83cҰ஠擈뀖璪囻抵嫕敠浕땈䀻埼խ롕犕䕐ꥌ嗊阴傕䠐䥕≕ꥦ寑晕茔祅ꖠᐕ噹尅鞕腊앂役宥辔恗袂샏Όưਠ엡\udcc1頎²ďዀ≓煓ם噁哱䑔樸ဇ쀨藴ǠƘ⢅簃푊蕦喓襀᠀李반¯䡸௥炈齢煒ꙷᗵ鞨幙⦅娖枫酖끗ህ勡煅袕㉔奇锶Ź噑攕⠺灎㹪ᧂ集꽏㓌姭怙fի깸踄鸽䂅ɲ⏠ક퉝⵨啥᝝圹淕஖ᾛᕲ霽嚹毕ᮖꕑ啟埴叵䇥耗ﵒ祄օ垞傱䎥힕镑൥嗮阢얳₠旘࿢횹Տ萾ʈḀ䤁 赧嗸ퟜ塍眅ᦁ耉블౧ᆦഷ໐⍔Ⅾ냴!垀൹繨魛㌁P塭甀웖魑9땰ɛ媯蓥ಔ腒襯\ud946坂꘦摑잓ⴌ⵾溽뤱岑圕閕ꑐ\ud95fᔬᅀ춑梵㖗欂╛࠵疀셙耀Р肫⎃씮⊄㬀昄ᅠۖ픯埍䫵㱕꽞∑꩛퓨卙碵乞ᥙ䖜홖БỄ鋖녛ﵟ혡鲡ꓵ♕⊓衊鹢雃᥹⋵㰐齖絅⪘ൽ淵ଃ\udf56嗯颩䏕깚텊唺闻巑䙕臗敜ᵹꔓᐃ婹涥앗䝚啸㔮镃啕䘅ꊫᘮꒃ䱂²Ȑ㵀넧␏妽䁹횁嗕慵輗灕✚䢟舍ᚘᤆ卛䀠薏徦ꃮ䳕䐙쒰낀Ō膲옄\udcaa䁀냠ઞ㣸吤葋浛ᔲ흹倃橈摀陁ἑ跃船쮾讠⣒䄅捯飥霯埌க쯓壈샎喾厵萷\udd57ᕊ啻劾寕뻕ᵞ钌初䌍懗瑑ᵰ㗔嘍玥瞖恝ൎֈ녵㰆七訄뀸ᄬ耼චˈ쭁㹚奾畑鑁匣挅﫹豨쵬䂕후ದꢅႛ♖ㆶ畩茳圃ἀ簾丄◊푶敹颔炂枂ﰃ렒፥糰쏔蕚㵇졟莮枎遀閄㰦Ǒ㾐홋\ud95aꅫ፠柵셺ⴃ﵈埿唉䬄쥱핀덷熅ⓑ噥搚朐ꏫꩼ楠镬혰䇍﶐妢獉ᦲΜ\ud973䬊㢊᠂앰唊ퟛ冾縍픗㭔䍜䴞힨࢓牍ᐶꓐ楍෻除\udf43燥嚗蝔൝ꔅ㚰푓淥ᕖ烐鵵ô壛侢ᎀ餢젷棵e淺꬀ሷ訇赇䴽啁嬖ॵ焣\udec6頥厓媰翅དྷ鸁蕬壊桓尠٠擠ᣒ횽⇻lഇꦨ뎠溘둺䀁ᮔ唓䄍텖뭜䍼䶞햐\udda9杅齕鋞鍯학㝒\ud80d猍凕幖썱䴬뚔헃戬需氋ဲ飸ꥰབ╶눆㸇뺉┢떊큍坍헡鎎꺋䫙闶ᩥ愈䡝ꭖ淯剠᳕ꗔई敘椠왅욭灙䂴檦钙Ғ萻볰瑁ꋗ浸ෞ哨䟀㺭笂᫘ᔏꓶ鋌٫缪狕胑幎㖠ߛꗤ\ude12ፕ旛ퟨ愀䂵趗礭闬䊈Èዂ⼗㐏\udaa7น莻蒰묀灄仒氛ӂ놘喻廘㗱倁䋘ⷄ掵횵\udd5b歾ⵏ嘒\ud8eb篕꒶镅ⶹ嚇卋湍璴냛ⷥ噃堛嬭\uda03쀸肋Ꚏᬺ㒀怂滕ဆ簙莰堕툶션鲣Ꮻ靆㩒術㊙㗗偅䄳揀躂壛䢥㔒꫎퓽偍๓춹ᗬ丑ࠍ녔굸뒨显䚩肵ඓ訸㣋ꌣ醆㬴拗덌㊢ĪϠ❪叠⟫\uda98Ú漈뛨\ud8b7칗譻딟둪巭礍캷ﭚ㐁\udd93倝㌗竒ൣꔷ鑁\udf1d䰵袰\udc83犔¦\u001eŀఀ뇇适鐊㡕⥡픣瑥崷퀌変딆\ud9e0ң粨哕㍾ü놦Ã㫰\ud949텂靾䨩萩\ude7f㊝笂꧑ꀺ鴝댈헕辕門苛訯衿㘀ḧᓵ郇Ἕ甚鹠쮃轆귍灂㥞⵵胁㒜䟛腅궷\ud8d9譈㖖廄ເꞀ氎븳눑S刐Ѐꈂ뀇庑壄茔̧孍鼶肋강푱꨿兟㏵쮷꽙㐌躎垍ĭ涍㵶軑͟◰ꑖ퐧畝鏧檐䐙녦秀쓛岤㩶፾鶤㜥哫婕吵ꓞ杻굔럥哃兕㺶荔ⶐ琾幓朢ꎂ蠊逷ⷨ릗읃血䐖槎⠠崅휅\udb87剀ꌡ嵻᎓菱囉ꡕ耀疓䆀לꏀ᳁耈♏Ӄ皍티࿂鍷䷛㝁딯\udaea乲廀｢烦洽莣芈㬴緧踙\udc74㸗蠍鐩䫍馊\ud867幱쑚셉핬嬈癕컚뵠떞탡臽湅\udbb1땁퀗쵆꥾脟Ű㳶㐅ဿ㴜ꔄЯ徚̃燖\udb47藞唭\ud8ad嘭嚴፛琤헻䩍⺶ﻔᵥ⵹嘰\udb4b涝ವ臖ལ鶬뜹\udd40ඨ筡\udb82蠾\ud977䠠ଫ뤀嵠Ⰷ垺㷢딗巓尌숃샍㒄薣⊪ힱ▍ꡗ纇覶ᢣ⃡苺亰킰粁싢舽Ꮐᔰ⸃්樬ᷚᨀ⎽翕轐򡗆唬픯䊎ူ䴂㙲㸭⨯儻歒朒䓑ᕫ봶딮壵䟝䙵緙䍏䕦痻\ud967枭䃶䝗杌痬㒔\ud90f句뱠ã䐖[炚ٰ⁑耇ꢺ絉뛡\udaa3ꃕ꨻閊ⅴ퉣咼尵托南뭣貀헼뉧䄫궽뵷뛐嶠ʵ퍞筝ⱷ憏ꅄ籵ß䏑췴㣨帗㸼w\udfb3偠냒즅ꀭ⊦9Ⱥˁ똊诗鉺ꦕ뜉\udead璽ఒ쳏坳л䈫\udf4bꇄⷞ㭗춝Ꝯ쬿䷕滶⿒䍧붟睾폯矕됷ﯘݗ귀ퟫ砽乵䏜輎᣿ொ蒱頀똆䰋　မ莭趠㷽㡵䅗朤탪壘喈ꈕ衟呤햡幖㪖鍩祤æ\uddac믎\udcf3擭펹ထ㜝퐕嶽杴6β脭輾㢶萌᠃躁఻∴ƀꠀẔ燦㠧蛊旀藳〺㭴瘱ׂℐ볕淜읺봭⫸裥纃挆䐸‴䏟ᇄ㜒盐ﭤ垤肳\udbc0ﶭ龴࠽鶾㖿怽䇴䠲Ὠ㴎症償吽㓡峍ꢆ옚莗᳠⢀℁䀃ᴏÚ๣픅犚圹瀍钃疕Ⓟ헂⨕如ꫜ鴒支꜈ԃቨ鷗﷔啐㰿糴쮣뚛䂉ႋ풶헠젃恰耈Ό؀᐀舃ဇ\u0016砬腄髲翨ￊ䐥⡤䍘찢믃鼏簻쎀轣擥ₙ輍䭜\uddf5໩훷勽ﰌ꿘⃻䏂࿾ퟵ喝탽鶱푰픇摽㸁瀌齬䇠骈Ɯ⛉뺒ᨕ廒쎝㛡\udcae미ꌡﱕ㐉냔퐼֛懃芎◕礥㵱⇠ఠ㉀燸嗛졕崰㒶邏闎鯸꣡塾ໝ펐쎃⵴⻔Ϫ엖輺쇀閃猂㉘ϓ䆠⟴༁첉䔵鈯瓰㛭瘣ຶ됲䭐菤둙푈㴎鈸単綃൒㔏皘쐃逈ⲷ풼꙼㆕Ꝓ鿦倎죄굏ᒏ斲曰ꌶ㺯轾¬ʡ嶝檭擶퀄\udd62堸Ĉ蠵皉憀䶋䀙ꍻZ㖰㖣뚌丅ႋ䈯䪐생慗耺႕ᤔ㫳瀃ꝷ祛⣁䤢孖\uda27䲽匱憝✤ⵒኞԀ⯂퍴읢မ둪葻貈ઠ灅ౕ润唎チᖈ뜏᱃냺軩䉎㴸\ud846䵣츾䑪㘻䁍䱵\udcdf郿ⱚ婄ރᎵ壂춌谯퓨\udf03⺎탏\udd1b㗨쁷ߗ쎔负톁楙Ὴꐇâ\ud8df퓠㻀绡䐇ᣦ綏ˉᙺ쳖䨺Ⅾ掑痶䄘猆⡤쐑୶㻳沵逎羹焾け膘¦ۃ뀇劖㓌䧘폘\udf1d緵鰽͠ﴢ瑫壉郉餇贍\udc94ꗸ魄죸⻂꼈쓳ፈʱ㝈⼥豶磊᭸䣥䜰澉瀽፧됒\ud867前㻕먿裇ꏿ琇펓䶝봍脱䣡ﵥ㔾常覺쯘䁨资Ԑ㢀ꄵ퍯趴裓僝囸䪷뱚嵿얛᧼幞ⱀ怂ἇ轕嗫\udab7瘙ᙛ❕䈈੸Ǡ怂囁㋺檄ᩤ诹ﭖ怇壇〭殏䊤ဎ묳锬痈\udcf7䮽颏믜䎿躙㿸읃蒌竜ӵ鎾踲\udfe8쐓์恟逡耙莊ǅ뺒ꁐ눅꒫ꃨ艡\ud88b⬃覴¥ퟲ섉鲭៦៞︰햖㙁궙惮樵셞劕퐦虞㺐ᐏ巛䕌봛⽂⢎胕䓇浟≥㶔ᡉ怀哒E䲍釲ざ\uda00Ⰿဍ㐬興ঁ呀羐뙋摷墠軹她⃮퀙樲ꅎꍎർ徨쫭笒ἰ㎠쾃㤌쪀탏䠋೤샰칀퀥锕ᗥ࿕ꆱꨳ㤩碓㛚譓썜侕\ud855ᾎ㐵䍆伒퉧坓Ҏ稻퓠素䳙㠴۝䀟ꔃዌఠむ陣퐎帿耚ʐњ걀똊碌蝒騦ɨ艝梅鍚ꎦᝮ얛厱铖놶㷥覈㯅习협鉷녅毹鱆ꐍꪗ䉕\udd0a辉隢뱈ᖘ㛑㙫㎜䶽㙑圳໔䎆䲽層\udf77꿝퓨대㿔﹍뙌ῐ᭤ᎈ뉨蒦蠸웑礎끄硋ʭ컩⺳銶鏒籵퓿ᘍ咐ネⱁᴸ㕚患ፂ섁▍슱峥༓델»㙢墤랱\ud801傷뎉一햘ᅤ̱唶賍华ఫ햌﫵歷餕쀅࢞鸰ム约퀉嬉왨㥘㜒덖ﭜ獼찧㑋䦓䋎Ꜳⳅ鍢೯\udd9c풳癍㓢Ȿꔹ杨㴖㸖藆뎐°㕳伕祥✖됴흦幞ᣕ蟃䔘墕훒⡄є뢢ᾬ퐝킒ዳ崸힛꽧莨豳㙛则팰⓵΂⇀은練퀘炜㮾၆ꖯ㘎㸨鯏漼쀮ﮒਗ਼둳땡⩄鲝쁜Ǐ↮ꁐ篃쀅掋皥㫀ꩍꯞꓓ㇬瓖呄᜝隵쿒퓼猆瘧㠬쩳퐵뫗䍥鏖痤\udf4b乳ﺴ䏖ﳴ㵜謇ណꮒ䯠Ĉꨂ롔㌐ం쳔뺐롕ᴕ훠㿅荇쌤ᨧ옸Ԁ䨭ᇎ━釰낰됁ࢴ砿肢⾈륌Ⓕ룬෷䦯嘙齣Χ壛Х鄟塪㨮ꪀ㑁蜂ꂳĭίᎀ䢹乮皗졬킱艮₀攭勛堵⽈뵔슋孀넍苘䑚톼\uda12暑Ꮇ㄁數鰘躽\udad4✺뽏취냼쾣俎蟝Ⳬ쿲샜⤀ᘬ䀝⒱̠Ⴜ捞封㢽ՎÅ邅謖ؕ挷鍐뼶斶ᬍ坧㦒樻쒇耮ไⵀ\ud825黶鐎ุ⓾⡒燪靁㸎⽌쏖ꡀݜເ됃蒥쀷疋ߪ@鋩깲ѫ᳞鵭䰋㵼뽶濔Ӧ玆⺁\udfd0쯳꘮쬲鴰⃚츎萏᤬\uda03쪌좽¦Šੲ⠮ⅹ堂ᚑ튿㿅昸⣚陱∁껌㩝蝁헅ૌ⭕寂뺼㏀癸萃䎗춐梱3⫣띌훑伆鐻躦謳ᝩ቎ಶ铺䏨⽭\ud8e5潮ꯝ蘦瞳㤜켋䫅悆焝쨯蝸꽟頠@耉卍贌뷥䠫\ude0c똺꽼헖凗婈䤁萕袄䃈涫\ud9ca⺓븊ꁎ궨㫪砷㔹㋺诋랈Ⲽ䣣⼿㮜줫沶逌떞乞ɸήડ\u0007ꉀⴭ㓯䫓謍㱐丹孥₅籈ﴷⴂ怙菥⧊홄▍䨭訟㍿᷄ⷱㅰ퐍鱎ชꎰ㎃靂﫭뵃箠裖厘聨᨝⢀檎㸇㐙චཏ⛰혳窶裃붒ⴻ򄣳\udd2c挾∙䩼썃ᤱꋕ춯펢\udfdd릯稱Ⳁ펫⼒댠䚻운ꚮ몘Ɵ頠㰁龁ဩ쯉킗庺嘢貂㕀츔ㅌ頍ꭙ셟⊮뷹䑔찂溼틁碻굊ㇲ픳⫕瓦鋢ꌙⴚ겿ኼ㡧▮쐩ႍൎ䚀ᡈ䧢殭i즰돬腧烝㎗遉햆僮毳껙䓨䯨躶㫗恫Ⱶ纄퓪譩걟㛺ힽ鵎\udf33髨荹꼬끚쀛䖭ƽ녻烧溲뾸Є淏抜뤡䯩\ud8f5ᬾึᣃ㘘㦢๽䨷鄆䐠췋ꆰ䐚뜋떍獛憟渑뾀✛䌀\u001fᬂ汊┠髎掌閯⢗லᝲ놂㍵ি쥠鷟Ⲫ릸튺瞯禮䮾坝䜺짫泌Ⴕ櫟珌¥넱ⳓ缥뜿뢍﫷j\ude43⮶綎㴒魇眅듺\uda8b马暵ꋧ긁㘬햓Ҭ菞䣉魃ാ嶔롒㑢⮈ꉦ醣詨⒅ꜭ马䝤䅲떅菚ූ䡝଄藫쇭\ud83b뺢鯣錔\udc1bΐ氾὘婢찄븵롁⯠뫴ﲛ붏躹ᨅ氇㴽䵔䮶閿㹄簆\udaec柩換墉࿭\udb0b埵\ud9ea\ud803纯\udeb7넡䎺轿儼킕焢唶論⏓⹢뇺ﳋ穭琿諈ᶳ濯퉢袰ᶅ璒㤌폀쬠㄀䤈鯫⪧ⲯ쀤⏝䄆㕒뎑瞦蓜磴靜帤ᨂᑼ豀㓃僘Č츶胼쩩⿁֨쪂㐗勡큒̮\udcbb૯㨃樬쀪뿍偫\udeb9ڇ茓⸺㫺墯趰ӏ匙콍빎ؿ鳀牱湪씐Ҟ䦔ꦫ猷礴퐐㩲\ud8c6﫺卞㸵㔯ꞓ宣䒅躂䗚ꨀ郐넴Ԩ裭掬䂴Ꜧ\uda53杷⪸ໍ嶵떡岏颓ფ댿㰲傢耠୓냬㠳Њ 胆茛컪萭නꛕ문蹦럸먯𥳐獆洒뼶侔木땋ȟରଠ讥쀆3ꁨੲ횴ꅵ껕魟髸㝲壘늶梌됤ꎤȞ衛閁䧊ⓜ╩໺델勉뤗૎✐殺소Ṟ움闯뀍廜⭁Ǘ냞呯Ⓙ跼럦ௗ踽怑ꁛ興ߤ㏄༃䷔耤쁡뙺⁤х\ude03聻혔ސ櫀缁飓봒ꋷϺ侾\udd6e턻代뮠世땎싛덅噸ꂣŀเ⸂댂儖㢫誱ʴ퓚⶯灙鋔\udcc9퍦壨フ쭀濨⇦왩胓喲剥릍៛\udc2e箢潎땰\udaabԯ⏨뫌鯄掰㐢⨩ẮꞶ关筵溣㑮찃\udc23ꎰ볆썦쉃ຖ‫㰈㕶劻써Ŗ㫱ꕎ⌿̩ၵ叨緶푳ឬ༥螙ލᶇ怀㡴뮆걣뱩蝝暮ᒱ滁ܞ㧞캛微㛁譎㥎퐞⋄ꉑ쒄࿠〼騣퐁⌫㣵ੲ\ud85b樵墌饃퓄唴҅쭁ﱖ鈷Iꈼ਱ᴔ㿭眓ྤ뵤⴨笺骎鷉勪ǎ떿涸뼙옋䨀ꓜAːԪ᝽㸞樺烄镎뀁꜒㳟鮸㢌ಗ링㡳❴ᡷ臞鎼쾷뢑\ud8db쓮遷諹ޒ켙땁᠔跑怿냤ͧ⬪뚀砊升⠆怪聳멝开䷗뾍㕨▢ᕟ蕍徚晖剦瑓䋶ᐼ넀䱹悄䃓ᴆ噛㬀ⱳᲗ孪侯刽菣ꤣ纊᫸鵗選㄀◀煮\udc63胻폄蘏 癹娻雿經꺐똦쳪區鄁꫖⡻ს钺⬝帵軚\t‽仸雮ၱ\udef5윤὾믞\udf53㍯㮴㓌덬듉詌血㩀桂ۜ閊䌰趬\udac7⍐噁ꕓ㓹䕉ꈩᶶ᯼奂ￅ涅ᄂ懣\udd50獉砓✟쥓⯞ↇ\udb74痟ሩ蜁괝\ud9e1帖셄而惎ʌࢺ粢므 嬥ãŘ囉弮ꭓ잃᳂坧ዡ꣺炖燙갓릢춻㜞⩶䇺䜔Ḽ綑׎쀇簧푬᭒䇊밠ဃ熏ဩ§Ⱔ蚒ዐఀ慜天댶㭦໹媍ࡔɐ涒髌䋄踑马䧡ꆌ᎝籧﨡♶瑩鱦盞ꧭ뫀ʳꇔ譙\udd6a아踞䧭攩쀣懀ਰἼ뀠ꨏ嬶鷒鿄熊핧쐝餻燚䜤責렾폇滬₎쀍ꏕ拞컛ી霃࣑梬샒ʜ봴酘팷ꛕ㜘篑䵘섡患෗ឃ击㕘䴫㏑礪낇䛠珨撳检臇牘他焂⟧㞡쵛彯䙼軕ﯾ곖嬔緫暯⢳섖匤撜\udcc0㷧죉㹼㬪ꁯ龱཈苀艧䢓ꃟೌ㮱詀杫\ud83d竴䜛쏭\udb54撟瀄됇蟌庂럗䌗䣯蒳倔露岖䐐㲗舂⥸䁄忤鞙碑椅ⴀ荬ಣ㡵ꎪ㊜⑳㋼ꞿ黖睱ﵧ༝Ŵ\ud9db뭖៨趠ӂ碉㪢䥣᠁조牲즧ꏕ驿᣷Ւ贻ᯛꇃ\ud997齂Ⅼ휤ड䥽阶묂ﱓኧ윀㏀悺䰀ȍ浠ी㳇獊㮭畜剳횜㹻✹黑듥ﴛ狳롿朢娥鳑痳憣쎜并૧㌢龤㫟ᕗ넱䰇嗉졢䄵琐ୗ⦯꦳귌납໯տ﫨埡竎梀빃㾾䕕l፾ቀ졑쫪鳛䎈签︽衙ⅲ큯渾㥘៧ꮡ䂪臣ꉢ鋰瓢䀂းꀊҤ㜑엇늝屽姑힓沝瀅샻獯Ŷ括㒂勔쫀࿌諣廎쀥뮜岕\ud8ed꥞柛ခ捛◓翓窖鬄㍪섛숥\ud833䗹騡壅꫔㳠\ude4a⋉㰂㌈࡚㞌'谒짇帟쵲샥鵘앆臄좸䧈㉚䰽䯕﯒\ud99fﶻ駡孿ⶉ춭了미考캟莡좹芠᧮엚십ꨣsᦞ缭\udac7ɴ牳㡭㎊莥㈾⵪⽔跋\uddf9皍쁗읟跡⬸\udd85癢\ude00仂ꤦ䆀ḿ쭈ư㋣ଁ耂뜵UṾୈ뗔哖ꪎᶡ睸봔⒣탊쫐ꩣ婊ꙭ拘圽淼䂶\udfd1齭讀䆫틪靆ẚ늌췫飮綸旨͗鷰ˈ㡝넔밌ꢛ쯫쌜整ꭗ櫬퐈㷰ʏ焒䓷藣個ꤰ柋龅ꦻ媻囌뜩癙ᖟ李ퟁ\udc63稝﹫摱痛믵쀑؀鐀뺛䍄成䁼ͫ싈ᎀ༁޾䓴卡丧뒅杰垌饰✌ϫⴢ龀㥾䃿댊ῦ睌\udc0c外쾘흾ณ듭ճ듹⮭㠆\ude10ť㔀⒠㬀덀뉒Ë笠炼⸏峲퀀䏦㺐ԏ㠱읧執꼮衒汼枏\ud829첥ᾟ⍻㯧\udf66럹ퟜ厵⃝ⷀଦᖵ㔷㜏蠂㒀⽼⨁㊼䐕풛㥍巋᳂갱Ⅲ탉阑ཅК㦗滂桔林鼷羄㐆챀죬᛻ီȚ⇾왰荄뉅胖⩨䶺⭣䆯桸᪼嵼臣貌౟꒧ꑻϸ㈺荮፽峫獆䍟酺ᙆᬋ꫐놡ꏘ淗콩덼쩇韝ⲷ﫠ᜑ\udfc8שּׁ훞霃膢왨삓Ɍö柱㥢젓⭉ꄊ믛ꨕళ♚ꎱၵ퐐ໜ졺㓗찹Ⴙ歘භ㴲䬂Ὀꀯ勴卾蓀ᮦ䭇ⱷⷯ螳崙礪鋏㴪공䧪룛덌ퟙ殤뀽感귌톹綢蓙ꦿ臨迻幔ﶊ\uddbb彸曍㺻뙢舃﬍䧲㵎\u000f㽐Եꞃ鄐ԩ쬘⯈\ud94d瓕嫑曛\udaea궈鼦厘졺᯸ﭾ밒黁໌⚓몏洄睋〯섢ᰘ速〉➉ೀꪱ㸄甀◡镬塚栗\udfac経\udbb7̝팼됛᷹몏\ud90b瞗龞噰痖毝翹첏ꪝ겼嫤絴뺨㶫䏸ᔀҤ뀢⓯낲؀⧋쳗埝㜯퟿䚈忄蒅컳ﱜ\ud876錅豀䂿ᢚ㒽틱\u0003⽴㠼ೋ⟰ὴ뜯힫퉬⡍몍ዳꗩᏘ쟈쉁꣆폯쬈܂ስ傇䀅ﳣ鐭緌좏ﻝ裶緸꿕㿛믳\udd4f񇭸௬돪䫠貞ᴔ昺榅찎\udefa檺됞넠鄍頍㖏ꡂ筍䅣㵀䐹Ⴂ螗唭ﯜ䟂ᯊ젟࠮沞ᑯ艠㰋ᯅﰬ㺫痓镦殝欌ꋄ녅쳭쓫ᬞ牸ꇝ㌔皸ｹ襷Ɤ卐ဝ脤ưᜀ楡聉軀췦럇믆ꉦȞﱻ脩攸‒䖁븜\ud94f齶⯗笙볼ﭓｻ＼뮼㓬덱公鯧䡀큐뾑쁁ɰض໛慠協ꚓ玍䡦㬗氋귞坙鴛ӄ畫䆿跏䶥睔㆘⥡遱崸ꯞ엽歺札踋⃽ȹरឌ瀃嶭枭透⚤\ud945籟残ျ῱ɱﷇ痫ࠄᚯ\udbd4測\udbc3襱嵊秱醂빹穞諹뭩쿟て⁽ꩾ닛ⴗ쬥ᰫ纘沔Ꝺ㒐ͳꠠ㚯辩㿔嘂ᕓ䀷垱⃍\udcad␈ⅿⳍ蒖侻ᾚ༂뫿돻眑ᴸ㕢⾈ꆟ샆䧻ぉꋣ㎼뚀堃錻Ľâ舓欓ᔌ蹻ㅎ燐휢뻾쵧⇝ǲꧦ䜀북亐〜ᥭ콨삒迄ཿ구䍄矔뻘墫Ҵ괡縨▊ꭤ蔆\ud821制秋텈ᐅᏡ簹剋꣯␆䧊麙꬐㉟꥿ꡁ韕딪ͥ깟䤮⽀ⵜ鱑ꪣꗤ䏇檵꟣띡籾￝ﻍ툁—u㑨ٻ믲཭账꽁㲣뇗櫧㞬漂᫸㬷緝폟抑㥨ⷣ딲꺍哱㛦澥籤籢닎ꈇ쀖fԐȀ偐拠耽䣒ƾ婲ﴀ無\ud9c1繕덣抌蒅흓갶꣪躹蹓\udc88솗椾鏧⽙㺤뎓퀻鮰趓౱쑽묗뤵휵➜㸧돜鷖΃썦ﭬ㥴섫쾓᣽采訃묯뭰㗶佷㰖监\udcbd楰驍䂒ﰄܲᢋ繁‏⿗郧삇軫췫⟅畷쬞஗綄룣寧绵࿅估ﵼ쿫쪞⏹䇲㽕翀ᖰ㣀뢠倇厍뢗덬뫍ᕇ⵨퇗耲斠㹡ﴔ령ᔢ낇ꥏ⡟⪣ë신⿨ᾐᯑ樥ဉ᭰䚷잟셿镠\udb41胤閣Ɨﭞ븯ퟮ⢼夗埘敫犯뫞൱꿝㏧䷲瞻㓹䏾髜ꝁ\ude48狼缾죺ߺꞑ첾ᥲ赗倄䌤욈ٓ銦받\udab7仝၆ꢍ廍嵵₈鏘撣ꂜ₡瓏졋걝뀸賈\ud914뼙管헧碈䧵တ䀘猺⨶轤菈췞딁픯ﲢͿ퇷ᑀ濾⪁翻앀矮裔羈\udb71︿鴧홿ꦟ㥞僴鬑舐裆賂阃쁆⣻效̧蛣擊춓।儎䳕殨飲湭묙낆ᔻꦍ傂⟅ే쑍銟岞ጱ\udb79徊ైꞥ恅ꁶ灒햇韵收懶ࢃ켃᭏嘞Ⱝ㑶倁薱쟠ऌ쉅ꂀ倃⿘좰╄햊ᣊⶸ砃끁\ude41㉣箺寸ꃳ걣갚的簩Ƕ큺≘旒ཉ퀕㯀宾䀙巹迵䛯\"垢¾粑勤ꬖᖑ►ࡌ祘貁箲ࠆﴕ䜝砣㶼徭蓼౬좻ꃑ՚⯰럁㬓✇῝骡ئ쑶礻债Մ䋉ཋЯ漰Ȳ⦵ꩨ\ud8c3꺐䑝嚇\udc3cۀ૰ᄣ쟀䵏␁︂ﷺЌ辩ပ檽砟큚땙ஊ)ꂧ啉㘵⩮룕렻驲碠␅縤蜲檇ದ꧓瞴䝝䊺덡ؘ⍥쉩遣끮ꀽ➇⽕繜뷺㠝잣孟軄ᆂ䊼ཚ쳄ᧉ᫅茞䂐옮䦼달Æꋻ騻苀ۄ\ude4bᘇ靪쀘尅튌Ï熁䞠줪觀߀쑀縇ą昀ࠧ怒똔黲ᵘݳ貘쾟葙䅎⼼๹巰囥玁玄ą릢퍨\udce3詯ྞỽⲲ哦仁뎹휼\ude6c듶̯暔અ੝胄䶪ꡰ㦀瞁\ud80a狝頜ఒ♐〰꧍哃࿢륊ដምꟊ䱁튏ᖄ⼇䑘栏Ɩ싸싀˦\f襢䶸㙘ㅠ同ﯢ음ꌚ曄菋㣾혟럏䌾縃緺㙴ཝᜫᑶ偈Ñﯢɬ⒰ư놬᧐䇬鍂傶Ӥꍑ픙鸥큌힬慔쫪๽廠炃ﾴꮦ䗑ၬ볚핹匿܅Þʠ쪃芀槇棇沋랞ﺎ㶰슉㇒歱ኀ⦀夀\udde1寈摅嗌変뢔㴋༬᜺᪚⿾ႀ㖃䠁혈쐘澱ᜮ绹ܭʓⱱ܌ጳⅎ犑艻樎ቦᏝ頝䂷帰̮㨇盰ဇ쳐便ᩁ഼制뫯൓琓텙ࡄـ캍ᓥ믅ㆌ\udfa0ꔙ꫔∆ｖ몣ꁥ킙脷쏅攮䱬⎏繘ᡭ鑘栅\udc47쀃С㘅聑뢂íҐΔ鬯ᜎ䟍莠鄁ꀣ䁗䭵⹌涻뮃蓯轠䜿祆䘃铹ꢦ䠂囜\ud8a5䥼ᰍȗވ퀏魀譁뒃⫺䟑吉Ꚋ;᠑Ƣ惠ۯ⼁\udf4dổ硞㘍뇨犷諈√骷Ⴂ졚뒦碙੝䭖覡᯼徂缄ﰛཐࡋ䨐ℹ艘렸ࣹ솤Ⲁ缀踙戃ଥ累䄄갣셋\udeab甬捸䀰ឭ풏鷓壔䱀끒㹦鎨鯍讦胻혋뗞⠷葼婞홸ꤊࠁꐢ쀬䍖:䊕돡ࠎ㿷널闁풂䊻금ꈕཌྷᨘ㌦裎聗膇䑌軌★硞\ud9d4㦃䁧춥̟ẻ㔪櫧ⲝ討놼쒦騃㕸䲀ᛁ\u0006쐃堋Ŀᠦຯ惽ȱඤ괭켰你윮緼杓롵냉妔灺₃훠⛼⅔⪨䶨㙠눀 標얋蛵뒍宍ߔᱽ탐嚛牁약娇騋尛鯊⡫䴔㘐Ô쑠䟵⸐䄀럹叄嵏砲枴匡髈Ⳇ꤉ずꕾả꒻勄ᨌ䏓ຄ䐊䀅㼬呩ꑱ倾六昋䚠䗱ᒞ\udb03鷫폭࿘큧뽊䅵鳃뢠ඕ\uda80ᬆ侰띠믁䫒ꆈﴈ䐬䥲ð淊傅ꜟ퉭Ч㢐瓔ﱐꞇ띉\ud8b1浗셈Ⱟ橊ꞿΧᮠⅠↈ沈纆䲃\udc03覻㼔陨䈑߶ೡ௉조暫᫲뫔䀁飡䐂笔怷㵛ソ門凬ֹ藀଑⇳䗀꺝ⲫ夈蘖遮鼵ꇨ\udde1晴૚ᅗ\ude7f鐽޶䤀곹䈀ﰌ諾顤/ꕢʜ닌ࣺ苼鰕儊觭趙ᕶ徊氳㔲稐ႳƓ폮悰੘璀ᥡ﫭ꠃ쬉搈갠냜䆦毟냰渌㦀旝䌁˂죺薕凈㿝堊혓滾Ğ鈶솆趾Ḁᇀᕰ肘꜑㔎퐼윫绷\udaea㓻߷쾨䕆収鹰அ袷胩爛㉰퀘෯㕕藿惨\ud9c3䴲谖폣갺ᡒ䜓䅞ﲩߜ猺ⓘ句庈ꪡ涆逍퀄 쀫蒺ꆋ酨㌘ồ䇾鐕氰銌훩냈彞ز攡횂ᖵ荚珳䝧዆蟈ᩨ祵ᐡ\ud941\ud808㲛튪᱓⒴ê൝ꛘ䁦༄㟡怀㾇櫆︚၌\u001fᅓ쏊窭আᅈ⒝遗ѡ㊽Ø旤얃挝쩫燥ᅂ࢙֘풰䧠귰녠⚂ࡒ鎄诌献賞粦臃ফ厎뙿℁짃媇ꪗ樑䚇栺촆\udad2涸ގཪ쯗뭿Ɩ꽠協㺁긆ќᐇ䂊⓾᫿⋌⿽臶ೡ떵㧙⿀꽞薓邾茥偈诀Ԣ㟸沈죈省꽶မ㯄朩慸Ⱗ櫖죿\udea0糠ꂡ榼䊆騎ᐩ硶킕ᐊ桀䞄րༀ♖爠봀蓃鰀祈ꆴذᖷ挛ㆠᙎठ狐簀漕ḃ瀁≡灇袱3싀䚲誠ዲi䟰ݔ牅₂벀刪ᴳb醺能㨸Ჺ᫆ᵰ阺鉤휹ⴆ娋㠬⾼⃕\ude88㴕텅\ud970맀䟝蛘ᄏ焜釔⡗装㵼䖙ꙷᧀᤀ廊뎉瞠迠ᯏꀣ냤姙뫦폘谳䡄㡓㻜ጵ쾠ᛔɂࢂ℻輭炩臼ꄄǯЙጂ넒　⹑E鹡숶뙡鷇蟨慦⹰⫟銛㪨턝렃鮵焚鯏죏ᄋ썎믌踶ᢲ⨞뛬涰뎡鼉\ud808﯅谯蘄洂膼뒦갵喨⃮橪漕︪㍰슥⣝塼僎㷤藨觰椓커昍ᖪ伢ៀ벊瀆⌍烴ꙺ헙၌醮⯧졣ᜀ㮰倰㿃툙堉ڏ❛Ăꎾꆳ儕ᘪⱕ㝸॔禄ꄋᠰ塒桭\ud8f3갢죉鏂ᔊⲐ刈ۃ㚄䔈外耸ꪜ䀇擌↣蔕ᬸƭꀚ䙖䟃⑨揔頛쇒鞄ે\ud862჌꘶«뗔簮劍槩≳踕ꓓ膇༓悺≙臨謠Ḡᩖᑀ쿬辣퐇玫バ력ᆚꍴགᛀ㴅㗔絑ﲜﭱ㗒퐞꽒薚僊Ⳇ䕋ಚ㔴穨妢∀蓊筇ఌ典ᄫ䊈㬴๜ᬲ℔乯⑑횢〪찀䀈篜馌䭩]鐴ᬋ腐ɰẦ㜠놰릺衑଍簯Ẫᔂ욂ᑢ饦и抛宄⯒㜞擐ᐁ︇ꀆ똓䀆ã䧒✘֧ᕇ᧴ڰ넀ⴘ䓇࠰၂Ⱌ낋Ɲ샹૮驮鑖翶옂鄁訯孀垔Š袃쏕﫼誯⤆⃺觀妋㡃전䏀욳ീ悖舡ꭀ嘞\fᙐ뜠匀઄阁⨔簯䘍傆ꄃꨤ揥ਪᑰ╆㕐몡孄㧹炏Ɗ剌傀ठ遨䊞訸ຠ㙘ᔀ唰ᐁ@﹀ป䀯⩵胔だ뮊ס춠᭥닀㬰䈴甂찄ⰼ≇蓿ⓝႳ䄌옢쏡㢠桀҉섂\udc02ꥈ஌葟耔\n쌐ț౫Ĥ跈ഀ킀픁∀팝ꀈ圻\u001a\ud8ad恮Ē䆸Аᆈ䍸禐፰憣峄렎鴐鈚찒䨣厥苩આ㯉ㆀ퓀喒Ёࠈသ蠻庒嗺≚䌽觓풀ൺ篬丁姈歧᠏逋※\ud888햾㬖♼␑忐ڳ糸얈혃읢ᬉ䌎쀖ງ౽⡲ߣ\u0018ỻ㉴༺Ɓ鿚㥪᲋ꢝ䡕ﻂǣ낂▇輍\udf79ⓜ牘䗨㯃餄䃎⠀〬老碈톦ᨢ있䯖㠰⃷摪鐰趋㘱᪲頟䣿ĺ읉灸߈ހᆈÀ쭹萂㠖透㘩켇⁋職ꦣΨ䖜쳸冻㫘\udd34ﵢ稃딅᠚耐툳棱걬⬄辈চ钬巪⪱\ude49뢧䐆ꡊ〖꡹녴ż怜ڇᐴ蛂靘冀㘃矂䚢\ude89谵㣵ࠬ짾우Їᘜܝ᥼潄濙ệ栄㡪갭墏뇾冽ᆖ㚲蟶❬廘뺱ꝣۄ嶏ᐊ㘽㨍\ud896퇦ၬ˫ᓶ㩋ꯘ뺼\udb63勀ு緄\udf5d耾煜͖쌇赛ౙ㟔剤ꡠ힡ꆂ\udc0c걊\ud8be燫挅앭褗ᶛ౜䃘썢ꗅ嶉霜ﻎ屽\ud8c5熏掞욫蹛쓮㲐ゐ拄泰獠ᮊᢊ형鄢㢩넊䰫珇摂䧈Ȝ䶅೎㜁懅鮈䜛쪑塞룀냋捹쟓誌ఝ᪶Ġ䡱釅돆땒蘤镦\u0004膳怬Ԑ໼轠გ乀퓥⡢ﮄ㬝鬔ĳ⁼㺔ㆤͦ쉛ɻোཥL쐁᧒刂狀\ude26怌ᭂ䁈쟟枠ิ儊ༀ䢘　氩儅镇ꡊ谮‪け옒ʣषၶи궱쬥졢茰\ude82놀恙肟ࡵ쐺Ž䶸蝜叀㈒堁週鮏蠎ꀟ\r联䁵앁䑰ₒ妀ײเꒉ도⾏쾃켃ဨꩼ퇵辧ᵛ࿬䅘ീ꺁暙ంꜘ혺鱴騛੃䧆詉嗴޶㒼䚀橈홑燆쳀븹逝⁦䄘軬ꢍ䇐⤄쒀හ聎₝嘍怡⁸П왒޴ा⽐뒀рƁ⃚旅﬘ᮥ‹曖儱·§ὀݜ卸툉−쐧ᘣ悐গꤤꈜ\u001b╌윹訸ˈ誥◀羒惸旱萁ԉ넊‷ąɉ吁攰൛ろ媜䢸崁ҏ鬜퀎㰽ꂁ쉜襘ꂄÒᭃڐ⵰㞀㬀סּࣕ꼄瀞怂쀝壿⑳拄݄ˈ෌䚳ഡ쑈℃휀笎\ude1a감쑬䗨◟摎₁㋣橲꽐㾑뽃Ѕ蠉᪕䩗䂻āμĘ೰ᰐగ⪈킁礀셶瓎ࠍ倷ؕボ膨Ï裐赛ᤓᏨﵑ䲓熄４븒䁅粘肛ᆖຄШᵠ⎜嶀ꐀ㒆礥瀖ဈ​ষ륥奄Ė䈿謀♸妦ଁ爥賈Ⱏ㘡艑䒂熈ș␽ἐ㯘戤蒁㨡䎥搀⼇툞쨞䂋揀⟏訯᡼ݺƸ\ud809햰\ud8cb枍\udf14\udc70ҭ䁯␎奣赐鮎⛠ɉᬊ㳩욈⒑툗肚鈜뢜襷ꌮ␔䨤พ韆ᮊ琂譁鷇؄㠈䠟ည쓉觗ᤷࣼ牌༺\ud9b0焥㪃\ud947攊屩Ҫ⃾䃗꓀ꧨළ㫰ⶼ㠀忆ᰴ圓脹逗:횈큿½贄铛诂窸\uddb1\ud9b1ஊ霕嘷ဨ蓿耺⒂₏᷈ᖀ⺀㫱ⵣᖀ뚍◙찘ҕè鶨㉊䳐賖㹬紫≀罣崂⮈唉︨ት쓕䥻戵☠戻ᐩ❜憤ퟣ쐃疏撜ﱁ㣤檜፝P䠹洡㳈┌㝄嫀倊ೃ撇\ud8c6焄Ȝ㋔ม⌐අ緱됒迄멍㼝긎屯쒺¶鏭⟞霘ۢ袼倠㍉躁ᩩ䙉삙ꤣզ䃔욆흄[쐜嬸푰踄컅ຆ鬓樇逐\ud812焜肣쌨䱼۲䇠㏄끰훢吀䗊速㸖픎뇫Ꮦ䉴䙔赶诲詨ꖦ䯡鈥అ ﴘ褺㙊蓛ª즸䷛ᛲ夒瞄딘뗁锣厁뤇젇㘚壑멕⥪씶▚⺈ាᰠ䯘﭂禋囋\uda03䀺⁹葵솽쁑认ɻြ᥃惉䬨栦ਁ吉⢁≪炁脑º䉳ᩡ⫡ೄ렽혀\udf60⬉蠌ꐸ䃒脴웗著읒醀Z傀‒ཱུ欋㦄䠛뺦⃰ꛠନᵠઠ⨘⺐妠އ︝Ꭶꁃ胻┣剬仢鍌旬㮰ｍ莀ﲒꘅ뀑牻碕쥲聇賔钾⧋᥸\ud808쉓욉ꙏ両퀛ꀺ넒Ꮨ☛诙䥃ৎ༠⚱ƒﻄ爀㥫帀扸\ud8ddҚ쒻袜餮㩜磘呠ញ冀蜝蠛㤒⹂䦷ጄʒ䧮׀ʒ糘Ꜭ狄鰂퉈뀏䤦Ⓩ脿욲䡫ᇉ㈍鋸흈訓ݠ튒蠃ﱾ騺Թ⚕䵔顼ᷤ꨸胤郣⛡喊첔踰퉽䧷ላ♦伛ዥ⎒媌糉薓ﴃᘡⲛ⠚쨦㐄즸肯⌾ᚠɕ㮒糂橈ᗇ枊藢Ĩ㉍钊煥엵䷥䦎㧊丄쩀⢀딧অ⤶ɓ룢Ⓛ⏣녂龕㦌໸풩嵢ᙒඈ἞抠褵ㆳꦊ䫟ក裷ꊄꝉ䊒彑쾏㪒\ud924뱼퓘胏蔱⍆䭑跙㿊彤㔱䈕㜟ᫎ렇蓤䦡쀶왪伸鷏ᩋ臋挩뢁斊ꎎ튞᠊ꩾ铫燱࢝᎓䪟᱘螬燯寱퉩᷄殍ꚑḸ쩞ꓘዞ䪆֪߹ᨴ䎆㓅牊ㄌ뤩츠穿ㅫ厹╣血࿑♌懯ڱ跣鯇鍎ᚘ謑汐\ud85aꇉ옽侲鶡⬊姐錱넓Ӂ숁㊓쀀鄵쀈㲿o뀬䢀ٰᑮ郤렀셵ࠑ㓲榯錶䠎Ꮐ৹↢撔ꎀ院廆萁\ud805ᄦ쁀삦Ŷ٘੡⸐ᵊ灀ዜ専뀎㠮䥈͉燄༶ⱒ佰෉⛓堁\ud9e4ﲚ堷\ud831Σ詩ꚰݖπ往ᑒ妑Ȇ쐎踨꬟‗꣚Xꝋ萷ᇅ㚬眠猠温蠃魇蔱챬䒓၍襪쟌❘Ә饐㋀܄킁䛨❉╍檯壅耯偏鋲薰䰒㶀⍬Ζ덢뻄ⶍײַႊ㺪蓃䐟⟁䆌຾⨜穸﹀䚤\ud856䚃젎鮖\ud8cd䧤ɰ䵊鯍㲼屔䝀楘봦֎粮䄡꒡ꔶ⟤઩㝪翸ᇣ쫇ї뒒嘢㱷\ud8d2晦鏨ʵ辐聕㢱㟇㭀ᆒ\ud823枏亃剂煭ꦦ樣䧿៾に⪸땉뵣퐦ᾉꦄ鸍م꓇Ɍꑿ䢝ี㢲䄸꿩⺤䝀脷ㆍ쀼䥷뢊㥭犣ඃ㻻୰ᕄᣣ첁喉ꤕ耍艂 䤅鍜ꗜ仏Ꮠ▐㕸闉ᲀ⩘뜀ᢝ丽擏鉿ꜛ䲔䂰᭲抾ᔱﬀ崂ꑌ埄簠稣聧灈꓄닾ᤥ入ᮘ鳘Ｅ鴄פֿ粗䪛실춳抾ᕱ騐͙飀玀ᢀρ␆萉蠎䱝쀰䃨\ud835髿✈鋨ᯣ誨萩똒쳇ḯĨ㌷鉒⑗䢵쫅ൺ兖磩鲁幊탆판蠝覵썬딂醈ὠᎴ鳘ǩ墥ཌ팂㴻詸㎫Ȋިฮॢ巴眙삁ꘁఀ菋뀍쁚Ƽ쐟仌⌀䏩瑹㳒齉릉\ud8cb胗퉓ņξ铉㟒援ꧢ觅뽍㪗挻辶꒿\ud800晣䈁驥⤜滢予鍰痆䃊뼇带ٸ哥ओꆫ戠죦鲚㉒樌麩⫅惉䜛茦ᩁ೻㏤켌頶㜱鈸ꨙ땣ꆘ烔㜎Ҕ夬㋽✻裡鳞◪伌ﳸ簲̃㎈鼓慀뉌碑᧟㏄朚䲑驃㧌㐸뤙ⷩ풒拉솖踽䙍穆燖冴曹藑鼃㋆噤곱䣣豦飋㬑挦牵貯饥懬攋謮館釃♴혨夥戤ꍆ堊ࠗ怱T爁鮌ƶ鏺髭ீ炘㬁瑁鰅⼜䒞렄쳶⥓㊸ꞙń֮௃⦘쿉ᐁ∦樅呈⠅餪핥䠚䉙鏆쩏৑ㄢ爠぀\ude95ก음怏쪖섣っ粜펻䁰䯎霕ΐڠ仉똳䁥苊︶榜晒䐁臻❟說ῒ噤﵉\ud9e3㮥ຄ笟⌦鱭穼厫態䧧茰Ț丄臙⦒黅䚤茩\udc56뢝胏㉁⛝丽ㅴ㢄鉰ḁ㞍႟唽ᩎ決楾耹搲쮰乪໪䆴솀ꣃ辆馯쐼\ud8c6焜돡ꓢ主ዜষ⌄\udf70넉헆穌ಗꬸ곭䦊눚에ϕ邀Z噤덉⋒䜂ཱьꬢᩇ䂯惶쒱䱾鱚骀㠠䥉㵢鉶年了㸫陊ꁥቌ錊Ʝ䴡鐘Ặ昤ꌐᄁ삣䶣碕㌿䡢덒쇅两頠ᳪ䧬⃀숀氩ꋉ慀陛⓬৥덁枀첪鿖⪠㑠挂㲁앆岚嬋੯줖좓ዑŽ䄆扎ৠ㺠⮀퓀꒦⨇砌䀞≋≘⤴胹Ϥ췁侢䳤腩㌀歠癡먫䨛牼숄䁈腹Ñ䡰鰈០⫀桀銁꒸㠧䐃茑弄뜡ᩤ젭攜틀ক᎚昤䲨㘔ꖅ힍抛ುᤊ煽ʁ츖钎ⴼ䰸艱輒횥⎎ΐ霨婰怏胀ሌ뎪䵭駾㴐᎖偩䈜ꩤ浏蠈핃謏ꕮ〦͊י鼈艠ऌ禄恒\udd12鰇\ud806࠙큦ꁇ奦፹儈퐈飆Ռൺ庙赣䆚ᾁ㰍뮆찵찉聶惡ɇ鐣囖侌龀溘ꡣ鰀܊젒颪᢫⡉兿ఐ\u001eᏡᴤ䙱ⷀ豀嬟ࢃ謊鰝თや歧剈錅㸜邍ɀ䉓⸑ᕢ쐅턾ꐂ琨幫ƝԄN魓錎䁘셣™儥䀎룥䢙㎄毯䋺茰ᕐ⚠杁ᩲ풁䡱걀票ꘈÐࣈ谝ඖࢩ\udcf4䃥୍ꕘႎ퀇䁓┕젭䞢ᢵŴ駱勠躤㋌싈嬾쓒熼ሩ욻䷕龶㴐ͬ䌓敓切爀מּ䙷ꓖ䑳쓼乤Ԟབ挀⑪✕쟆࣊첛쩔풱ᤎ㈤柾캑騫㳢巨뵩笨꼢ꩊ犛䌵限㥒銪얺札鋨Ђ吜莖잀픥郈ڒ࢈ᩗ㳃ꧪ댝͒䔟ᇮ㕄鯉Ҙ韄Ɛ힛脢뙠鳤䳂獫斉졭靨শ拨䈹ퟣं羃퐬蠗\udc2f껜鋞왳쾻鳀༺畜郌皁೏퐃瀆੬硤禎䅾ȉ芩䊈Ꭲዀ垀쬅ᰄ１䔳멆ꡟ㇞鍁褋ᒝ\udea5ᾦ淉漥⽠셵\ud995款䓟聍퓦ڦಏ㰐㋀禦욱宥繓믥긇繥ᤍ챆赖៺䷔칩싲믆ꖅ傚蚝뉧瓦짲鏦웵䤺顋㼐ㇸ節坓헇ⷠ㐏䙜鱝熂峻䍛赔鯿⊱꩔렀첀ः뛉䜑茲걚ᒴ妷늙쑝䥏ሩ➞ᐜ홙儀\udf09떊뒙젟㓳礃ጡ쑁죯ษ⃥ꗌ걱뮈꫆MⰕ⹒듪祎旻쨑頵⺰蜄혙筢㝥ꪆ\udd9c᠇㘀賜স牸ϡ찥鳿㢎忄镱⭸⣥ٙ″覹Ꮃ慜䤄鑉┼䬜﷤솀㣤ꎊ䌷蹈퓨車珁旇찞⺶碜웙剳鲄ỡว届峢焕贶꓿쨚鴾㇐ᥣ珩㜳织뮐渦䰨ⓔ䂟劀쬃钎⩘牸襱枳ꝁ궏ꌬ㣰ꐚஹꞍᐿᆲ䜀Ṫ穠⭔！╉㐊弳ᨤ쓧릐腶斥我꿘ૡ̈́윂ﮥ벑뻎ဖ䳘섲攳녤਷⻠㣜욾뗹锡礁㌜ࠞ愑쁜Ⴛ㈜呄ԍ阼㮬铑軡฀茳\ude98넹刯䁇爾Ⴔ落ᬺꌸ骙泳ウ䨤驯㌢≋\ud898雖퍿郯䕮鷨෺ዀ禀묀즐셵렄瀑倮쳿膿ƥ\u000f䭢邽㎊棴옡멑妄ﲓ茈䚽㉟肖뉷ꂹ護ٰ௚䀋殀✁ꕘꉶ琚좙刀稿豨큗荷鉘劰꧒浌\ud9f1槲鴐ﾉꖗ윰䙙\ud8d5﹄戂쪫ᕈ誌⎸᫱﫣壥砮᠇걾뒇꤁脱ꓲߔπ᳀ᯉ㙀Ӣ꿃풇䖜ᅛ뱡⁖䐕㈵Ϛ䴤壓岑涸况䙓ሗˏꌨ艾㢛ੌ리⮩鋛㈜瘠⑜鷢⨭鼒➆乆є恥❉銍෤躠墉䷔꩒⦈頌梽홺㲦⥝扃ᬂꛍ臈ॶ檴ꭐ錁\ud801媅窇圿倔⼗䀀ⷁŎ쾋ᕒ骆ᧀ羁䈵뭃\ud9caꓯ뀎蒖黣ᑔ줫ᔾઙᵜ蓨饢ꋆ⽊妖ﴜਿ餉툤꞊ʸ౰ొ䔀桀붰괁萴驠怓꒪乁ᑢ쟶ٸՑೠ㓀⛄ၸ긐ሧ砀봧逜铙怜孭轇፛܁䩐␨෣掦ꝍ㡙炂ဩ쀀梡稢и寰ጼ㳂寨킀뉋尀레晋싮⧜듭鉌䰔ও⵮䧀ƙ持懣＋瑄嘂瑤䁔鴤ꬌ증⭑㞇⾝巰눁⍫鿲ᬈ혤뱼볠끹焹❾ⱁ奃庙啥뷀繋♏⸩鶋聎ꖖ쑘ੁ┼濃娔뢀獡㭈耊ၒ怌渘䁝卨ѽ⟙㠈Ɐᨡ\uda00ᖳ꾈ѫ풄쐇ᙒ摃즮怱䳔ྰ먐⸏病ꣲ渗벖챟よ䚼쓭ó狣鋦⫿驁⬮殤컔틀罁㌘턭嬜䓕씀遦춎⻟Ⱀ၅声귳夓腁䓫༓ꈸᐛૌ詄隘ܘў苰ঘ䬘葩阋礨ࠑ弽ᒗ꠮댥į蒽苘ꗌ䅂꧅⑒ﴰ簣돂ⲍᨇ吼聝˗դ侨ූ䓼鏼衑⏃ꎍ螈˛튓듻ए犞ĳ런ȯ⌜Ꮤ纙㣘ᡌ쿌뀉쬴ꭿ\ud8ed稺쨛¤돚漎㲙圉渃밇㼌ࠀ퀟糿ㅸ謇㞮੠ኀ⟤뙠䢁븖쏅﹁碾铘拓᝭蝙ǭ㍮睄눂ﶠꈂᓄખႾ걃碦愛➻蓲錓ኦ慜족諍夐앎ꒌ찔鄁㣊菧☙⅄魩⣜阔ꢀ運ꐔ섯汓鱄▫剐韄⍘ຄꂀ检Ⱕ⹨如蠀퐏䙜我븖牰肴䅤閘͛µנᗌ쮌舀헏⸥☺扇뒒瀲勪别씖㛠ႍ穖脀欴Ů瀆籤⁇䕍ଆᙚ䫪餷㗂䳄﮹₀ဤ籚땍챯峌䁗ࡃ᫛佇ᜌ뚢帼켁ԡⰅ䠉锑㱹貔퍒䫍馮퉢唧ḉ삀Ӄ릊࢑㼦텻쀈씲択ƹ赮靸꫉䘠䚅ﴓا駉ᢑ蒅\t褟줺⊪ʄ̨Ạ᫄铑⟸縁缍䜩점倫粡냧ǿ蝢ͩ隸ꐳ⽒ᇼⲀ圖螊뜞茴兽銫ਛ﯆넔Ϡ҆㼲賱⎊ᑙ츿늞䧅蠴頵鹜䇼馥㲁蕧垊퐊딷驒犈房⥶僬ᖠ峿ಾᡴ韸懓镡⹕嘴䉘颙䤈狋銹㉖漜呡ḥ厉碒锦똈蒴곮ᘓⴆ泙㨰⻢繒ꂒ\uda00骗縶楳碿⤄耢Ǘ覟ᙘ鿁厢縈ਲ਼독촫쪓㉡ॾ틯偢֖⡻컷㮲穠닄䩌ꚇ窉⩻ﲽ夠쳉ᗧ躆邜Ꝝ层턩蒦拓嬩㳎⯔⫐ꐁ䗬鑱隓螦䷆〙 㢐ᥬ墥ꓘ员ݞ㠂殤湀ര蜦랋悃㲴Մ碑禽砭✗좚醗㖖癵ੱ좊ᐔ硎ꢹ熜⥕䮔옢땘Ҿᙨ釀⌹ㅋ뙦㽡璋ࠊ怂䤮맋ū쀏亓丹㏪礜ꁰﬀ夁ꇐꢝ⫆䥼ݘ覲ùÚ⩟ൔ떦瀠䱨揀툑䘣䡓㬨旜듻⟥츬੝⼁ᓒ띱槊킦\ud905늞Ⴑ☍\udce9ô䭌윺น鯊靠⎜䣅뼀䫤ꓭ鎡亂玥̂۝쭔먜搌A衈㤼ዀ警ᘉ䶯䟤뿠嬒ꢱ檁ꕚꏊ溪봫쌶ﲢ蠎ꓭذ⧖‚秬ꪈ䋒㇤厎ڐ放\ude5aᓀ৸┘괤予껼甬ꚱ먋挤爇꩓ภ酐૩鋳덲乎讣㤐㗬虱궓ጥ쁍塞嬮ꕡ諛䥩酒⇗ᬐϼ䰌鵱ꢸኧ涊ᢋ섾מּ狺\u0000Ʃ\udc4b䖓Ｏ䙌Ⓛ擌ꦫᣒ껒劌쭱ൢ堹ሄ욌鴝ᩲ⁘뤶㊵}襤巉㛶磊囹ᶓ\udd91㎶쓠渺ꁵ쒚⑰♊ౄ鑭අ㦥ᬤം掏䡓ﲍ씧ꁹር샕蠗耜ꍯ㸴닆壣쇣읡錙픡怋ʂ粒쫧ᩧ譱侜륟㵲뙸菜蛃贐᪒뤽뙬і熩Ŏ乀컊ꨐ铤詉伫礖벪醕\udca7ᕃ焌ò갢¤\uda72揊﷤芫⤧઩ꜚ⪠ༀ뢣姧행䕢巨ࠐ⎸⩎烳鲕Ꝉ\udf9d鵊Ɱ蠓䔬큙≜╋ዅ⢺柘﹀昁ꛑ頄꺝鬓녋푟蠓ꏷ䵚ꥐ趦䫜﵀褓࢔谭簮\udf36⥬焖⤛űǚꭑ迴헤꟤ԋ黆舃䥟댠逴 褺끤铟憂ஐ╄겒ⱒ⵱繧᠃좒Ⱶぇ聩˶荄ɿ蔴峢胋實띊躚င．쒋蔄࡬⦂콊鬍▅ْ댓퇆⑎㠉錫檁ᓩ䃫bᙲ֏߄뭌䌲ꒀ暀뺣Ϗ튼Ṩ륒鑣謝敜Ѱ⢿ⰼ㵡椱ꢁ꒺촑圕沴쉄쁹肿b⑤젭婌鰉姒偋︂崫艓璸耝틤▾ㅐ锽⺷ᦄ꽾㰗໘➰뀃캯\ude4a倭⬡㳖梒雂˂嘌ꚉ爦媜렀㸭\udb13\ud93bဈҿ⦤衘ꝼùଌਨඐ㻎䐽ఀ潂퇠ᚔ訜愥⋃逯⏤ᝐ뺡ᙂ沄㤊錅蘁쨇訦権ꀍ㬇䒘୧ᜎ礀ྀ⠐憑ჰ눋ꀗม[⃶䇫ղ໤Ꮘ㞐张휵㱃鞖瀣瘃ὒ₋밅硂푁聤ϡӈ뜑ア쌍䄚祌젰髫瑏闄퐹ɲˤ෈ސ⼠㹀ﲀ恑퍛鵑ᘞ褐仜떵㯲鎨膎ᕂᥘᶰ乫깡 ᠔ᝋ푣Փ좉懬旖൞ല豚鳺빽ꚩ鱀뗨ᛑ\ud838첐ꨙ쉨҅劽哌⸈俲쉁萀㾐』熋髉㔶橤ퟙ꾓嚁虷ڙшȤ递ꕄ萌튲슄᧱K‎̧䂀✮ല榁鄣튅Ⰼ针ቸ㰟₧ꀁ賬༼Ṁ㾁㠠響韣\uda21ꚢ簙순⑍ꃖÖ흗ߵ䒀鍭䮺ⴀᛑՃ쭗㉢暪ⴏ過쐄芷睵撑༠㊰ᓶ㙈䁨켑\b㮘눊Ἇ똷檫艂憓굳ഀϚ쾶佪깰꼩\udc05浈䡛땟歒飽꽰꼤㸣뀅⒚꘩༂튡D삍煼쁥ꯃṄ⨘➅䙊媅톪⼯䚸킮㔄Ę⦰噳奎ꄂṀ䘊ἠ⭊ຩ࠸㪔β䍀Ȟ鈄ꏚ走壣쐁⠌␛౉䁨畲鄯≄ፆ굶댌柚银㽫ꥁ\u0004푊킹[䋶蔒胈՜˨廹㛲榸來⺮．甦Ơǃ萚藩ꎰ㪬妀᪰똂櫁\ud81c嵋땻ၙ힌莗壿호␒熨ｪ䬪ꔃ픎쐐暺層\ud98d풄蜖趕ᘀׯᬀ瑀锒쀂颊⏎ᵇꍩ諃肎觠Р໡䀘Ḥ䌀ᡕ냂ි爛빏頒栓&ŕ䊨囫媔힭泮Ƶ൫駑弬嚴砢怙㨩臓Ŧǌ೘ἰ㭠ዀ윝䯐렃\n庥괸㡐끆섗잰൜჻늰氱헀骰祯凘檓祸⬷ꪀꀀ࿅劳礖臦ꍗٚ謝᲌㨾ꃖ綰ခ⟑侦齝푨괉腩岳埅ƙ䂾냍拺ᡬ쯫插彄ᄄꩩ膊Ưꯍᷟ쌷⺪纜렸䎛垫桶㌬陆귍妊瀷ꆷ䞂ㆽ爀보췪恐ឩ潘庍뵁㸭䟪똵ᮬ㓔纰鈡ᚢ籄龬섖纶㺥醙﫰ᡯ푬ɥ涟圾꯺뛦䗵錪羬꺭ﺲ뺌쨿藚ʙ藃တ₌业萀⌃稆谓ぜǌÀ\f䴔쟘猫Ԭ只繢ㅳ\uda25퀏覆멋肯ꢙꟘᵽ婺茀萁矕꾨؄㨾ᑚࣲ빳﶑䔾嘌樘였㡣洀醍ᨃ䷁豥凊ؒ挡鸅谩ꢍ劏槌܌ⴀ\udcc6㗤꿂ᘲ뛀Ơ촨`෶趓砠蠝ᑄ⸔簰ป倇⌉烖ᣔ怄捚穞᫇菱闰턴ს聆퓆섚㌚葮챣掏㆔䛎\ud878⌚㔬湘튱閣妘㖌넄㘳볍Ц졬ჭ䄝豽祶〠\uda71힤呚ࠍᖄ诚鷲㣥鈈䍡ꠢ꫘螈Ɔૠธ⟜䤍Ā醂봅䘁ᠷ큿ᨬ\u0006⋌݅ྷ℗㐀鏫邃侮탚堗䍭ꑅꂌ㕫䕟婡ꇼ릆鷵篪蠂\ud86f䣓㿝ѐ﬷癣䶤M㊚櫎ຎ撕㕬䤁ᚘ䇢ᚱﵺ팈땛䳨ꊿ흸걏쌶ꇓ粡❌䶫瀃∉ꐇڸ ᫀ薰蜪挾䐔浓㠘嵝᪙矨舶硬ゔᅒ뵾㙤橆ᦂ〓瀦ꂛ暛艨婤뻛⤂⚬\uda48魶骢栺涘̓啌ⱍ塅崰谛럄讇ᢥᐓ᮰薙У\ude34傟匮늙覎﩯铇!卝粀쵕桘\uda21괂諆ﮠꐷ汬☇↿捥聃跊᭎憧ԙج䅉댗⇵ᓁ乣֋璇㠒䀞퀠\u0000";
+            window.__GITBOOK_INITIAL_RENDER__ = true;
+            window.__GITBOOK_LAZY_MODULES__ = [];
+        </script>
+        
+                
+    </body>
+</html>
